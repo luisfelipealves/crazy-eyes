@@ -51,3 +51,47 @@ jobs:
           path: |
             app/build/reports/
             app/build/test-results/
+  watchface-device:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
+          cmdline-tools-version: '13114758'
+          log-accepted-android-sdk-licenses: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r tools/requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: crazy-eyes-face-debug
+          path: device-apk
+      - name: Boot Wear OS 4 emulator
+        run: |
+          sdkmanager 'emulator' 'system-images;android-33;android-wear;x86_64'
+          sudo chmod 666 /dev/kvm
+          echo no | avdmanager create avd -n wear -k 'system-images;android-33;android-wear;x86_64' --device 'wearos_large_round'
+          "$ANDROID_HOME/emulator/emulator" -avd wear -no-window -no-audio -no-snapshot -no-boot-anim -gpu swiftshader_indirect -accel on -cores 2 -memory 2048 > emulator.log 2>&1 &
+          timeout 240 adb wait-for-device
+          timeout 240 bash -c 'until [ "$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d "\r")" = 1 ]; do sleep 2; done'
+          adb shell settings put global device_provisioned 1
+          adb shell settings put secure user_setup_complete 1
+          adb shell wm dismiss-keyguard
+          adb install -r device-apk/watchface-debug.apk
+      - name: Verify after-shake reaction in system renderer
+        run: python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: watchface-device-evidence
+          path: |
+            watchface-device-results/
+            emulator.log
