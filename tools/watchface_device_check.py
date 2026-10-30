@@ -83,9 +83,13 @@ def validate_calibration(baseline, tilted, recovered):
 
 def run(package, output, expect_spin=True):
     output.mkdir(parents=True, exist_ok=True)
+    # Wear OS opens ChargingActivity over the selected face while charging.
+    # Motion calibration must exercise the face, not that system overlay.
+    adb('emu', 'power', 'ac', 'off')
+    adb('emu', 'power', 'status', 'discharging')
     adb('shell', 'settings', 'put', 'system', 'screen_off_timeout', '600000')
-    adb('shell', 'svc', 'power', 'stayon', 'true')
     adb('shell', 'input', 'keyevent', 'KEYCODE_WAKEUP')
+    adb('shell', 'input', 'keyevent', 'KEYCODE_HOME')
     adb('emu', 'sensor', 'set', 'acceleration', '0:0:9.8')
     print(adb('shell', 'am', 'broadcast', '--async', '-a', 'com.google.android.wearable.app.DEBUG_SURFACE',
               '--es', 'operation', 'set-watchface', '--es', 'watchFaceId', package).decode(), flush=True)
