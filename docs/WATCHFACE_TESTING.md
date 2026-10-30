@@ -4,6 +4,14 @@
 
 O pacote `com.luisfelipe.crazyeyes.watchface.shake`, nome **Crazy Eyes Shake**, é separado do mostrador já validado. O experimento testa uma transição angular WFF de 3 segundos depois de uma aceleração forte (módulo acima de 25 m/s²). Não é um detector de padrão de sacudida com histórico; uma pancada ou outro movimento forte também pode disparar.
 
+Instale `crazy-eyes-shake-0.1.1-debug.apk` pelo mesmo instalador usado antes e selecione **Adicionar mostrador → Crazy Eyes Shake**. Pelo computador, use `adb install -r crazy-eyes-shake-0.1.1-debug.apk`; para ativar diretamente:
+
+```sh
+adb shell am broadcast -a com.google.android.wearable.app.DEBUG_SURFACE --es operation set-watchface --es watchFaceId com.luisfelipe.crazyeyes.watchface.shake
+```
+
+As instruções abaixo, com **Crazy Eyes Face**, referem-se à versão estável, não a este experimento.
+
 - [ ] Sacudir com a tela ativa produz giro horário à esquerda e anti-horário à direita.
 - [ ] O giro continua depois de parar o pulso e termina em aproximadamente 3 segundos.
 - [ ] Outra sacudida, depois de parar, funciona novamente.

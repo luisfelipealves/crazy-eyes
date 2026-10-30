@@ -36,10 +36,21 @@ jobs:
         run: ./gradlew --no-daemon testDebugUnitTest lintDebug assembleDebug
       - name: Verify resource-only watch face APK
         run: python -m tools.validate_watchface --apk watchface/build/outputs/apk/debug/watchface-debug.apk
+      - name: Build baseline for renderer comparison
+        run: |
+          mkdir device-apks
+          cp watchface/build/outputs/apk/debug/watchface-debug.apk device-apks/experiment.apk
+          cp watchface/src/main/res/raw/watchface.xml "$RUNNER_TEMP/experiment.xml"
+          git fetch --no-tags --depth=1 origin e5e6d1fca63fe67c96dc687bd385da15716fadd8
+          git show FETCH_HEAD:watchface/src/main/res/raw/watchface.xml > watchface/src/main/res/raw/watchface.xml
+          ./gradlew --no-daemon :watchface:assembleDebug
+          cp watchface/build/outputs/apk/debug/watchface-debug.apk device-apks/baseline.apk
+          cp "$RUNNER_TEMP/experiment.xml" watchface/src/main/res/raw/watchface.xml
+          git diff --exit-code -- watchface/src/main/res/raw/watchface.xml
       - uses: actions/upload-artifact@v4
         with:
           name: crazy-eyes-face-debug
-          path: watchface/build/outputs/apk/debug/watchface-debug.apk
+          path: device-apks/*.apk
       - uses: actions/upload-artifact@v4
         with:
           name: crazy-eyes-debug
@@ -55,6 +66,10 @@ jobs:
     needs: verify
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      ANDROID_AVD_HOME: ${{ runner.temp }}/crazy-eyes-avds
+      ANDROID_USER_HOME: ${{ runner.temp }}/crazy-eyes-android
+      ANDROID_EMULATOR_HOME: ${{ runner.temp }}/crazy-eyes-android
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -78,16 +93,23 @@ jobs:
         run: |
           sdkmanager 'emulator' 'system-images;android-33;android-wear;x86_64'
           sudo chmod 666 /dev/kvm
-          echo no | avdmanager create avd -n wear -k 'system-images;android-33;android-wear;x86_64' --device 'wearos_large_round'
+          mkdir -p "$ANDROID_AVD_HOME" "$ANDROID_USER_HOME"
+          echo no | avdmanager create avd -n wear -k 'system-images;android-33;android-wear;x86_64' --device 'wearos_large_round' --path "$ANDROID_AVD_HOME/wear.avd"
+          "$ANDROID_HOME/emulator/emulator" -list-avds | grep -x wear
           "$ANDROID_HOME/emulator/emulator" -avd wear -no-window -no-audio -no-snapshot -no-boot-anim -gpu swiftshader_indirect -accel on -cores 2 -memory 2048 > emulator.log 2>&1 &
           timeout 240 adb wait-for-device
           timeout 240 bash -c 'until [ "$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d "\r")" = 1 ]; do sleep 2; done'
           adb shell settings put global device_provisioned 1
           adb shell settings put secure user_setup_complete 1
           adb shell wm dismiss-keyguard
-          adb install -r device-apk/watchface-debug.apk
+          adb install -r device-apk/baseline.apk
+      - name: Characterize original face with calibrated injection
+        run: python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --expect-no-spin --output watchface-device-results/baseline
       - name: Verify after-shake reaction in system renderer
-        run: python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake
+        run: |
+          adb uninstall com.luisfelipe.crazyeyes.watchface.shake
+          adb install -r device-apk/experiment.apk
+          python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --output watchface-device-results/experiment
       - uses: actions/upload-artifact@v4
         if: always()
         with:
