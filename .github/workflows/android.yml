@@ -67,9 +67,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      ANDROID_AVD_HOME: ${{ runner.temp }}/crazy-eyes-avds
-      ANDROID_USER_HOME: ${{ runner.temp }}/crazy-eyes-android
-      ANDROID_EMULATOR_HOME: ${{ runner.temp }}/crazy-eyes-android
+      ANDROID_AVD_HOME: /tmp/crazy-eyes-avds
+      ANDROID_USER_HOME: /tmp/crazy-eyes-android
+      ANDROID_EMULATOR_HOME: /tmp/crazy-eyes-android
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
