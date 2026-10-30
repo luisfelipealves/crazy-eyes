@@ -87,7 +87,7 @@ jobs:
           adb shell wm dismiss-keyguard
           adb install -r device-apk/watchface-debug.apk
       - name: Verify after-shake reaction in system renderer
-        run: python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface
+        run: python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -10,9 +10,14 @@
         <Condition>
           <Expressions><Expression name="motion">[ACCELEROMETER_IS_SUPPORTED]</Expression></Expressions>
           <Compare expression="motion">
-            <Group name="left_tilt" x="41" y="68" width="72" height="72">
+            <Group name="left_tilt" x="13" y="40" width="128" height="128">
               <Gyro x="clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40"/>
-              <PartImage x="0" y="0" width="72" height="72"><Image resource="pupil"/></PartImage>
+              <PartImage name="left_spin" x="28" y="28" width="72" height="72" pivotX="0.6944444" pivotY="0.5" angle="0">
+                <Transform target="angle" value="([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
+                  <Animation duration="3" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30"/>
+                </Transform>
+                <Image resource="pupil"/>
+              </PartImage>
             </Group>
           </Compare>
           <Default>
@@ -35,9 +40,14 @@
         <Condition>
           <Expressions><Expression name="motion">[ACCELEROMETER_IS_SUPPORTED]</Expression></Expressions>
           <Compare expression="motion">
-            <Group name="right_tilt" x="41" y="68" width="72" height="72">
+            <Group name="right_tilt" x="13" y="40" width="128" height="128">
               <Gyro x="clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40"/>
-              <PartImage x="0" y="0" width="72" height="72"><Image resource="pupil"/></PartImage>
+              <PartImage name="right_spin" x="28" y="28" width="72" height="72" pivotX="0.6944444" pivotY="0.5" angle="0">
+                <Transform target="angle" value="([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
+                  <Animation duration="3" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30"/>
+                </Transform>
+                <Image resource="pupil"/>
+              </PartImage>
             </Group>
           </Compare>
           <Default>

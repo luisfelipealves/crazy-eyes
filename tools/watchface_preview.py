@@ -9,16 +9,22 @@ from PIL import Image, ImageChops, ImageDraw, ImageFont
 
 DEFAULTS = dict(IS_24_HOUR_MODE=True, HOUR_0_23_Z='10', HOUR_1_12=10, MINUTE_Z='08',
                 ACCELEROMETER_IS_SUPPORTED=True, ACCELEROMETER_ANGLE_X=0,
-                ACCELEROMETER_ANGLE_Y=0, SECONDS_IN_DAY=10, SECOND_MILLISECOND=1)
+                ACCELEROMETER_ANGLE_Y=0, ACCELEROMETER_X=0, ACCELEROMETER_Y=0,
+                ACCELEROMETER_Z=9.8, SECONDS_IN_DAY=10, SECOND_MILLISECOND=1)
 FUNCTIONS = dict(abs=abs, floor=math.floor, sin=math.sin,
                  fract=lambda x: x - math.floor(x), clamp=lambda x, low, high: max(low, min(x, high)))
 
 
 def evaluate(expression, values):
     source = re.sub(r'\[([A-Z_0-9]+)\]', r'\1', expression)
+    if '?' in source:
+        condition, branches = source.split('?', 1)
+        yes, no = branches.split(':', 1)
+        source = f'({yes}) if ({condition}) else ({no})'
     tree = ast.parse(source, mode='eval')
     allowed = (ast.Expression, ast.Constant, ast.Name, ast.Load, ast.Call, ast.BinOp,
-               ast.UnaryOp, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Mod, ast.USub, ast.UAdd)
+               ast.UnaryOp, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Mod, ast.USub, ast.UAdd,
+               ast.IfExp, ast.Compare, ast.Gt)
     for node in ast.walk(tree):
         if not isinstance(node, allowed): raise ValueError(f'Unsupported expression: {expression}')
         if isinstance(node, ast.Call) and (not isinstance(node.func, ast.Name) or node.func.id not in FUNCTIONS):
@@ -107,7 +113,27 @@ def render_preview(xml_path: Path, ambient=False, values=None, poke=None):
             squashed = layer.resize((width, max(1, round(height * sy))), Image.Resampling.LANCZOS)
             layer = Image.new('RGBA', (width, height))
             layer.alpha_composite(squashed, (0, (height - squashed.height) // 2))
-        return layer, round(float(attrs.get('x', 0))), round(float(attrs.get('y', 0)))
+        x, y = round(float(attrs.get('x', 0))), round(float(attrs.get('y', 0)))
+        angle = float(attrs.get('angle', 0))
+        if angle:
+            # Only the current angle is drawn. This is not a temporal WFF simulator.
+            px = float(attrs.get('pivotX', .5)) * width
+            py = float(attrs.get('pivotY', .5)) * height
+            c, s = math.cos(math.radians(angle)), math.sin(math.radians(angle))
+            corners = [(c * (a - px) - s * (b - py) + px,
+                        s * (a - px) + c * (b - py) + py)
+                       for a, b in ((0, 0), (width, 0), (0, height), (width, height))]
+            left = math.floor(min(p[0] for p in corners))
+            top = math.floor(min(p[1] for p in corners))
+            right = math.ceil(max(p[0] for p in corners))
+            bottom = math.ceil(max(p[1] for p in corners))
+            layer = layer.transform((right - left, bottom - top), Image.Transform.AFFINE,
+                                    (c, s, c * (left - px) + s * (top - py) + px,
+                                     -s, c, -s * (left - px) + c * (top - py) + py),
+                                    resample=Image.Resampling.BICUBIC)
+            x += left
+            y += top
+        return layer, x, y
 
     foreground, _, _ = render(root.find('Scene'), data)
     result = Image.new('RGBA', canvas_size, 'black'); result.alpha_composite(foreground)

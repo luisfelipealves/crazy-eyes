@@ -1,5 +1,17 @@
 # Crazy Eyes Face — teste no relógio
 
+## Experimento de sacudida (0.1.1-experimental)
+
+O pacote `com.luisfelipe.crazyeyes.watchface.shake`, nome **Crazy Eyes Shake**, é separado do mostrador já validado. O experimento testa uma transição angular WFF de 3 segundos depois de uma aceleração forte (módulo acima de 25 m/s²). Não é um detector de padrão de sacudida com histórico; uma pancada ou outro movimento forte também pode disparar.
+
+- [ ] Sacudir com a tela ativa produz giro horário à esquerda e anti-horário à direita.
+- [ ] O giro continua depois de parar o pulso e termina em aproximadamente 3 segundos.
+- [ ] Outra sacudida, depois de parar, funciona novamente.
+- [ ] Inclinar devagar ou deixar parado não dispara o efeito.
+- [ ] Hora, toque e AOD continuam como antes.
+
+O teste `python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake` usa o renderer do emulador, registra capturas e mede as pupilas após soltar o sensor. A prévia Python não simula a duração de animações. A sensibilidade em pulso real e a bateria exigem teste físico. Não considerar o experimento validado apenas por passar no schema.
+
 APK separado da app Crazy Eyes. Requer Wear OS 4 ou superior (API33+).
 
 ## Instalação
