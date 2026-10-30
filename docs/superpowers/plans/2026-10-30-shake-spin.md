@@ -29,8 +29,10 @@
 
 **Interfaces:** Consumes an installed resource-only APK on a Wear OS 4+ emulator. Produces screenshots and a pass/fail result for after-shake pupil motion.
 
-- [ ] Add an adb/Pillow integration check: idle image, brief 40:0:9.8 acceleration, return to 0:0:9.8, timed screenshots. Require opposite vertical displacement after release and baseline recovery after 3.6 seconds. Reject setup failures separately.
-- [ ] Run the baseline on the emulator: expected failure because no motion remains after release.
-- [ ] Add the minimal directed rotation and eccentric pivot to sensor-supported pupils; adapt the static preview renderer for rotation and comparisons, without simulating the temporal engine.
-- [ ] Run all existing Python tests, WFF schema and resource-only APK checks, lint, build, and the emulator integration check. If the hypothesis fails, do not ship it as complete; investigate before any further fix.
-- [ ] Obtain one independent whole-branch review; report actual evidence and physical-test limits. Commit and publish only on the agent test branch.
+- [x] Add an adb/Pillow integration check: idle image, brief 40:0:9.8 acceleration, return to 0:0:9.8, timed screenshots. Require opposite vertical displacement after release and baseline recovery after 3.6 seconds. Reject setup failures separately.
+- [x] Run the baseline on the emulator: expected failure because no motion remains after release.
+- [x] Add the minimal directed rotation and eccentric pivot to sensor-supported pupils; adapt the static preview renderer for rotation and comparisons, without simulating the temporal engine.
+- [x] Run all existing Python tests, WFF schema and resource-only APK checks, lint, build, and the emulator integration check. If the hypothesis fails, do not ship it as complete; investigate before any further fix.
+- [x] Obtain one independent whole-branch review; report actual evidence and physical-test limits. Commit and publish only on the agent test branch.
+
+Native timing assertion and conservative replay are documented in docs/SHAKE_VERIFICATION.md. The native images prove the effect; the original CI assertion used screenshot completion times and was corrected. Physical watch testing remains pending.

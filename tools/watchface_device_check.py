@@ -136,12 +136,16 @@ def run(package, output, expect_spin=True):
             remaining = released + delay - time.monotonic()
             if remaining > 0:
                 time.sleep(remaining)
+            # PNG transfer and pixel analysis can take almost a second on CI.
+            # Timestamp the capture request, not the completion of that work.
+            capture_started = time.monotonic() - released
             picture = capture(output, f'trial-{trial}-{delay}')
             try:
                 points = centroids(picture)
             except ValueError:
                 continue  # A periodic blink invalidates this one measurement.
-            samples.append({'seconds': time.monotonic() - released, 'eyes': points})
+            samples.append({'seconds': capture_started,
+                            'completed_seconds': time.monotonic() - released, 'eyes': points})
         traces.append(samples)
     (output / 'measurements.json').write_text(json.dumps({'baseline': baseline, 'trials': traces}, indent=2))
     if expect_spin:
