@@ -50,3 +50,21 @@ APK em `app/build/outputs/apk/debug/app-debug.apk`. O CI também entrega esse AP
 As imagens em `app/build/reports/eyes-preview/` são produzidas pelo renderer de produção nos testes Robolectric. A app usa Kotlin e APIs Android, sem frameworks de interface ou bibliotecas de rede.
 
 Versão inicial: **0.1.0**. Não é um mostrador.
+
+
+## Mostrador Crazy Eyes Face
+
+Além da app, o módulo `watchface` produz um mostrador independente em Watch Face Format 1 (Wear OS4/API33+). A hora fica pequena e curvada no topo, como o `TimeText()` do Aquaticks. Os olhos seguem a inclinação e contraem ao toque. No AOD aparecem a hora e contornos econômicos.
+
+[Instalar e testar o mostrador](docs/WATCHFACE_TESTING.md).
+
+```sh
+pip install -r tools/requirements.txt
+python -m unittest discover -s tools/tests -v
+python -m tools.validate_watchface
+./gradlew :watchface:lintDebug :watchface:assembleDebug
+python -m tools.validate_watchface --apk watchface/build/outputs/apk/debug/watchface-debug.apk
+```
+
+Recursos reproduzíveis: `python tools/watchface_assets.py watchface/src/main/res/drawable-nodpi`.
+Prévias de layout: `python -m tools.watchface_preview watchface/src/main/res/raw/watchface.xml preview.png` (`--ambient` para AOD). São prévias Python da definição XML, não screenshots do runtime Wear OS. O schema oficial WFF1 fica em `tools/wff-schema-v1.zip`; ele não é incluído no APK. O teste físico, especialmente toque e persistência após reiniciar, permanece pendente.

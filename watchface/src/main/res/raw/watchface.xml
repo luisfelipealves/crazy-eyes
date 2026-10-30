@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WatchFace width="450" height="450">
+  <Scene backgroundColor="#000000">
+
+    <Group name="interactive" x="0" y="0" width="450" height="450">
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
+      <Group name="left_eye" x="54" y="122" width="153" height="207" pivotX="0.5" pivotY="0.5">
+        <Transform target="scaleY" value="1 - 0.94 * (1 - clamp(abs(([SECOND_MILLISECOND] % 6) - 0.12) / 0.12, 0, 1))"/>
+        <PartImage x="0" y="0" width="153" height="207"><Image resource="sclera"/></PartImage>
+        <Condition>
+          <Expressions><Expression name="motion">[ACCELEROMETER_IS_SUPPORTED]</Expression></Expressions>
+          <Compare expression="motion">
+            <Group name="left_tilt" x="41" y="68" width="72" height="72">
+              <Gyro x="clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40"/>
+              <PartImage x="0" y="0" width="72" height="72"><Image resource="pupil"/></PartImage>
+            </Group>
+          </Compare>
+          <Default>
+            <Group name="left_wander" x="41" y="68" width="72" height="72">
+              <Transform target="x" value="41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 26"><Animation duration="0.25" interpolation="EASE_OUT"/></Transform>
+              <Transform target="y" value="68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 40"><Animation duration="0.25" interpolation="EASE_OUT"/></Transform>
+              <PartImage x="0" y="0" width="72" height="72"><Image resource="pupil"/></PartImage>
+            </Group>
+          </Default>
+        </Condition>
+        <PartAnimatedImage name="left_poke" x="0" y="0" width="153" height="207" renderMode="MASK">
+          <AnimationController play="TAP" loopCount="1" beforePlaying="THUMBNAIL" afterPlaying="THUMBNAIL"/>
+          <AnimatedImage resource="poke_mask" format="WEBP"/>
+          <Thumbnail resource="eye_mask"/>
+        </PartAnimatedImage>
+      </Group>
+      <Group name="right_eye" x="243" y="122" width="153" height="207" pivotX="0.5" pivotY="0.5">
+        <Transform target="scaleY" value="1 - 0.94 * (1 - clamp(abs(([SECOND_MILLISECOND] % 6) - 0.12) / 0.12, 0, 1))"/>
+        <PartImage x="0" y="0" width="153" height="207"><Image resource="sclera"/></PartImage>
+        <Condition>
+          <Expressions><Expression name="motion">[ACCELEROMETER_IS_SUPPORTED]</Expression></Expressions>
+          <Compare expression="motion">
+            <Group name="right_tilt" x="41" y="68" width="72" height="72">
+              <Gyro x="clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40"/>
+              <PartImage x="0" y="0" width="72" height="72"><Image resource="pupil"/></PartImage>
+            </Group>
+          </Compare>
+          <Default>
+            <Group name="right_wander" x="41" y="68" width="72" height="72">
+              <Transform target="x" value="41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 26"><Animation duration="0.25" interpolation="EASE_OUT"/></Transform>
+              <Transform target="y" value="68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 40"><Animation duration="0.25" interpolation="EASE_OUT"/></Transform>
+              <PartImage x="0" y="0" width="72" height="72"><Image resource="pupil"/></PartImage>
+            </Group>
+          </Default>
+        </Condition>
+        <PartAnimatedImage name="right_poke" x="0" y="0" width="153" height="207" renderMode="MASK">
+          <AnimationController play="TAP" loopCount="1" beforePlaying="THUMBNAIL" afterPlaying="THUMBNAIL"/>
+          <AnimatedImage resource="poke_mask" format="WEBP"/>
+          <Thumbnail resource="eye_mask"/>
+        </PartAnimatedImage>
+      </Group>
+    </Group>
+    <Group name="ambient" x="0" y="0" width="450" height="450" alpha="0">
+      <Variant mode="AMBIENT" target="alpha" value="255"/>
+      <PartImage x="0" y="0" width="450" height="450"><Image resource="eyes_ambient"/></PartImage>
+    </Group>
+    <Condition>
+      <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+      <Compare expression="is24"><PartText name="time_24" x="0" y="0" width="450" height="450">
+        <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+          <Font family="SYNC_TO_DEVICE" size="26" weight="MEDIUM" color="#C6C6C6">
+            <Template>%s:%s<Parameter expression="[HOUR_0_23_Z]"/><Parameter expression="[MINUTE_Z]"/></Template>
+          </Font>
+        </TextCircular>
+      </PartText></Compare>
+      <Default><PartText name="time_12" x="0" y="0" width="450" height="450">
+        <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+          <Font family="SYNC_TO_DEVICE" size="26" weight="MEDIUM" color="#C6C6C6">
+            <Template>%s:%s<Parameter expression="[HOUR_1_12]"/><Parameter expression="[MINUTE_Z]"/></Template>
+          </Font>
+        </TextCircular>
+      </PartText></Default>
+    </Condition>
+  </Scene>
+</WatchFace>

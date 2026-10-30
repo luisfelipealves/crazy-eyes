@@ -7,3 +7,8 @@ local.properties
 .superpowers/
 
 .kotlin/
+
+.tools/
+
+**/__pycache__/
+*.pyc

@@ -1,0 +1,2 @@
+Pillow>=11,<13
+xmlschema==4.3.2
