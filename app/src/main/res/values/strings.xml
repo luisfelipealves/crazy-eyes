@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Crazy Eyes</string>
+    <string name="eyes_description">Dois olhos que seguem seu dedo e o movimento do pulso</string>
+</resources>
