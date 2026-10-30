@@ -87,9 +87,9 @@ def run(package, output, expect_spin=True):
     adb('shell', 'svc', 'power', 'stayon', 'true')
     adb('shell', 'input', 'keyevent', 'KEYCODE_WAKEUP')
     adb('emu', 'sensor', 'set', 'acceleration', '0:0:9.8')
-    print(adb('shell', 'am', 'broadcast', '-a', 'com.google.android.wearable.app.DEBUG_SURFACE',
+    print(adb('shell', 'am', 'broadcast', '--async', '-a', 'com.google.android.wearable.app.DEBUG_SURFACE',
               '--es', 'operation', 'set-watchface', '--es', 'watchFaceId', package).decode(), flush=True)
-    deadline = time.monotonic() + 60
+    deadline = time.monotonic() + 120
     while True:
         try:
             baseline = centroids(capture(output, 'baseline'))

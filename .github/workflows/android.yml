@@ -96,7 +96,7 @@ jobs:
           mkdir -p "$ANDROID_AVD_HOME" "$ANDROID_USER_HOME"
           echo no | avdmanager create avd -n wear -k 'system-images;android-33;android-wear;x86_64' --device 'wearos_large_round' --path "$ANDROID_AVD_HOME/wear.avd"
           "$ANDROID_HOME/emulator/emulator" -list-avds | grep -x wear
-          "$ANDROID_HOME/emulator/emulator" -avd wear -no-window -no-audio -no-snapshot -no-boot-anim -gpu swiftshader_indirect -accel on -cores 2 -memory 2048 > emulator.log 2>&1 &
+          "$ANDROID_HOME/emulator/emulator" -avd wear -no-window -no-audio -no-snapshot -no-boot-anim -gpu swiftshader_indirect -accel on -cores 4 -memory 3072 > emulator.log 2>&1 &
           timeout 240 adb wait-for-device
           timeout 240 bash -c 'until [ "$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d "\r")" = 1 ]; do sleep 2; done'
           adb shell settings put global device_provisioned 1
