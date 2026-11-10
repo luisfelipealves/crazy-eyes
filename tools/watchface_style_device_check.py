@@ -50,6 +50,28 @@ def assert_style(picture, style):
                     'irregular green socket is missing or covered', skin)
 
 
+class StyleStability:
+    """Do not mistake a transient blink that hides the overlay for a fix."""
+    def __init__(self):
+        self.first_pass = None
+        self.passes = 0
+        self.error = None
+
+    def observe(self, picture, style, seconds):
+        try:
+            assert_style(picture, style)
+        except AssertionError as error:
+            self.first_pass = None
+            self.passes = 0
+            self.error = error
+            return False
+        self.error = None
+        if self.first_pass is None:
+            self.first_pass = seconds
+        self.passes += 1
+        return self.passes >= 2 and seconds - self.first_pass >= .7
+
+
 def run(package, style, output):
     output.mkdir(parents=True, exist_ok=True)
     def adb(*args):
@@ -63,6 +85,7 @@ def run(package, style, output):
     adb('shell', 'input', 'keyevent', 'KEYCODE_BACK')
     deadline = time.monotonic() + 90
     next_activation = 0
+    stability = StyleStability()
     try:
         while True:
             now = time.monotonic()
@@ -73,16 +96,15 @@ def run(package, style, output):
                     'com.google.android.wearable.app.DEBUG_SURFACE', '--es', 'operation',
                     'set-watchface', '--es', 'watchFaceId', package)
                 next_activation = now + 10
+            capture_started = time.monotonic()
             picture = Image.open(io.BytesIO(adb('exec-out', 'screencap', '-p')))
             picture.save(output / (style + '.png'))
-            try:
-                assert_style(picture, style)
-                print(f'PASS native {style}: both complete eye silhouettes visible; no rectangular overlay', flush=True)
+            if stability.observe(picture, style, capture_started):
+                print(f'PASS native {style}: stable complete eye silhouettes visible; no rectangular overlay', flush=True)
                 return
-            except AssertionError:
-                if time.monotonic() >= deadline:
-                    raise
-                time.sleep(.5)  # Allow selection transition or a periodic blink to finish.
+            if time.monotonic() >= deadline:
+                raise stability.error or AssertionError(f'{style}: insufficient stable, fully visible captures')
+            time.sleep(.5)  # Allow selection transition or a periodic blink to finish.
     finally:
         (output / (style + '-logcat.txt')).write_bytes(adb('logcat', '-d', '-v', 'brief'))
 
