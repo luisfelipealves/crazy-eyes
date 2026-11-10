@@ -1,5 +1,16 @@
 # Crazy Eyes Face — teste no relógio
 
+## Versão 0.1.5-experimental — estilos do olho inteiro
+
+Correção do escopo: o estilo agora troca o formato, a parte branca, a moldura/pálpebra e a pupila dos dois olhos. Cartoon mantém os ovais; Gato usa aberturas amendoadas com pontas e pupilas verticais; Robô usa olhos quadrados, moldura metálica e sensores quadrados; Monstrinho usa contornos verdes irregulares e pálpebras grossas.
+
+- Instalar `crazy-eyes-shake-0.1.5-debug.apk`; se houver conflito de assinatura, desinstalar a versão de teste anterior.
+- Em **Personalizar/Editar**, alternar os quatro estilos e as seis cores. A cor continua alterando apenas a íris, sem recolorir a moldura.
+- [ ] Conferir a mudança do contorno completo, incluindo Robô e Monstrinho, e verificar os mesmos formatos no modo sempre ligado.
+- [ ] Tocar em cada olho separadamente: apenas sua abertura fecha; moldura e outro olho permanecem.
+- [ ] Inclinar e sacudir: pupilas acompanham o movimento e ficam recortadas pelas pálpebras/molduras.
+- [ ] Confirmar a seleção depois de sair do editor, apagar/acender a tela e reiniciar.
+
 ## Versão 0.1.4-experimental — personalização
 
 - Instalar `crazy-eyes-shake-0.1.4-debug.apk`. Se houver conflito de assinatura, desinstalar o Crazy Eyes Shake anterior primeiro.

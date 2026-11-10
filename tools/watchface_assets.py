@@ -8,13 +8,14 @@ EYE_WIDTH, EYE_HEIGHT = 153, 207
 EYE_POSITIONS = ((54, 122), (243, 122))
 
 
-def mask(openness=1.0):
+def mask(openness=1.0, rectangular=False):
     scale = 3
     im = Image.new('RGBA', (EYE_WIDTH * scale, EYE_HEIGHT * scale))
     half = EYE_HEIGHT * openness / 2
-    ImageDraw.Draw(im).ellipse((0, (EYE_HEIGHT / 2 - half) * scale,
-                               EYE_WIDTH * scale - 1, (EYE_HEIGHT / 2 + half) * scale - 1),
-                              fill='white')
+    draw = ImageDraw.Draw(im)
+    paint = draw.rectangle if rectangular else draw.ellipse
+    paint((0, (EYE_HEIGHT / 2 - half) * scale,
+           EYE_WIDTH * scale - 1, (EYE_HEIGHT / 2 + half) * scale - 1), fill='white')
     return im.resize((EYE_WIDTH, EYE_HEIGHT), Image.Resampling.LANCZOS)
 
 
@@ -44,6 +45,16 @@ def generate(output: Path):
     frames[-1] = mask()
     frames[0].save(output / 'poke_mask.webp', save_all=True, append_images=frames[1:],
                    duration=50, loop=1, lossless=True, minimize_size=True)
+    # A neutral band closes any eye silhouette without clipping square frames
+    # back into the old oval. Legacy oval assets remain for baseline comparison.
+    mask(rectangular=True).save(output / 'open_band.png')
+    bands = []
+    for i in range(18):
+        recovery = max(0.0, (i / 17 - .14) / .86)
+        bands.append(mask(.06 + .94 * (1 - (1 - recovery) ** 2), rectangular=True))
+    bands[-1] = mask(rectangular=True)
+    bands[0].save(output / 'poke_band.webp', save_all=True, append_images=bands[1:],
+                  duration=50, loop=1, lossless=True, minimize_size=True)
     ambient = Image.new('RGB', (SIZE * 3, SIZE * 3), 'black')
     draw = ImageDraw.Draw(ambient)
     for x, y in EYE_POSITIONS:

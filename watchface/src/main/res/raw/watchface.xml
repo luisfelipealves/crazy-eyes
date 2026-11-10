@@ -20,375 +20,1081 @@
     <Group name="interactive" x="0" y="0" width="450" height="450">
       <Variant mode="AMBIENT" target="alpha" value="0" />
       <Group name="left_eye" x="54" y="122" width="153" height="207" pivotX="0.5" pivotY="0.5">
-        <Transform target="scaleY" value="1 - 0.94 * (1 - clamp(abs(([SECOND_MILLISECOND] % 6) - 0.12) / 0.12, 0, 1))" />
-        <PartImage x="0" y="0" width="153" height="207">
-          <Image resource="sclera" />
-        </PartImage>
-        <Condition>
-          <Expressions>
-            <Expression name="motion">[ACCELEROMETER_IS_SUPPORTED]</Expression>
-          </Expressions>
-          <Compare expression="motion">
-            <Group name="left_tilt" x="0" y="0" width="153" height="207">
-              <Gyro x="-clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="-clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40" />
-              <Group name="left_spin" x="41" y="68" width="72" height="72" pivotX="0.5" pivotY="0.8611111" angle="0">
-                <Transform target="angle" value="([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
-                  <Animation duration="3" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
+        <ListConfiguration id="eye_style">
+          <ListOption id="cartoon">
+            <Group name="left_frame_cartoon" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="cat">
+            <Group name="left_frame_cat" x="0" y="0" width="153" height="207">
+              <Group name="left_frame_cat_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-10" y="-101.5" width="173" height="280">
+                    <Fill color="#654733" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-10" y="28.5" width="173" height="280">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="left_frame_cat_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-6" y="-97.5" width="165" height="272">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-6" y="32.5" width="165" height="272">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+          </ListOption>
+          <ListOption id="robot">
+            <Group name="left_frame_robot" x="0" y="0" width="153" height="207">
+              <Group name="left_frame_robot_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="0" y="27" width="153" height="153" cornerRadiusX="15" cornerRadiusY="15">
+                    <Fill color="#3A4855" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <Group name="left_frame_robot_bevel" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="3" y="30" width="147" height="147" cornerRadiusX="12" cornerRadiusY="12">
+                    <Fill color="#97A7B3" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <Group name="left_frame_robot_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="10" y="37" width="133" height="133" cornerRadiusX="5" cornerRadiusY="5">
+                    <Fill color="#000000" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="6" y="33" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="7" y="34" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="141" y="33" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="142" y="34" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="6" y="168" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="7" y="169" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="141" y="168" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="142" y="169" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <RoundRectangle x="43" y="30" width="67" height="3" cornerRadiusX="1" cornerRadiusY="1">
+                  <Fill color="#C2CED6" />
+                </RoundRectangle>
+              </PartDraw>
+            </Group>
+          </ListOption>
+          <ListOption id="monster">
+            <Group name="left_frame_monster" x="0" y="0" width="153" height="207">
+              <Group name="left_frame_monster_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="12" width="137" height="183">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="0" y="27" width="45" height="66">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="117" y="74" width="36" height="82">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="34" y="162" width="77" height="42">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="left_frame_monster_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="16" y="20" width="121" height="167">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="35" width="29" height="50">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="125" y="82" width="20" height="66">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="42" y="170" width="61" height="26">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+          </ListOption>
+        </ListConfiguration>
+        <Group name="left_lid" x="0" y="0" width="153" height="207">
+          <Transform target="scaleY" value="1 - 0.94 * (1 - clamp(abs(([SECOND_MILLISECOND] % 6) - 0.12) / 0.12, 0, 1))" />
+          <ListConfiguration id="eye_style">
+            <ListOption id="cartoon">
+              <PartImage x="0" y="0" width="153" height="207">
+                <Image resource="sclera" />
+              </PartImage>
+            </ListOption>
+            <ListOption id="cat">
+              <Group name="left_background_cat" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Rectangle x="0" y="0" width="153" height="207">
+                    <Fill color="#F5EBC9" />
+                  </Rectangle>
+                </PartDraw>
+              </Group>
+            </ListOption>
+            <ListOption id="robot">
+              <Group name="left_background_robot" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Rectangle x="0" y="0" width="153" height="207">
+                    <Fill color="#D7F1EC" />
+                  </Rectangle>
+                </PartDraw>
+              </Group>
+            </ListOption>
+            <ListOption id="monster">
+              <Group name="left_background_monster" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Rectangle x="0" y="0" width="153" height="207">
+                    <Fill color="#EAE7BB" />
+                  </Rectangle>
+                </PartDraw>
+              </Group>
+            </ListOption>
+          </ListConfiguration>
+          <Condition>
+            <Expressions>
+              <Expression name="motion">[ACCELEROMETER_IS_SUPPORTED]</Expression>
+            </Expressions>
+            <Compare expression="motion">
+              <Group name="left_tilt" x="0" y="0" width="153" height="207">
+                <Gyro x="-clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="-clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40" />
+                <Group name="left_spin" x="41" y="68" width="72" height="72" pivotX="0.5" pivotY="0.8611111" angle="0">
+                  <Transform target="angle" value="([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
+                    <Animation duration="3" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
+                  </Transform>
+                  <ListConfiguration id="eye_style">
+                    <ListOption id="cartoon">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </Ellipse>
+                        <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
+                          <Fill color="#06080D" />
+                        </Ellipse>
+                        <Ellipse x="20" y="17.667" width="12" height="12">
+                          <Fill color="#FFFFFF" />
+                        </Ellipse>
+                        <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
+                          <Fill color="#A0FFFFFF" />
+                        </Ellipse>
+                      </PartDraw>
+                    </ListOption>
+                    <ListOption id="cat">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </Ellipse>
+                        <Ellipse x="27" y="7" width="18" height="58">
+                          <Fill color="#06080D" />
+                        </Ellipse>
+                        <Ellipse x="16" y="18" width="10" height="10">
+                          <Fill color="#FFFFFF" />
+                        </Ellipse>
+                        <Ellipse x="46" y="44" width="5" height="5">
+                          <Fill color="#A0FFFFFF" />
+                        </Ellipse>
+                      </PartDraw>
+                    </ListOption>
+                    <ListOption id="robot">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <RoundRectangle x="1" y="1" width="70" height="70" cornerRadiusX="8" cornerRadiusY="8">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </RoundRectangle>
+                        <RoundRectangle x="16" y="16" width="40" height="40" cornerRadiusX="5" cornerRadiusY="5">
+                          <Fill color="#06080D" />
+                        </RoundRectangle>
+                        <Rectangle x="23" y="22" width="9" height="9">
+                          <Fill color="#FFFFFF" />
+                        </Rectangle>
+                        <Rectangle x="44" y="44" width="4" height="4">
+                          <Fill color="#A0FFFFFF" />
+                        </Rectangle>
+                      </PartDraw>
+                    </ListOption>
+                    <ListOption id="monster">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </Ellipse>
+                        <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
+                          <Fill color="#06080D" />
+                        </RoundRectangle>
+                        <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
+                          <Fill color="#06080D" />
+                        </RoundRectangle>
+                        <Ellipse x="30" y="15" width="8" height="8">
+                          <Fill color="#FFFFFF" />
+                        </Ellipse>
+                        <Ellipse x="48" y="32" width="5" height="5">
+                          <Fill color="#A0FFFFFF" />
+                        </Ellipse>
+                      </PartDraw>
+                    </ListOption>
+                  </ListConfiguration>
+                </Group>
+              </Group>
+            </Compare>
+            <Default>
+              <Group name="left_wander" x="41" y="68" width="72" height="72">
+                <Transform target="x" value="41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 26">
+                  <Animation duration="0.25" interpolation="EASE_OUT" />
                 </Transform>
-                <ListConfiguration id="eye_style">
-                  <ListOption id="cartoon">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
-                        <Fill color="#06080D" />
-                      </Ellipse>
-                      <Ellipse x="20" y="17.667" width="12" height="12">
-                        <Fill color="#FFFFFF" />
-                      </Ellipse>
-                      <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
-                        <Fill color="#A0FFFFFF" />
-                      </Ellipse>
-                    </PartDraw>
-                  </ListOption>
-                  <ListOption id="cat">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <Ellipse x="27" y="7" width="18" height="58">
-                        <Fill color="#06080D" />
-                      </Ellipse>
-                      <Ellipse x="16" y="18" width="10" height="10">
-                        <Fill color="#FFFFFF" />
-                      </Ellipse>
-                      <Ellipse x="46" y="44" width="5" height="5">
-                        <Fill color="#A0FFFFFF" />
-                      </Ellipse>
-                    </PartDraw>
-                  </ListOption>
-                  <ListOption id="robot">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <RoundRectangle x="13" y="13" width="46" height="46" cornerRadiusX="9" cornerRadiusY="9">
-                        <Fill color="#06080D" />
-                      </RoundRectangle>
-                      <Rectangle x="22" y="27" width="8" height="8">
-                        <Fill color="#FFFFFF" />
-                      </Rectangle>
-                      <Rectangle x="42" y="27" width="8" height="8">
-                        <Fill color="#FFFFFF" />
-                      </Rectangle>
-                      <Rectangle x="25" y="45" width="22" height="3">
-                        <Fill color="#A0FFFFFF" />
-                      </Rectangle>
-                    </PartDraw>
-                  </ListOption>
-                  <ListOption id="monster">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
-                        <Fill color="#06080D" />
-                      </RoundRectangle>
-                      <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
-                        <Fill color="#06080D" />
-                      </RoundRectangle>
-                      <Ellipse x="30" y="15" width="8" height="8">
-                        <Fill color="#FFFFFF" />
-                      </Ellipse>
-                      <Ellipse x="48" y="32" width="5" height="5">
-                        <Fill color="#A0FFFFFF" />
-                      </Ellipse>
-                    </PartDraw>
-                  </ListOption>
-                </ListConfiguration>
+                <Transform target="y" value="68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
+                  <Animation duration="0.25" interpolation="EASE_OUT" />
+                </Transform>
+                <Group x="0" y="0" width="72" height="72" name="left_wander_pupil">
+                  <ListConfiguration id="eye_style">
+                    <ListOption id="cartoon">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </Ellipse>
+                        <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
+                          <Fill color="#06080D" />
+                        </Ellipse>
+                        <Ellipse x="20" y="17.667" width="12" height="12">
+                          <Fill color="#FFFFFF" />
+                        </Ellipse>
+                        <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
+                          <Fill color="#A0FFFFFF" />
+                        </Ellipse>
+                      </PartDraw>
+                    </ListOption>
+                    <ListOption id="cat">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </Ellipse>
+                        <Ellipse x="27" y="7" width="18" height="58">
+                          <Fill color="#06080D" />
+                        </Ellipse>
+                        <Ellipse x="16" y="18" width="10" height="10">
+                          <Fill color="#FFFFFF" />
+                        </Ellipse>
+                        <Ellipse x="46" y="44" width="5" height="5">
+                          <Fill color="#A0FFFFFF" />
+                        </Ellipse>
+                      </PartDraw>
+                    </ListOption>
+                    <ListOption id="robot">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <RoundRectangle x="1" y="1" width="70" height="70" cornerRadiusX="8" cornerRadiusY="8">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </RoundRectangle>
+                        <RoundRectangle x="16" y="16" width="40" height="40" cornerRadiusX="5" cornerRadiusY="5">
+                          <Fill color="#06080D" />
+                        </RoundRectangle>
+                        <Rectangle x="23" y="22" width="9" height="9">
+                          <Fill color="#FFFFFF" />
+                        </Rectangle>
+                        <Rectangle x="44" y="44" width="4" height="4">
+                          <Fill color="#A0FFFFFF" />
+                        </Rectangle>
+                      </PartDraw>
+                    </ListOption>
+                    <ListOption id="monster">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </Ellipse>
+                        <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
+                          <Fill color="#06080D" />
+                        </RoundRectangle>
+                        <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
+                          <Fill color="#06080D" />
+                        </RoundRectangle>
+                        <Ellipse x="30" y="15" width="8" height="8">
+                          <Fill color="#FFFFFF" />
+                        </Ellipse>
+                        <Ellipse x="48" y="32" width="5" height="5">
+                          <Fill color="#A0FFFFFF" />
+                        </Ellipse>
+                      </PartDraw>
+                    </ListOption>
+                  </ListConfiguration>
+                </Group>
               </Group>
-            </Group>
-          </Compare>
-          <Default>
-            <Group name="left_wander" x="41" y="68" width="72" height="72">
-              <Transform target="x" value="41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 26">
-                <Animation duration="0.25" interpolation="EASE_OUT" />
-              </Transform>
-              <Transform target="y" value="68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
-                <Animation duration="0.25" interpolation="EASE_OUT" />
-              </Transform>
-              <Group x="0" y="0" width="72" height="72" name="left_wander_pupil">
-                <ListConfiguration id="eye_style">
-                  <ListOption id="cartoon">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
-                        <Fill color="#06080D" />
-                      </Ellipse>
-                      <Ellipse x="20" y="17.667" width="12" height="12">
-                        <Fill color="#FFFFFF" />
-                      </Ellipse>
-                      <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
-                        <Fill color="#A0FFFFFF" />
-                      </Ellipse>
-                    </PartDraw>
-                  </ListOption>
-                  <ListOption id="cat">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <Ellipse x="27" y="7" width="18" height="58">
-                        <Fill color="#06080D" />
-                      </Ellipse>
-                      <Ellipse x="16" y="18" width="10" height="10">
-                        <Fill color="#FFFFFF" />
-                      </Ellipse>
-                      <Ellipse x="46" y="44" width="5" height="5">
-                        <Fill color="#A0FFFFFF" />
-                      </Ellipse>
-                    </PartDraw>
-                  </ListOption>
-                  <ListOption id="robot">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <RoundRectangle x="13" y="13" width="46" height="46" cornerRadiusX="9" cornerRadiusY="9">
-                        <Fill color="#06080D" />
-                      </RoundRectangle>
-                      <Rectangle x="22" y="27" width="8" height="8">
-                        <Fill color="#FFFFFF" />
-                      </Rectangle>
-                      <Rectangle x="42" y="27" width="8" height="8">
-                        <Fill color="#FFFFFF" />
-                      </Rectangle>
-                      <Rectangle x="25" y="45" width="22" height="3">
-                        <Fill color="#A0FFFFFF" />
-                      </Rectangle>
-                    </PartDraw>
-                  </ListOption>
-                  <ListOption id="monster">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
-                        <Fill color="#06080D" />
-                      </RoundRectangle>
-                      <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
-                        <Fill color="#06080D" />
-                      </RoundRectangle>
-                      <Ellipse x="30" y="15" width="8" height="8">
-                        <Fill color="#FFFFFF" />
-                      </Ellipse>
-                      <Ellipse x="48" y="32" width="5" height="5">
-                        <Fill color="#A0FFFFFF" />
-                      </Ellipse>
-                    </PartDraw>
-                  </ListOption>
-                </ListConfiguration>
+            </Default>
+          </Condition>
+          <ListConfiguration id="eye_style">
+            <ListOption id="cartoon">
+              <Group name="left_opening_cartoon" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="0" y="0" width="153" height="207">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
               </Group>
+            </ListOption>
+            <ListOption id="cat">
+              <Group name="left_opening_cat" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-6" y="-97.5" width="165" height="272">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-6" y="32.5" width="165" height="272">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </ListOption>
+            <ListOption id="robot">
+              <Group name="left_opening_robot" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="10" y="37" width="133" height="133" cornerRadiusX="5" cornerRadiusY="5">
+                    <Fill color="#FFFFFF" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+            </ListOption>
+            <ListOption id="monster">
+              <Group name="left_opening_monster" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="16" y="20" width="121" height="167">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="35" width="29" height="50">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="125" y="82" width="20" height="66">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="42" y="170" width="61" height="26">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </ListOption>
+          </ListConfiguration>
+          <PartAnimatedImage name="left_poke" x="0" y="0" width="153" height="207" renderMode="MASK">
+            <AnimationController play="TAP" loopCount="1" beforePlaying="THUMBNAIL" afterPlaying="THUMBNAIL" />
+            <AnimatedImage resource="poke_band" format="WEBP" />
+            <Thumbnail resource="open_band" />
+          </PartAnimatedImage>
+        </Group>
+        <ListConfiguration id="eye_style">
+          <ListOption id="cartoon">
+            <Group name="left_detail_cartoon" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="cat">
+            <Group name="left_detail_cat" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="robot">
+            <Group name="left_detail_robot" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="monster">
+            <Group name="left_detail_monster" x="0" y="0" width="153" height="207">
+              <PartDraw x="0" y="0" width="153" height="207" angle="-8">
+                <RoundRectangle x="25" y="30" width="104" height="14" cornerRadiusX="6" cornerRadiusY="6">
+                  <Fill color="#5A7039" />
+                </RoundRectangle>
+              </PartDraw>
             </Group>
-          </Default>
-        </Condition>
-        <PartAnimatedImage name="left_poke" x="0" y="0" width="153" height="207" renderMode="MASK">
-          <AnimationController play="TAP" loopCount="1" beforePlaying="THUMBNAIL" afterPlaying="THUMBNAIL" />
-          <AnimatedImage resource="poke_mask" format="WEBP" />
-          <Thumbnail resource="eye_mask" />
-        </PartAnimatedImage>
+          </ListOption>
+        </ListConfiguration>
       </Group>
       <Group name="right_eye" x="243" y="122" width="153" height="207" pivotX="0.5" pivotY="0.5">
-        <Transform target="scaleY" value="1 - 0.94 * (1 - clamp(abs(([SECOND_MILLISECOND] % 6) - 0.12) / 0.12, 0, 1))" />
-        <PartImage x="0" y="0" width="153" height="207">
-          <Image resource="sclera" />
-        </PartImage>
-        <Condition>
-          <Expressions>
-            <Expression name="motion">[ACCELEROMETER_IS_SUPPORTED]</Expression>
-          </Expressions>
-          <Compare expression="motion">
-            <Group name="right_tilt" x="0" y="0" width="153" height="207">
-              <Gyro x="-clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="-clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40" />
-              <Group name="right_spin" x="41" y="68" width="72" height="72" pivotX="0.5" pivotY="0.8611111" angle="0">
-                <Transform target="angle" value="([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
-                  <Animation duration="3" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
+        <ListConfiguration id="eye_style">
+          <ListOption id="cartoon">
+            <Group name="right_frame_cartoon" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="cat">
+            <Group name="right_frame_cat" x="0" y="0" width="153" height="207">
+              <Group name="right_frame_cat_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-10" y="-101.5" width="173" height="280">
+                    <Fill color="#654733" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-10" y="28.5" width="173" height="280">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="right_frame_cat_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-6" y="-97.5" width="165" height="272">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-6" y="32.5" width="165" height="272">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+          </ListOption>
+          <ListOption id="robot">
+            <Group name="right_frame_robot" x="0" y="0" width="153" height="207">
+              <Group name="right_frame_robot_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="0" y="27" width="153" height="153" cornerRadiusX="15" cornerRadiusY="15">
+                    <Fill color="#3A4855" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <Group name="right_frame_robot_bevel" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="3" y="30" width="147" height="147" cornerRadiusX="12" cornerRadiusY="12">
+                    <Fill color="#97A7B3" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <Group name="right_frame_robot_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="10" y="37" width="133" height="133" cornerRadiusX="5" cornerRadiusY="5">
+                    <Fill color="#000000" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="6" y="33" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="7" y="34" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="141" y="33" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="142" y="34" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="6" y="168" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="7" y="169" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="141" y="168" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="142" y="169" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <RoundRectangle x="43" y="30" width="67" height="3" cornerRadiusX="1" cornerRadiusY="1">
+                  <Fill color="#C2CED6" />
+                </RoundRectangle>
+              </PartDraw>
+            </Group>
+          </ListOption>
+          <ListOption id="monster">
+            <Group name="right_frame_monster" x="0" y="0" width="153" height="207">
+              <Group name="right_frame_monster_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="12" width="137" height="183">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="0" y="27" width="45" height="66">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="117" y="74" width="36" height="82">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="34" y="162" width="77" height="42">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="right_frame_monster_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="16" y="20" width="121" height="167">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="35" width="29" height="50">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="125" y="82" width="20" height="66">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="42" y="170" width="61" height="26">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+          </ListOption>
+        </ListConfiguration>
+        <Group name="right_lid" x="0" y="0" width="153" height="207">
+          <Transform target="scaleY" value="1 - 0.94 * (1 - clamp(abs(([SECOND_MILLISECOND] % 6) - 0.12) / 0.12, 0, 1))" />
+          <ListConfiguration id="eye_style">
+            <ListOption id="cartoon">
+              <PartImage x="0" y="0" width="153" height="207">
+                <Image resource="sclera" />
+              </PartImage>
+            </ListOption>
+            <ListOption id="cat">
+              <Group name="right_background_cat" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Rectangle x="0" y="0" width="153" height="207">
+                    <Fill color="#F5EBC9" />
+                  </Rectangle>
+                </PartDraw>
+              </Group>
+            </ListOption>
+            <ListOption id="robot">
+              <Group name="right_background_robot" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Rectangle x="0" y="0" width="153" height="207">
+                    <Fill color="#D7F1EC" />
+                  </Rectangle>
+                </PartDraw>
+              </Group>
+            </ListOption>
+            <ListOption id="monster">
+              <Group name="right_background_monster" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Rectangle x="0" y="0" width="153" height="207">
+                    <Fill color="#EAE7BB" />
+                  </Rectangle>
+                </PartDraw>
+              </Group>
+            </ListOption>
+          </ListConfiguration>
+          <Condition>
+            <Expressions>
+              <Expression name="motion">[ACCELEROMETER_IS_SUPPORTED]</Expression>
+            </Expressions>
+            <Compare expression="motion">
+              <Group name="right_tilt" x="0" y="0" width="153" height="207">
+                <Gyro x="-clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="-clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40" />
+                <Group name="right_spin" x="41" y="68" width="72" height="72" pivotX="0.5" pivotY="0.8611111" angle="0">
+                  <Transform target="angle" value="([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
+                    <Animation duration="3" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
+                  </Transform>
+                  <ListConfiguration id="eye_style">
+                    <ListOption id="cartoon">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </Ellipse>
+                        <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
+                          <Fill color="#06080D" />
+                        </Ellipse>
+                        <Ellipse x="20" y="17.667" width="12" height="12">
+                          <Fill color="#FFFFFF" />
+                        </Ellipse>
+                        <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
+                          <Fill color="#A0FFFFFF" />
+                        </Ellipse>
+                      </PartDraw>
+                    </ListOption>
+                    <ListOption id="cat">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </Ellipse>
+                        <Ellipse x="27" y="7" width="18" height="58">
+                          <Fill color="#06080D" />
+                        </Ellipse>
+                        <Ellipse x="16" y="18" width="10" height="10">
+                          <Fill color="#FFFFFF" />
+                        </Ellipse>
+                        <Ellipse x="46" y="44" width="5" height="5">
+                          <Fill color="#A0FFFFFF" />
+                        </Ellipse>
+                      </PartDraw>
+                    </ListOption>
+                    <ListOption id="robot">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <RoundRectangle x="1" y="1" width="70" height="70" cornerRadiusX="8" cornerRadiusY="8">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </RoundRectangle>
+                        <RoundRectangle x="16" y="16" width="40" height="40" cornerRadiusX="5" cornerRadiusY="5">
+                          <Fill color="#06080D" />
+                        </RoundRectangle>
+                        <Rectangle x="23" y="22" width="9" height="9">
+                          <Fill color="#FFFFFF" />
+                        </Rectangle>
+                        <Rectangle x="44" y="44" width="4" height="4">
+                          <Fill color="#A0FFFFFF" />
+                        </Rectangle>
+                      </PartDraw>
+                    </ListOption>
+                    <ListOption id="monster">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </Ellipse>
+                        <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
+                          <Fill color="#06080D" />
+                        </RoundRectangle>
+                        <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
+                          <Fill color="#06080D" />
+                        </RoundRectangle>
+                        <Ellipse x="30" y="15" width="8" height="8">
+                          <Fill color="#FFFFFF" />
+                        </Ellipse>
+                        <Ellipse x="48" y="32" width="5" height="5">
+                          <Fill color="#A0FFFFFF" />
+                        </Ellipse>
+                      </PartDraw>
+                    </ListOption>
+                  </ListConfiguration>
+                </Group>
+              </Group>
+            </Compare>
+            <Default>
+              <Group name="right_wander" x="41" y="68" width="72" height="72">
+                <Transform target="x" value="41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 26">
+                  <Animation duration="0.25" interpolation="EASE_OUT" />
                 </Transform>
-                <ListConfiguration id="eye_style">
-                  <ListOption id="cartoon">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
-                        <Fill color="#06080D" />
-                      </Ellipse>
-                      <Ellipse x="20" y="17.667" width="12" height="12">
-                        <Fill color="#FFFFFF" />
-                      </Ellipse>
-                      <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
-                        <Fill color="#A0FFFFFF" />
-                      </Ellipse>
-                    </PartDraw>
-                  </ListOption>
-                  <ListOption id="cat">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <Ellipse x="27" y="7" width="18" height="58">
-                        <Fill color="#06080D" />
-                      </Ellipse>
-                      <Ellipse x="16" y="18" width="10" height="10">
-                        <Fill color="#FFFFFF" />
-                      </Ellipse>
-                      <Ellipse x="46" y="44" width="5" height="5">
-                        <Fill color="#A0FFFFFF" />
-                      </Ellipse>
-                    </PartDraw>
-                  </ListOption>
-                  <ListOption id="robot">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <RoundRectangle x="13" y="13" width="46" height="46" cornerRadiusX="9" cornerRadiusY="9">
-                        <Fill color="#06080D" />
-                      </RoundRectangle>
-                      <Rectangle x="22" y="27" width="8" height="8">
-                        <Fill color="#FFFFFF" />
-                      </Rectangle>
-                      <Rectangle x="42" y="27" width="8" height="8">
-                        <Fill color="#FFFFFF" />
-                      </Rectangle>
-                      <Rectangle x="25" y="45" width="22" height="3">
-                        <Fill color="#A0FFFFFF" />
-                      </Rectangle>
-                    </PartDraw>
-                  </ListOption>
-                  <ListOption id="monster">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
-                        <Fill color="#06080D" />
-                      </RoundRectangle>
-                      <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
-                        <Fill color="#06080D" />
-                      </RoundRectangle>
-                      <Ellipse x="30" y="15" width="8" height="8">
-                        <Fill color="#FFFFFF" />
-                      </Ellipse>
-                      <Ellipse x="48" y="32" width="5" height="5">
-                        <Fill color="#A0FFFFFF" />
-                      </Ellipse>
-                    </PartDraw>
-                  </ListOption>
-                </ListConfiguration>
+                <Transform target="y" value="68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
+                  <Animation duration="0.25" interpolation="EASE_OUT" />
+                </Transform>
+                <Group x="0" y="0" width="72" height="72" name="right_wander_pupil">
+                  <ListConfiguration id="eye_style">
+                    <ListOption id="cartoon">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </Ellipse>
+                        <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
+                          <Fill color="#06080D" />
+                        </Ellipse>
+                        <Ellipse x="20" y="17.667" width="12" height="12">
+                          <Fill color="#FFFFFF" />
+                        </Ellipse>
+                        <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
+                          <Fill color="#A0FFFFFF" />
+                        </Ellipse>
+                      </PartDraw>
+                    </ListOption>
+                    <ListOption id="cat">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </Ellipse>
+                        <Ellipse x="27" y="7" width="18" height="58">
+                          <Fill color="#06080D" />
+                        </Ellipse>
+                        <Ellipse x="16" y="18" width="10" height="10">
+                          <Fill color="#FFFFFF" />
+                        </Ellipse>
+                        <Ellipse x="46" y="44" width="5" height="5">
+                          <Fill color="#A0FFFFFF" />
+                        </Ellipse>
+                      </PartDraw>
+                    </ListOption>
+                    <ListOption id="robot">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <RoundRectangle x="1" y="1" width="70" height="70" cornerRadiusX="8" cornerRadiusY="8">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </RoundRectangle>
+                        <RoundRectangle x="16" y="16" width="40" height="40" cornerRadiusX="5" cornerRadiusY="5">
+                          <Fill color="#06080D" />
+                        </RoundRectangle>
+                        <Rectangle x="23" y="22" width="9" height="9">
+                          <Fill color="#FFFFFF" />
+                        </Rectangle>
+                        <Rectangle x="44" y="44" width="4" height="4">
+                          <Fill color="#A0FFFFFF" />
+                        </Rectangle>
+                      </PartDraw>
+                    </ListOption>
+                    <ListOption id="monster">
+                      <PartDraw x="0" y="0" width="72" height="72">
+                        <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                          <Fill color="[CONFIGURATION.eye_color.0]" />
+                        </Ellipse>
+                        <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
+                          <Fill color="#06080D" />
+                        </RoundRectangle>
+                        <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
+                          <Fill color="#06080D" />
+                        </RoundRectangle>
+                        <Ellipse x="30" y="15" width="8" height="8">
+                          <Fill color="#FFFFFF" />
+                        </Ellipse>
+                        <Ellipse x="48" y="32" width="5" height="5">
+                          <Fill color="#A0FFFFFF" />
+                        </Ellipse>
+                      </PartDraw>
+                    </ListOption>
+                  </ListConfiguration>
+                </Group>
               </Group>
-            </Group>
-          </Compare>
-          <Default>
-            <Group name="right_wander" x="41" y="68" width="72" height="72">
-              <Transform target="x" value="41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 26">
-                <Animation duration="0.25" interpolation="EASE_OUT" />
-              </Transform>
-              <Transform target="y" value="68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
-                <Animation duration="0.25" interpolation="EASE_OUT" />
-              </Transform>
-              <Group x="0" y="0" width="72" height="72" name="right_wander_pupil">
-                <ListConfiguration id="eye_style">
-                  <ListOption id="cartoon">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
-                        <Fill color="#06080D" />
-                      </Ellipse>
-                      <Ellipse x="20" y="17.667" width="12" height="12">
-                        <Fill color="#FFFFFF" />
-                      </Ellipse>
-                      <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
-                        <Fill color="#A0FFFFFF" />
-                      </Ellipse>
-                    </PartDraw>
-                  </ListOption>
-                  <ListOption id="cat">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <Ellipse x="27" y="7" width="18" height="58">
-                        <Fill color="#06080D" />
-                      </Ellipse>
-                      <Ellipse x="16" y="18" width="10" height="10">
-                        <Fill color="#FFFFFF" />
-                      </Ellipse>
-                      <Ellipse x="46" y="44" width="5" height="5">
-                        <Fill color="#A0FFFFFF" />
-                      </Ellipse>
-                    </PartDraw>
-                  </ListOption>
-                  <ListOption id="robot">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <RoundRectangle x="13" y="13" width="46" height="46" cornerRadiusX="9" cornerRadiusY="9">
-                        <Fill color="#06080D" />
-                      </RoundRectangle>
-                      <Rectangle x="22" y="27" width="8" height="8">
-                        <Fill color="#FFFFFF" />
-                      </Rectangle>
-                      <Rectangle x="42" y="27" width="8" height="8">
-                        <Fill color="#FFFFFF" />
-                      </Rectangle>
-                      <Rectangle x="25" y="45" width="22" height="3">
-                        <Fill color="#A0FFFFFF" />
-                      </Rectangle>
-                    </PartDraw>
-                  </ListOption>
-                  <ListOption id="monster">
-                    <PartDraw x="0" y="0" width="72" height="72">
-                      <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                        <Fill color="[CONFIGURATION.eye_color.0]" />
-                      </Ellipse>
-                      <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
-                        <Fill color="#06080D" />
-                      </RoundRectangle>
-                      <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
-                        <Fill color="#06080D" />
-                      </RoundRectangle>
-                      <Ellipse x="30" y="15" width="8" height="8">
-                        <Fill color="#FFFFFF" />
-                      </Ellipse>
-                      <Ellipse x="48" y="32" width="5" height="5">
-                        <Fill color="#A0FFFFFF" />
-                      </Ellipse>
-                    </PartDraw>
-                  </ListOption>
-                </ListConfiguration>
+            </Default>
+          </Condition>
+          <ListConfiguration id="eye_style">
+            <ListOption id="cartoon">
+              <Group name="right_opening_cartoon" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="0" y="0" width="153" height="207">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
               </Group>
+            </ListOption>
+            <ListOption id="cat">
+              <Group name="right_opening_cat" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-6" y="-97.5" width="165" height="272">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-6" y="32.5" width="165" height="272">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </ListOption>
+            <ListOption id="robot">
+              <Group name="right_opening_robot" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="10" y="37" width="133" height="133" cornerRadiusX="5" cornerRadiusY="5">
+                    <Fill color="#FFFFFF" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+            </ListOption>
+            <ListOption id="monster">
+              <Group name="right_opening_monster" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="16" y="20" width="121" height="167">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="35" width="29" height="50">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="125" y="82" width="20" height="66">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="42" y="170" width="61" height="26">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </ListOption>
+          </ListConfiguration>
+          <PartAnimatedImage name="right_poke" x="0" y="0" width="153" height="207" renderMode="MASK">
+            <AnimationController play="TAP" loopCount="1" beforePlaying="THUMBNAIL" afterPlaying="THUMBNAIL" />
+            <AnimatedImage resource="poke_band" format="WEBP" />
+            <Thumbnail resource="open_band" />
+          </PartAnimatedImage>
+        </Group>
+        <ListConfiguration id="eye_style">
+          <ListOption id="cartoon">
+            <Group name="right_detail_cartoon" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="cat">
+            <Group name="right_detail_cat" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="robot">
+            <Group name="right_detail_robot" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="monster">
+            <Group name="right_detail_monster" x="0" y="0" width="153" height="207">
+              <PartDraw x="0" y="0" width="153" height="207" angle="-8">
+                <RoundRectangle x="25" y="30" width="104" height="14" cornerRadiusX="6" cornerRadiusY="6">
+                  <Fill color="#5A7039" />
+                </RoundRectangle>
+              </PartDraw>
             </Group>
-          </Default>
-        </Condition>
-        <PartAnimatedImage name="right_poke" x="0" y="0" width="153" height="207" renderMode="MASK">
-          <AnimationController play="TAP" loopCount="1" beforePlaying="THUMBNAIL" afterPlaying="THUMBNAIL" />
-          <AnimatedImage resource="poke_mask" format="WEBP" />
-          <Thumbnail resource="eye_mask" />
-        </PartAnimatedImage>
+          </ListOption>
+        </ListConfiguration>
       </Group>
     </Group>
     <Group name="ambient" x="0" y="0" width="450" height="450" alpha="0">
       <Variant mode="AMBIENT" target="alpha" value="255" />
-      <PartImage x="0" y="0" width="450" height="450">
-        <Image resource="eyes_ambient" />
-      </PartImage>
+      <ListConfiguration id="eye_style">
+        <ListOption id="cartoon">
+          <Group name="ambient_shape_cartoon" x="0" y="0" width="450" height="450">
+            <PartImage x="0" y="0" width="450" height="450">
+              <Image resource="eyes_ambient" />
+            </PartImage>
+          </Group>
+        </ListOption>
+        <ListOption id="cat">
+          <Group name="ambient_shape_cat" x="0" y="0" width="450" height="450">
+            <Group name="ambient_shape_cat_left" x="54" y="122" width="153" height="207">
+              <Group name="ambient_shape_cat_left_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-10" y="-101.5" width="173" height="280">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-10" y="28.5" width="173" height="280">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="ambient_shape_cat_left_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-8" y="-99.5" width="169" height="276">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-8" y="30.5" width="169" height="276">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+            <Group name="ambient_shape_cat_right" x="243" y="122" width="153" height="207">
+              <Group name="ambient_shape_cat_right_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-10" y="-101.5" width="173" height="280">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-10" y="28.5" width="173" height="280">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="ambient_shape_cat_right_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-8" y="-99.5" width="169" height="276">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-8" y="30.5" width="169" height="276">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+          </Group>
+        </ListOption>
+        <ListOption id="robot">
+          <Group name="ambient_shape_robot" x="0" y="0" width="450" height="450">
+            <Group name="ambient_shape_robot_left" x="54" y="122" width="153" height="207">
+              <Group name="ambient_shape_robot_left_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="0" y="27" width="153" height="153" cornerRadiusX="15" cornerRadiusY="15">
+                    <Fill color="#707780" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <Group name="ambient_shape_robot_left_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="2" y="29" width="149" height="149" cornerRadiusX="13" cornerRadiusY="13">
+                    <Fill color="#000000" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+            </Group>
+            <Group name="ambient_shape_robot_right" x="243" y="122" width="153" height="207">
+              <Group name="ambient_shape_robot_right_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="0" y="27" width="153" height="153" cornerRadiusX="15" cornerRadiusY="15">
+                    <Fill color="#707780" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <Group name="ambient_shape_robot_right_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="2" y="29" width="149" height="149" cornerRadiusX="13" cornerRadiusY="13">
+                    <Fill color="#000000" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+            </Group>
+          </Group>
+        </ListOption>
+        <ListOption id="monster">
+          <Group name="ambient_shape_monster" x="0" y="0" width="450" height="450">
+            <Group name="ambient_shape_monster_left" x="54" y="122" width="153" height="207">
+              <Group name="ambient_shape_monster_left_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="12" width="137" height="183">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="0" y="27" width="45" height="66">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="117" y="74" width="36" height="82">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="34" y="162" width="77" height="42">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="ambient_shape_monster_left_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="10" y="14" width="133" height="179">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="2" y="29" width="41" height="62">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="119" y="76" width="32" height="78">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="36" y="164" width="73" height="38">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+            <Group name="ambient_shape_monster_right" x="243" y="122" width="153" height="207">
+              <Group name="ambient_shape_monster_right_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="12" width="137" height="183">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="0" y="27" width="45" height="66">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="117" y="74" width="36" height="82">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="34" y="162" width="77" height="42">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="ambient_shape_monster_right_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="10" y="14" width="133" height="179">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="2" y="29" width="41" height="62">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="119" y="76" width="32" height="78">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="36" y="164" width="73" height="38">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+          </Group>
+        </ListOption>
+      </ListConfiguration>
     </Group>
     <Condition>
       <Expressions>

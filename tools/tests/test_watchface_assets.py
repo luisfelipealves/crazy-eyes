@@ -6,6 +6,18 @@ from tools.watchface_assets import generate
 
 
 class WatchfaceAssetsTest(unittest.TestCase):
+    def test_neutral_poke_band_keeps_square_corners_open_and_recovers(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            generate(Path(tmp))
+            open_mask = Image.open(Path(tmp) / 'open_band.png').getchannel('A')
+            self.assertEqual(open_mask.getextrema(), (255, 255))
+            animation = Image.open(Path(tmp) / 'poke_band.webp')
+            closed = animation.convert('RGBA').getchannel('A')
+            self.assertEqual(closed.getpixel((0, 103)), 255)
+            self.assertEqual(closed.getpixel((76, 30)), 0)
+            animation.seek(animation.n_frames - 1)
+            self.assertEqual(animation.convert('RGBA').getchannel('A').tobytes(), open_mask.tobytes())
+
     def test_poke_closes_then_recovers_to_open_thumbnail(self):
         with tempfile.TemporaryDirectory() as tmp:
             generate(Path(tmp))

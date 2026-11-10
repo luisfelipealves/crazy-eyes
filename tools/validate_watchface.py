@@ -26,10 +26,15 @@ def validate(root: Path, apk: Path | None = None):
         with Image.open(paths[0]) as im:
             decoded_bytes += im.width * im.height * 4 * getattr(im, 'n_frames', 1)
     if decoded_bytes > 100 * 1024 * 1024: raise ValueError('Interactive decoded image budget exceeded')
-    ambient = render_preview(definition, ambient=True)
-    lit = sum(ambient.convert('L').histogram()[1:]) / (ambient.width * ambient.height)
-    if lit >= .15: raise ValueError(f'AOD illuminates {lit:.1%} of pixels')
-    if ambient.crop((100, 0, 350, 85)).getbbox() is None: raise ValueError('AOD clock is hidden')
+    styles = tree.find('UserConfigurations/ListConfiguration[@id="eye_style"]')
+    ambient_lit = {}
+    for style in ([o.get('id') for o in styles] if styles is not None else ['default']):
+        values = {'CONFIGURATION.eye_style': style} if style != 'default' else None
+        ambient = render_preview(definition, ambient=True, values=values)
+        lit = sum(ambient.convert('L').histogram()[1:]) / (ambient.width * ambient.height)
+        if lit >= .15: raise ValueError(f'AOD {style} illuminates {lit:.1%} of pixels')
+        if ambient.crop((100, 0, 350, 85)).getbbox() is None: raise ValueError('AOD clock is hidden')
+        ambient_lit[style] = round(lit * 100, 2)
     if apk:
         with zipfile.ZipFile(apk) as archive:
             if any(n.endswith('.dex') or n.startswith('lib/') for n in archive.namelist()):
@@ -37,7 +42,8 @@ def validate(root: Path, apk: Path | None = None):
             packaged = archive.read('res/raw/watchface.xml')
             schema.validate(packaged.decode())
     return dict(schema='WFF1', image_count=len(referenced), decoded_image_bytes=decoded_bytes,
-                ambient_lit_percent=round(lit * 100, 2), apk_checked=bool(apk))
+                ambient_lit_percent=max(ambient_lit.values()), ambient_lit_by_style=ambient_lit,
+                apk_checked=bool(apk))
 
 
 if __name__ == '__main__':
