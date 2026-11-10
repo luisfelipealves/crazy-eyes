@@ -9,11 +9,11 @@ def sample(seconds, eyes):
 
 
 def orbit():
-    # Hand-constructed clockwise left / counterclockwise right orbit, radius14.
-    return [sample(.3, [(145, 212), (334, 240)]),
-            sample(.8, [(159, 226), (348, 226)]),
-            sample(1.4, [(145, 240), (334, 212)]),
-            sample(2.1, [(132, 233), (321, 219)]),
+    # Hand-constructed clockwise left / counterclockwise right orbit, radius26 below neutral gaze.
+    return [sample(.3, [(157, 252), (294, 252)]),
+            sample(.8, [(131, 278), (320, 278)]),
+            sample(1.4, [(105, 252), (346, 252)]),
+            sample(2.1, [(118, 229), (333, 229)]),
             sample(3.8, BASE), sample(4.43, BASE), sample(5.17, BASE)]
 
 
@@ -28,12 +28,12 @@ class DeviceEvidenceTest(unittest.TestCase):
 
     def test_rejects_continuous_motion_crossing_baseline_at_one_sample(self):
         continuous = orbit()
-        continuous[-2] = sample(4.43, [(145, 212), (334, 240)])
+        continuous[-2] = sample(4.43, [(157, 252), (294, 252)])
         with self.assertRaises(AssertionError):
             validate_trials(BASE, [continuous])
 
     def test_rejects_reversed_orbital_directions(self):
-        reversed_frames = [sample(f['seconds'], [(x, 452 - y) for x, y in f['eyes']]) for f in orbit()]
+        reversed_frames = [sample(f['seconds'], [(2 * BASE[i][0] - x, y) for i, (x, y) in enumerate(f['eyes'])]) for f in orbit()]
         with self.assertRaises(AssertionError):
             validate_trials(BASE, [reversed_frames])
 

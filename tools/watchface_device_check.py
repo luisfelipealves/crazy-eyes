@@ -52,12 +52,12 @@ def validate_trials(baseline, traces):
             if .2 < sample['seconds'] < 2.8:
                 phases = []
                 for i in (0, 1):
-                    dx = sample['eyes'][i][0] - baseline[i][0] - 14
-                    dy = sample['eyes'][i][1] - baseline[i][1]
-                    if abs(math.hypot(dx, dy) - 14) > 5:
+                    dx = sample['eyes'][i][0] - baseline[i][0]
+                    dy = sample['eyes'][i][1] - baseline[i][1] - 26
+                    if abs(math.hypot(dx, dy) - 26) > 5:
                         raise AssertionError(f'Pupil left expected orbit in trial {trial}')
                     angle = math.atan2(dy, dx)
-                    phases.append(((angle - math.pi) if i == 0 else (math.pi - angle)) % math.tau)
+                    phases.append(((angle + math.pi / 2) if i == 0 else (-math.pi / 2 - angle)) % math.tau)
                 if abs(phases[0] - phases[1]) > .6:
                     raise AssertionError(f'Orbital phases do not oppose in trial {trial}')
                 active.append((sample['seconds'], phases))

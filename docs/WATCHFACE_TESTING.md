@@ -1,5 +1,13 @@
 # Crazy Eyes Face — teste no relógio
 
+## Versão 0.1.3-experimental
+
+- Giro da sacudida com raio 26 (antes 14), aproximadamente 86% mais amplo.
+- Pivô abaixo do centro da pupila para aproveitar a altura do olho. Posição neutra preservada; pupilas giram em sentidos opostos e retornam após aproximadamente 3 segundos.
+- Fonte 40 e direção invertida do acelerômetro mantidas.
+- Instalar `crazy-eyes-shake-0.1.3-debug.apk` e selecionar **Crazy Eyes Shake**. Desinstalar o APK de teste anterior se houver conflito de assinatura.
+- No relógio, comparar a amplitude, repetir a sacudida e verificar toque e retorno à inclinação normal.
+
 ## Versão 0.1.2-experimental
 
 - Hora em arco acima dos olhos com fonte 40 (antes 26), em 12h/24h e AOD.
