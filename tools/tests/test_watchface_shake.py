@@ -25,6 +25,6 @@ class WatchfaceShakeTest(unittest.TestCase):
             ((0, 0, 40), (15, -15)),
         ]
         for axes, expected in fixtures:
-            values = DEFAULTS | dict(zip(('ACCELEROMETER_X', 'ACCELEROMETER_Y', 'ACCELEROMETER_Z'), axes))
+            values = DEFAULTS | {'CONFIGURATION.shake_enabled': 'TRUE'} | dict(zip(('ACCELEROMETER_X', 'ACCELEROMETER_Y', 'ACCELEROMETER_Z'), axes))
             with self.subTest(axes=axes):
                 self.assertEqual(tuple(evaluate(e, values) for e in expressions), expected)

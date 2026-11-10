@@ -13,4 +13,8 @@
     <string name="color_brown">Castanho</string>
     <string name="color_purple">Roxo</string>
     <string name="color_amber">Âmbar</string>
+    <string name="animation_intensity_label">Intensidade das animações</string>
+    <string name="intensity_calm">Tranquilo</string>
+    <string name="intensity_crazy">Maluco</string>
+    <string name="shake_enabled_label">Efeito de sacudida</string>
 </resources>

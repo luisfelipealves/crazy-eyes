@@ -15,6 +15,11 @@
       <ColorOption id="purple" displayName="color_purple" screenReaderText="color_purple" colors="#A978E6" />
       <ColorOption id="amber" displayName="color_amber" screenReaderText="color_amber" colors="#F6B52C" />
     </ColorConfiguration>
+    <ListConfiguration id="animation_intensity" displayName="animation_intensity_label" screenReaderText="animation_intensity_label" defaultValue="crazy">
+      <ListOption id="calm" displayName="intensity_calm" screenReaderText="intensity_calm" />
+      <ListOption id="crazy" displayName="intensity_crazy" screenReaderText="intensity_crazy" />
+    </ListConfiguration>
+    <BooleanConfiguration id="shake_enabled" displayName="shake_enabled_label" screenReaderText="shake_enabled_label" defaultValue="TRUE" />
   </UserConfigurations>
   <Scene backgroundColor="#000000">
     <Group name="interactive" x="0" y="0" width="450" height="450">
@@ -215,11 +220,12 @@
                 </Expressions>
                 <Compare expression="motion">
                   <Group name="left_tilt" x="0" y="0" width="153" height="207">
-                    <Gyro x="-clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="-clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40" />
+                    <Gyro x="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 13 : -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 20 : -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40" />
                     <Group name="left_spin" x="41" y="68" width="72" height="72" pivotX="0.5" pivotY="0.8611111" angle="0">
-                      <Transform target="angle" value="([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
+                      <Transform target="angle" value="[CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
                         <Animation duration="3" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
                       </Transform>
+                      <Transform target="pivotY" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 0.6805556 : 0.8611111" />
                       <Group name="left_spin_energy" x="0" y="0" width="72" height="72">
                         <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
                         <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
@@ -298,10 +304,10 @@
                 </Compare>
                 <Default>
                   <Group name="left_wander" x="41" y="68" width="72" height="72">
-                    <Transform target="x" value="41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 26">
+                    <Transform target="x" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 13 : 41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 26">
                       <Animation duration="0.25" interpolation="EASE_OUT" />
                     </Transform>
-                    <Transform target="y" value="68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
+                    <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 20 : 68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
                       <Animation duration="0.25" interpolation="EASE_OUT" />
                     </Transform>
                     <Group x="0" y="0" width="72" height="72" name="left_wander_pupil">
@@ -673,11 +679,12 @@
                 </Expressions>
                 <Compare expression="motion">
                   <Group name="right_tilt" x="0" y="0" width="153" height="207">
-                    <Gyro x="-clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="-clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40" />
+                    <Gyro x="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 13 : -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 20 : -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40" />
                     <Group name="right_spin" x="41" y="68" width="72" height="72" pivotX="0.5" pivotY="0.8611111" angle="0">
-                      <Transform target="angle" value="([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
+                      <Transform target="angle" value="[CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
                         <Animation duration="3" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
                       </Transform>
+                      <Transform target="pivotY" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 0.6805556 : 0.8611111" />
                       <Group name="right_spin_energy" x="0" y="0" width="72" height="72">
                         <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
                         <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
@@ -756,10 +763,10 @@
                 </Compare>
                 <Default>
                   <Group name="right_wander" x="41" y="68" width="72" height="72">
-                    <Transform target="x" value="41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 26">
+                    <Transform target="x" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 13 : 41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 26">
                       <Animation duration="0.25" interpolation="EASE_OUT" />
                     </Transform>
-                    <Transform target="y" value="68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
+                    <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 20 : 68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
                       <Animation duration="0.25" interpolation="EASE_OUT" />
                     </Transform>
                     <Group x="0" y="0" width="72" height="72" name="right_wander_pupil">

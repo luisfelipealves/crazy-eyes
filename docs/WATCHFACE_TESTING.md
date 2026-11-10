@@ -1,3 +1,11 @@
+## Versão 0.1.8-experimental — intensidade das animações
+
+- Desinstalar a versão anterior se houver conflito de assinatura e instalar o novo APK. Selecionar Crazy Eyes Shake e abrir Personalizar/Editar.
+- Em **Intensidade das animações**, comparar **Maluco** (padrão, comportamento atual) com **Tranquilo** (metade da amplitude). Inclinação e olhar automático devem mover ambos os olhos na mesma direção de antes; sacudidas devem girar em sentidos opostos por cerca de3segundos, com órbita menor no Tranquilo.
+- Desligar **Efeito de sacudida** em cada modo: inclinar ainda move os olhos; sacudir não inicia giro. Religar recupera o efeito. Testar salvar/sair, trocar de mostrador e voltar, e reiniciar para confirmar persistência do editor.
+- Repetir nos4estilos; confirmar cores, toque/piscada, relógio, bateria baixa/carregando e modo ambiente. A mudança de intensidade não altera tamanho parado nem o pulso de carga.
+- CI testa o APK padrão e fixturesCalmON/CrazyOFF que só mudam defaults. Wear OS4 mede órbitas13/26px, recuperação e inclinação com o giro desligado. A escolha/persistência pelo editor permanece teste físico.
+
 # Crazy Eyes Face — teste no relógio
 
 ## Versão 0.1.7-experimental — expressões automáticas

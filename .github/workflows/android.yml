@@ -52,6 +52,18 @@ jobs:
             ./gradlew --no-daemon :watchface:assembleDebug
             cp watchface/build/outputs/apk/debug/watchface-debug.apk "device-apks/style-$style.apk"
           done
+          for fixture in calm shake-off; do
+            python - "$fixture" "$RUNNER_TEMP/experiment.xml" <<'PYFIX'
+          import sys
+          import xml.etree.ElementTree as ET
+          tree = ET.parse(sys.argv[2])
+          tree.find('UserConfigurations/ListConfiguration[@id="animation_intensity"]').set('defaultValue', 'calm' if sys.argv[1] == 'calm' else 'crazy')
+          tree.find('UserConfigurations/BooleanConfiguration[@id="shake_enabled"]').set('defaultValue', 'FALSE' if sys.argv[1] == 'shake-off' else 'TRUE')
+          tree.write('watchface/src/main/res/raw/watchface.xml', encoding='UTF-8', xml_declaration=True)
+          PYFIX
+            ./gradlew --no-daemon :watchface:assembleDebug
+            cp watchface/build/outputs/apk/debug/watchface-debug.apk "device-apks/motion-$fixture.apk"
+          done
           git fetch --no-tags --depth=1 origin e5e6d1fca63fe67c96dc687bd385da15716fadd8
           git show FETCH_HEAD:watchface/src/main/res/raw/watchface.xml > watchface/src/main/res/raw/watchface.xml
           ./gradlew --no-daemon :watchface:assembleDebug
@@ -131,6 +143,18 @@ jobs:
           adb uninstall com.luisfelipe.crazyeyes.watchface.shake
           adb install -r device-apk/experiment.apk
           python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --output watchface-device-results/experiment
+      - name: Verify calm orbit and independent shake switch in native renderer
+        run: |
+          for fixture in calm shake-off; do
+            adb uninstall com.luisfelipe.crazyeyes.watchface.shake
+            adb install "device-apk/motion-$fixture.apk"
+            python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output "watchface-device-results/motion-$fixture/style"
+            if [ "$fixture" = calm ]; then
+              python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --orbit-radius 13 --output watchface-device-results/motion-calm
+            else
+              python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --expect-no-spin --output watchface-device-results/motion-shake-off
+            fi
+          done
       - uses: actions/upload-artifact@v4
         if: always()
         with:

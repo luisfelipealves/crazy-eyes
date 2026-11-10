@@ -45,7 +45,7 @@ def centroids(picture):
     return eyes
 
 
-def validate_trials(baseline, traces):
+def validate_trials(baseline, traces, orbit_radius=26):
     for trial, samples in enumerate(traces):
         active = []
         for sample in samples:
@@ -53,8 +53,8 @@ def validate_trials(baseline, traces):
                 phases = []
                 for i in (0, 1):
                     dx = sample['eyes'][i][0] - baseline[i][0]
-                    dy = sample['eyes'][i][1] - baseline[i][1] - 26
-                    if abs(math.hypot(dx, dy) - 26) > 5:
+                    dy = sample['eyes'][i][1] - baseline[i][1] - orbit_radius
+                    if abs(math.hypot(dx, dy) - orbit_radius) > 5:
                         raise AssertionError(f'Pupil left expected orbit in trial {trial}')
                     angle = math.atan2(dy, dx)
                     phases.append(((angle + math.pi / 2) if i == 0 else (-math.pi / 2 - angle)) % math.tau)
@@ -81,7 +81,7 @@ def validate_calibration(baseline, tilted, recovered):
         raise RuntimeError('SETUP: pupils did not recover after sensor calibration')
 
 
-def run(package, output, expect_spin=True):
+def run(package, output, expect_spin=True, orbit_radius=26):
     output.mkdir(parents=True, exist_ok=True)
     # Wear OS opens ChargingActivity over the selected face while charging.
     # Motion calibration must exercise the face, not that system overlay.
@@ -149,14 +149,14 @@ def run(package, output, expect_spin=True):
         traces.append(samples)
     (output / 'measurements.json').write_text(json.dumps({'baseline': baseline, 'trials': traces}, indent=2))
     if expect_spin:
-        validate_trials(baseline, traces)
+        validate_trials(baseline, traces, orbit_radius)
         print('PASS: opposite after-release pupil motion and stationary recovery observed twice in the Wear OS renderer')
     else:
         for samples in traces:
             settled = [s for s in samples if s['seconds'] > .8]
             if len(settled) < 4 or any(math.dist(s['eyes'][i], baseline[i]) > 3 for s in settled for i in (0, 1)):
-                raise AssertionError('Baseline face unexpectedly moves after release')
-        print('BASELINE CONFIRMED: sensor injection works, but the original face has no after-release orbit')
+                raise AssertionError('Shake-disabled control unexpectedly moves after release')
+        print('CONTROL CONFIRMED: tilt injection works, with no after-release orbit')
 
 
 if __name__ == '__main__':
@@ -164,9 +164,10 @@ if __name__ == '__main__':
     parser.add_argument('--package', required=True)
     parser.add_argument('--output', type=Path, default=Path('watchface-device-results'))
     parser.add_argument('--expect-no-spin', action='store_true')
+    parser.add_argument('--orbit-radius', type=int, choices=(13, 26), default=26)
     args = parser.parse_args()
     try:
-        run(args.package, args.output, not args.expect_no_spin)
+        run(args.package, args.output, not args.expect_no_spin, args.orbit_radius)
     finally:
         args.output.mkdir(parents=True, exist_ok=True)
         (args.output / 'logcat.txt').write_bytes(adb('logcat', '-d', '-v', 'brief'))

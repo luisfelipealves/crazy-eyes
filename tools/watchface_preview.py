@@ -17,7 +17,7 @@ FUNCTIONS = dict(abs=abs, floor=math.floor, sin=math.sin,
 
 
 def evaluate(expression, values):
-    source = re.sub(r'\[([A-Z_0-9]+)\]', r'\1', expression)
+    source = re.sub(r'\[([A-Za-z_0-9.]+)\]', lambda m: m[1].replace('.', '__'), expression)
     source = re.sub(r'!(?!=)', ' not ', source.replace('&&', ' and ').replace('||', ' or ')).strip()
     if '?' in source:
         condition, branches = source.split('?', 1)
@@ -26,12 +26,12 @@ def evaluate(expression, values):
     tree = ast.parse(source, mode='eval')
     allowed = (ast.Expression, ast.Constant, ast.Name, ast.Load, ast.Call, ast.BinOp,
                ast.UnaryOp, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Mod, ast.USub, ast.UAdd,
-               ast.IfExp, ast.Compare, ast.Gt, ast.LtE, ast.BoolOp, ast.And, ast.Or, ast.Not)
+               ast.IfExp, ast.Compare, ast.Eq, ast.Gt, ast.LtE, ast.BoolOp, ast.And, ast.Or, ast.Not)
     for node in ast.walk(tree):
         if not isinstance(node, allowed): raise ValueError(f'Unsupported expression: {expression}')
         if isinstance(node, ast.Call) and (not isinstance(node.func, ast.Name) or node.func.id not in FUNCTIONS):
             raise ValueError('Unsupported function')
-    return eval(compile(tree, '<wff-expression>', 'eval'), {'__builtins__': {}}, FUNCTIONS | values)
+    return eval(compile(tree, '<wff-expression>', 'eval'), {'__builtins__': {}}, FUNCTIONS | {k.replace('.', '__'): v for k, v in values.items()})
 
 
 def render_preview(xml_path: Path, ambient=False, values=None, poke=None):
@@ -43,6 +43,10 @@ def render_preview(xml_path: Path, ambient=False, values=None, poke=None):
         for configuration in configurations:
             key = 'CONFIGURATION.' + configuration.get('id')
             choice = data.setdefault(key, configuration.get('defaultValue'))
+            if configuration.tag == 'BooleanConfiguration':
+                if choice not in ('TRUE', 'FALSE'):
+                    raise ValueError(f'Unknown configuration {key}={choice}')
+                continue
             option = next((o for o in configuration if o.get('id') == choice), None)
             if option is None:
                 raise ValueError(f'Unknown configuration {key}={choice}')
