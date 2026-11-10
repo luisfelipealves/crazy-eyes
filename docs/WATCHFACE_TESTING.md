@@ -1,5 +1,14 @@
 # Crazy Eyes Face — teste no relógio
 
+## Versão 0.1.6-experimental — correção do fundo retangular
+
+As máscaras do formato e da animação agora são aplicadas em grupos separados. Isso evita que a máscara retangular do piscar amplie o recorte do olho e esconda o estilo. Os IDs, estilos, cores e gestos continuam os mesmos.
+
+- Instalar `crazy-eyes-shake-0.1.6-debug.apk`; desinstalar a versão de teste anterior em caso de conflito de assinatura.
+- [ ] Alternar Cartoon, Gato, Robô e Monstrinho: conferir o formato completo com os olhos abertos, sem retângulos cobrindo o desenho.
+- [ ] Tocar em cada olho: a abertura fecha e volta ao mesmo formato; moldura e outro olho permanecem.
+- [ ] Conferir a escolha após apagar/acender a tela e reiniciar.
+
 ## Versão 0.1.5-experimental — estilos do olho inteiro
 
 Correção do escopo: o estilo agora troca o formato, a parte branca, a moldura/pálpebra e a pupila dos dois olhos. Cartoon mantém os ovais; Gato usa aberturas amendoadas com pontas e pupilas verticais; Robô usa olhos quadrados, moldura metálica e sensores quadrados; Monstrinho usa contornos verdes irregulares e pálpebras grossas.

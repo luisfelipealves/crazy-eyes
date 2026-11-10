@@ -41,6 +41,17 @@ jobs:
           mkdir device-apks
           cp watchface/build/outputs/apk/debug/watchface-debug.apk device-apks/experiment.apk
           cp watchface/src/main/res/raw/watchface.xml "$RUNNER_TEMP/experiment.xml"
+          for style in cartoon cat robot monster; do
+            python - "$style" "$RUNNER_TEMP/experiment.xml" <<'PY'
+          import sys
+          import xml.etree.ElementTree as ET
+          tree = ET.parse(sys.argv[2])
+          tree.find('UserConfigurations/ListConfiguration[@id="eye_style"]').set('defaultValue', sys.argv[1])
+          tree.write('watchface/src/main/res/raw/watchface.xml', encoding='UTF-8', xml_declaration=True)
+          PY
+            ./gradlew --no-daemon :watchface:assembleDebug
+            cp watchface/build/outputs/apk/debug/watchface-debug.apk "device-apks/style-$style.apk"
+          done
           git fetch --no-tags --depth=1 origin e5e6d1fca63fe67c96dc687bd385da15716fadd8
           git show FETCH_HEAD:watchface/src/main/res/raw/watchface.xml > watchface/src/main/res/raw/watchface.xml
           ./gradlew --no-daemon :watchface:assembleDebug
@@ -103,6 +114,15 @@ jobs:
           adb shell settings put secure user_setup_complete 1
           adb shell wm dismiss-keyguard
           adb install -r device-apk/baseline.apk
+      - name: Verify all complete eye silhouettes in native renderer
+        run: |
+          for style in cartoon cat robot monster; do
+            adb uninstall com.luisfelipe.crazyeyes.watchface.shake
+            adb install "device-apk/style-$style.apk"
+            python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style "$style" --output watchface-device-results/styles
+          done
+          adb uninstall com.luisfelipe.crazyeyes.watchface.shake
+          adb install device-apk/baseline.apk
       - name: Characterize original face with calibrated injection
         run: python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --expect-no-spin --output watchface-device-results/baseline
       - name: Verify after-shake reaction in system renderer

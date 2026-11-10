@@ -139,7 +139,12 @@ def render_preview(xml_path: Path, ambient=False, values=None, poke=None):
                 if child.get('renderMode') == 'MASK':
                     field = Image.new('RGBA', (width, height)); field.alpha_composite(painted, (x, y)); masks.append(field.getchannel('A'))
                 else: layer.alpha_composite(painted, (x, y))
-            for mask in masks: layer.putalpha(ImageChops.multiply(layer.getchannel('A'), mask))
+            if masks:
+                # WFF combines sibling masks on one canvas (union), not as
+                # successive intersections. Intersections require nested groups.
+                combined = Image.new('L', (width, height))
+                for mask in masks: combined = ImageChops.screen(combined, mask)
+                layer.putalpha(ImageChops.multiply(layer.getchannel('A'), combined))
         elif node.tag in ('PartImage', 'PartAnimatedImage'):
             resource = node.find('Image') if node.tag == 'PartImage' else node.find('Thumbnail')
             if poke and node.get('name') == poke[0]:
