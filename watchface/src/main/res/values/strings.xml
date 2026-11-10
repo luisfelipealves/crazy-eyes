@@ -1,3 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="watch_face_name">Crazy Eyes Shake</string>
+    <string name="eye_style_label">Eye style</string>
+    <string name="eye_color_label">Iris color</string>
+    <string name="style_cartoon">Cartoon</string>
+    <string name="style_cat">Cat</string>
+    <string name="style_robot">Robot</string>
+    <string name="style_monster">Little monster</string>
+    <string name="color_gray">Gray</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_green">Green</string>
+    <string name="color_brown">Brown</string>
+    <string name="color_purple">Purple</string>
+    <string name="color_amber">Amber</string>
 </resources>

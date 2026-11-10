@@ -36,6 +36,17 @@ def render_preview(xml_path: Path, ambient=False, values=None, poke=None):
     root = ET.parse(xml_path).getroot()
     resources = xml_path.parent.parent / 'drawable-nodpi'
     data = DEFAULTS | (values or {})
+    configurations = root.find('UserConfigurations')
+    if configurations is not None:
+        for configuration in configurations:
+            key = 'CONFIGURATION.' + configuration.get('id')
+            choice = data.setdefault(key, configuration.get('defaultValue'))
+            option = next((o for o in configuration if o.get('id') == choice), None)
+            if option is None:
+                raise ValueError(f'Unknown configuration {key}={choice}')
+            if configuration.tag == 'ColorConfiguration':
+                for i, color in enumerate(option.get('colors').split()):
+                    data[f'{key}.{i}'] = color
     canvas_size = (int(root.get('width')), int(root.get('height')))
 
     def image_resource(name, frame=0):
@@ -47,7 +58,11 @@ def render_preview(xml_path: Path, ambient=False, values=None, poke=None):
 
     def selected_children(node, env):
         for child in node:
-            if child.tag == 'Condition':
+            if child.tag == 'ListConfiguration':
+                choice = env['CONFIGURATION.' + child.get('id')]
+                option = next(o for o in child if o.get('id') == choice)
+                yield from selected_children(option, env)
+            elif child.tag == 'Condition':
                 local = env.copy()
                 for expression in child.find('Expressions'):
                     local[expression.get('name')] = evaluate(expression.text, local)
@@ -79,6 +94,32 @@ def render_preview(xml_path: Path, ambient=False, values=None, poke=None):
             position += advance
         return out
 
+    def part_draw(node, env, width, height):
+        # Supersampling approximates native vector AA; it does not simulate timing.
+        scale = 3
+        out = Image.new('RGBA', (width * scale, height * scale))
+        for shape in node:
+            fill = shape.find('Fill')
+            color = fill.get('color')
+            if color.startswith('['):
+                color = env[color[1:-1]]
+            if len(color) == 9:  # WFF uses ARGB, Pillow uses RGBA.
+                color = color[0] + color[3:] + color[1:3]
+            x, y, w, h = (float(shape.get(k)) * scale for k in ('x', 'y', 'width', 'height'))
+            overlay = Image.new('RGBA', out.size)
+            draw = ImageDraw.Draw(overlay)
+            bounds = (x, y, x + w, y + h)
+            if shape.tag == 'Ellipse':
+                draw.ellipse(bounds, fill=color)
+            elif shape.tag == 'RoundRectangle':
+                draw.rounded_rectangle(bounds, radius=float(shape.get('cornerRadiusX')) * scale, fill=color)
+            elif shape.tag == 'Rectangle':
+                draw.rectangle(bounds, fill=color)
+            else:
+                raise ValueError(f'Unsupported draw shape: {shape.tag}')
+            out.alpha_composite(overlay)
+        return out.resize((width, height), Image.Resampling.LANCZOS)
+
     def render(node, env):
         width, height = int(node.get('width', 450)), int(node.get('height', 450))
         attrs = dict(node.attrib)
@@ -105,6 +146,7 @@ def render_preview(xml_path: Path, ambient=False, values=None, poke=None):
                 img = image_resource(node.find('AnimatedImage').get('resource'), poke[1])
             else: img = image_resource(resource.get('resource'))
             layer = img.convert('RGBA').resize((width, height), Image.Resampling.LANCZOS)
+        elif node.tag == 'PartDraw': layer = part_draw(node, env, width, height)
         elif node.tag == 'PartText': layer = part_text(node, env)
         alpha = float(attrs.get('alpha', 255)) / 255
         if alpha != 1: layer.putalpha(layer.getchannel('A').point(lambda p: round(p * alpha)))

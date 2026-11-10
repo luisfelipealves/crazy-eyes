@@ -20,7 +20,7 @@ class ShakeAmplitudeTest(unittest.TestCase):
             for left_angle in (90, 270):
                 tree = ET.parse(XML)
                 for side, angle in (('left', left_angle), ('right', -left_angle)):
-                    tree.find(f'.//PartImage[@name="{side}_spin"]/Transform').set('value', str(angle))
+                    tree.find(f'.//Group[@name="{side}_spin"]/Transform').set('value', str(angle))
                 definition = raw / 'watchface.xml'
                 tree.write(definition)
                 points = centroids(render_preview(definition))

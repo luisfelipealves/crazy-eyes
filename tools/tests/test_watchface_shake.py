@@ -11,7 +11,7 @@ class WatchfaceShakeTest(unittest.TestCase):
         root = ET.parse(Path('watchface/src/main/res/raw/watchface.xml'))
         expressions = []
         for eye in ('left_tilt', 'right_tilt'):
-            transform = root.find(f'.//Group[@name="{eye}"]/PartImage/Transform[@target="angle"]')
+            transform = root.find(f'.//Group[@name="{eye}"]/Group/Transform[@target="angle"]')
             self.assertIsNotNone(transform, 'Sensor-supported pupils have no shake reaction')
             expressions.append(transform.get('value'))
         fixtures = [

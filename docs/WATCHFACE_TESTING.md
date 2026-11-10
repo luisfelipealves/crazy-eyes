@@ -1,5 +1,15 @@
 # Crazy Eyes Face — teste no relógio
 
+## Versão 0.1.4-experimental — personalização
+
+- Instalar `crazy-eyes-shake-0.1.4-debug.apk`. Se houver conflito de assinatura, desinstalar o Crazy Eyes Shake anterior primeiro.
+- Selecionar **Crazy Eyes Shake**, manter pressionado no mostrador e abrir **Personalizar/Editar** (ou usar o editor do Galaxy Wearable).
+- **Estilo dos olhos:** Cartoon, Gato, Robô e Monstrinho.
+- **Cor da íris:** Cinza, Azul, Verde, Castanho, Roxo e Âmbar. Ambas as escolhas são independentes e se aplicam aos dois olhos. Padrão: Cartoon/Cinza.
+- [ ] Alterar estilo e cor, salvar e confirmar que a seleção permanece depois de sair do editor, apagar/acender a tela e reiniciar o relógio.
+- [ ] Conferir que hora, inclinação invertida, sacudida ampla e reação ao toque continuam funcionando em cada estilo.
+- [ ] Conferir que o modo sempre ligado mantém hora e contornos discretos, sem as íris coloridas.
+
 ## Versão 0.1.3-experimental
 
 - Giro da sacudida com raio 26 (antes 14), aproximadamente 86% mais amplo.
