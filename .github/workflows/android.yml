@@ -120,6 +120,7 @@ jobs:
             adb uninstall com.luisfelipe.crazyeyes.watchface.shake
             adb install "device-apk/style-$style.apk"
             python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style "$style" --output watchface-device-results/styles
+            python -m tools.watchface_mood_device_check --style "$style" --output watchface-device-results/moods
           done
           adb uninstall com.luisfelipe.crazyeyes.watchface.shake
           adb install device-apk/baseline.apk

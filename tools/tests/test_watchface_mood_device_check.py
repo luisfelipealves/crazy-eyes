@@ -1,0 +1,34 @@
+from pathlib import Path
+import unittest
+from tools.watchface_preview import render_preview
+from tools.watchface_style_device_check import STYLES, assert_style
+from tools.watchface_mood_device_check import assert_mood, pupil_widths
+
+XML = Path('watchface/src/main/res/raw/watchface.xml')
+
+
+class BatteryNativeProbeTest(unittest.TestCase):
+    def test_checks_awake_and_tired_images_for_all_styles(self):
+        for style in STYLES:
+            awake = render_preview(XML, values={'CONFIGURATION.eye_style': style, 'BATTERY_PERCENT': 21})
+            tired = render_preview(XML, values={'CONFIGURATION.eye_style': style, 'BATTERY_PERCENT': 20})
+            assert_mood(awake, style, False); assert_mood(tired, style, True)
+            with self.assertRaises(AssertionError): assert_mood(awake, style, True)
+            with self.assertRaises(AssertionError): assert_mood(tired, style, False)
+
+    def test_horizontal_pulse_is_visible_on_both_pupils(self):
+        for style in STYLES:
+            widths = [pupil_widths(render_preview(XML, values={'CONFIGURATION.eye_style': style,
+                'BATTERY_CHARGING_STATUS': True, 'SECOND_MILLISECOND': seconds}))
+                for seconds in (1, 2, 3, 4)]
+            for eye in (0, 1): self.assertGreaterEqual(max(w[eye] for w in widths) - min(w[eye] for w in widths), 4)
+
+    def test_normal_blink_cannot_fake_the_horizontal_pulse(self):
+        for style in STYLES:
+            widths = []
+            for seconds in (.01, .04, .08, .12, .18, .23, 1, 2):
+                image = render_preview(XML, values={'CONFIGURATION.eye_style': style, 'SECOND_MILLISECOND': seconds})
+                try: assert_style(image, style)
+                except AssertionError: continue
+                widths.append(pupil_widths(image))
+            for eye in (0, 1): self.assertLess(max(w[eye] for w in widths) - min(w[eye] for w in widths), 4)

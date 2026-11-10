@@ -1,5 +1,15 @@
 # Crazy Eyes Face — teste no relógio
 
+## Versão 0.1.7-experimental — expressões automáticas
+
+- Bateria em20% ou menos, fora do carregador: pálpebras baixam, deixando os olhos cansados.
+- Carregando: olhos abertos e íris pulsando suavemente, mesmo com bateria baixa. A carga tem prioridade.
+- Ao desconectar com20% ou menos, voltam a ficar cansados; acima de20%, voltam ao normal.
+- Os quatro estilos, seis cores, hora, toque, inclinação, sacudida e modo sempre ligado continuam disponíveis. As expressões não alteram a tela ambiente.
+- Instalar `crazy-eyes-shake-0.1.7-debug.apk`; se houver conflito de assinatura, desinstalar a versão de teste anterior.
+- [ ] No carregador, abrir o mostrador e conferir a pulsação das duas íris.
+- [ ] Com bateria baixa, conferir as pálpebras nos estilos favoritos e a reação ao toque.
+
 ## Versão 0.1.6-experimental — correção do fundo retangular
 
 As máscaras do formato e da animação agora são aplicadas em grupos separados. Isso evita que a máscara retangular do piscar amplie o recorte do olho e esconda o estilo. Os IDs, estilos, cores e gestos continuam os mesmos.

@@ -10,13 +10,15 @@ from PIL import Image, ImageChops, ImageDraw, ImageFont
 DEFAULTS = dict(IS_24_HOUR_MODE=True, HOUR_0_23_Z='10', HOUR_1_12=10, MINUTE_Z='08',
                 ACCELEROMETER_IS_SUPPORTED=True, ACCELEROMETER_ANGLE_X=0,
                 ACCELEROMETER_ANGLE_Y=0, ACCELEROMETER_X=0, ACCELEROMETER_Y=0,
-                ACCELEROMETER_Z=9.8, SECONDS_IN_DAY=10, SECOND_MILLISECOND=1)
+                ACCELEROMETER_Z=9.8, SECONDS_IN_DAY=10, SECOND_MILLISECOND=1,
+                BATTERY_PERCENT=100, BATTERY_CHARGING_STATUS=False)
 FUNCTIONS = dict(abs=abs, floor=math.floor, sin=math.sin,
                  fract=lambda x: x - math.floor(x), clamp=lambda x, low, high: max(low, min(x, high)))
 
 
 def evaluate(expression, values):
     source = re.sub(r'\[([A-Z_0-9]+)\]', r'\1', expression)
+    source = re.sub(r'!(?!=)', ' not ', source.replace('&&', ' and ').replace('||', ' or ')).strip()
     if '?' in source:
         condition, branches = source.split('?', 1)
         yes, no = branches.split(':', 1)
@@ -24,7 +26,7 @@ def evaluate(expression, values):
     tree = ast.parse(source, mode='eval')
     allowed = (ast.Expression, ast.Constant, ast.Name, ast.Load, ast.Call, ast.BinOp,
                ast.UnaryOp, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Mod, ast.USub, ast.UAdd,
-               ast.IfExp, ast.Compare, ast.Gt)
+               ast.IfExp, ast.Compare, ast.Gt, ast.LtE, ast.BoolOp, ast.And, ast.Or, ast.Not)
     for node in ast.walk(tree):
         if not isinstance(node, allowed): raise ValueError(f'Unsupported expression: {expression}')
         if isinstance(node, ast.Call) and (not isinstance(node.func, ast.Name) or node.func.id not in FUNCTIONS):
@@ -99,6 +101,8 @@ def render_preview(xml_path: Path, ambient=False, values=None, poke=None):
         scale = 3
         out = Image.new('RGBA', (width * scale, height * scale))
         for shape in node:
+            if shape.tag in ('Transform', 'Variant', 'Gyro'):
+                continue
             fill = shape.find('Fill')
             color = fill.get('color')
             if color.startswith('['):
@@ -155,11 +159,11 @@ def render_preview(xml_path: Path, ambient=False, values=None, poke=None):
         elif node.tag == 'PartText': layer = part_text(node, env)
         alpha = float(attrs.get('alpha', 255)) / 255
         if alpha != 1: layer.putalpha(layer.getchannel('A').point(lambda p: round(p * alpha)))
-        sy = float(attrs.get('scaleY', 1))
-        if sy != 1:
-            squashed = layer.resize((width, max(1, round(height * sy))), Image.Resampling.LANCZOS)
+        sx, sy = float(attrs.get('scaleX', 1)), float(attrs.get('scaleY', 1))
+        if sx != 1 or sy != 1:
+            squashed = layer.resize((max(1, round(width * sx)), max(1, round(height * sy))), Image.Resampling.LANCZOS)
             layer = Image.new('RGBA', (width, height))
-            layer.alpha_composite(squashed, (0, (height - squashed.height) // 2))
+            layer.alpha_composite(squashed, ((width - squashed.width) // 2, (height - squashed.height) // 2))
         x, y = round(float(attrs.get('x', 0))), round(float(attrs.get('y', 0)))
         angle = float(attrs.get('angle', 0))
         if angle:

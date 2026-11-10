@@ -52,14 +52,15 @@ def assert_style(picture, style):
 
 class StyleStability:
     """Do not mistake a transient blink that hides the overlay for a fix."""
-    def __init__(self):
+    def __init__(self, checker=assert_style):
+        self.checker = checker
         self.first_pass = None
         self.passes = 0
         self.error = None
 
     def observe(self, picture, style, seconds):
         try:
-            assert_style(picture, style)
+            self.checker(picture, style)
         except AssertionError as error:
             self.first_pass = None
             self.passes = 0
@@ -78,6 +79,7 @@ def run(package, style, output):
         return subprocess.check_output(['adb', *args], timeout=25)
     adb('emu', 'power', 'ac', 'off')
     adb('emu', 'power', 'status', 'discharging')
+    adb('emu', 'power', 'capacity', '80')
     adb('emu', 'sensor', 'set', 'acceleration', '0:0:9.8')
     adb('shell', 'settings', 'put', 'system', 'screen_off_timeout', '600000')
     adb('shell', 'input', 'keyevent', 'KEYCODE_WAKEUP')
