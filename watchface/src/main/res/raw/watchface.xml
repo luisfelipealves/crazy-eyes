@@ -11,7 +11,7 @@
           <Expressions><Expression name="motion">[ACCELEROMETER_IS_SUPPORTED]</Expression></Expressions>
           <Compare expression="motion">
             <Group name="left_tilt" x="13" y="40" width="128" height="128">
-              <Gyro x="clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40"/>
+              <Gyro x="-clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="-clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40"/>
               <PartImage name="left_spin" x="28" y="28" width="72" height="72" pivotX="0.6944444" pivotY="0.5" angle="0">
                 <Transform target="angle" value="([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
                   <Animation duration="3" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30"/>
@@ -41,7 +41,7 @@
           <Expressions><Expression name="motion">[ACCELEROMETER_IS_SUPPORTED]</Expression></Expressions>
           <Compare expression="motion">
             <Group name="right_tilt" x="13" y="40" width="128" height="128">
-              <Gyro x="clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40"/>
+              <Gyro x="-clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="-clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40"/>
               <PartImage name="right_spin" x="28" y="28" width="72" height="72" pivotX="0.6944444" pivotY="0.5" angle="0">
                 <Transform target="angle" value="([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
                   <Animation duration="3" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30"/>
@@ -73,14 +73,14 @@
       <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
       <Compare expression="is24"><PartText name="time_24" x="0" y="0" width="450" height="450">
         <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
-          <Font family="SYNC_TO_DEVICE" size="26" weight="MEDIUM" color="#C6C6C6">
+          <Font family="SYNC_TO_DEVICE" size="40" weight="MEDIUM" color="#C6C6C6">
             <Template>%s:%s<Parameter expression="[HOUR_0_23_Z]"/><Parameter expression="[MINUTE_Z]"/></Template>
           </Font>
         </TextCircular>
       </PartText></Compare>
       <Default><PartText name="time_12" x="0" y="0" width="450" height="450">
         <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
-          <Font family="SYNC_TO_DEVICE" size="26" weight="MEDIUM" color="#C6C6C6">
+          <Font family="SYNC_TO_DEVICE" size="40" weight="MEDIUM" color="#C6C6C6">
             <Template>%s:%s<Parameter expression="[HOUR_1_12]"/><Parameter expression="[MINUTE_Z]"/></Template>
           </Font>
         </TextCircular>

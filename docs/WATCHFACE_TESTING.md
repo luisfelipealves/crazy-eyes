@@ -1,5 +1,11 @@
 # Crazy Eyes Face — teste no relógio
 
+## Versão 0.1.2-experimental
+
+- Hora em arco acima dos olhos com fonte 40 (antes 26), em 12h/24h e AOD.
+- Direção do acelerômetro invertida em X e Y: uma mesma inclinação move as pupilas para o lado oposto ao da versão anterior; os eixos não foram trocados entre si.
+- Instalar `crazy-eyes-shake-0.1.2-debug.apk` e selecionar **Crazy Eyes Shake**. APKs de teste podem usar certificados diferentes; se o Android acusar conflito de assinatura, desinstalar o Crazy Eyes Shake anterior antes de instalar.
+
 ## Experimento de sacudida (0.1.1-experimental)
 
 O pacote `com.luisfelipe.crazyeyes.watchface.shake`, nome **Crazy Eyes Shake**, é separado do mostrador já validado. O experimento testa uma transição angular WFF de 3 segundos depois de uma aceleração forte (módulo acima de 25 m/s²). Não é um detector de padrão de sacudida com histórico; uma pancada ou outro movimento forte também pode disparar.
