@@ -113,6 +113,7 @@ jobs:
           name: crazy-eyes-face-debug
           path: device-apk
       - name: Boot Wear OS 4 emulator
+        id: boot_wear
         run: |
           sdkmanager 'emulator' 'system-images;android-33;android-wear;x86_64'
           sudo chmod 666 /dev/kvm
@@ -144,6 +145,7 @@ jobs:
           adb install -r device-apk/experiment.apk
           python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --output watchface-device-results/experiment
       - name: Verify calm orbit and independent shake switch in native renderer
+        if: ${{ !cancelled() && steps.boot_wear.outcome == 'success' }}
         run: |
           for fixture in calm shake-off; do
             adb uninstall com.luisfelipe.crazyeyes.watchface.shake

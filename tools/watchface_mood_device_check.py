@@ -47,6 +47,13 @@ def overlay_has_focus(window_dump):
                for line in window_dump.splitlines())
 
 
+def watchface_clock_visible(picture):
+    # The existing clock remains visible during blinks and mood transitions.
+    # Full-screen system cards (including low-battery warnings) cover it.
+    clock = picture.convert('RGB').resize((450, 450)).crop((100, 0, 350, 70))
+    return sum(clock.convert('L').histogram()[81:]) >= 150
+
+
 def run(style, output):
     output.mkdir(parents=True, exist_ok=True)
     def adb(*args):
@@ -59,14 +66,14 @@ def run(style, output):
     last_dismissed = float('-inf')
     def capture(label):
         nonlocal last_dismissed
-        focus = adb('shell', 'dumpsys', 'window', 'windows').decode()
+        focus = adb('shell', 'dumpsys', 'window').decode()
         (output / f'{style}-focus.txt').write_text('\n'.join(
             line for line in focus.splitlines() if 'mCurrentFocus=' in line))
+        picture = Image.open(io.BytesIO(adb('exec-out', 'screencap', '-p')))
         now = time.monotonic()
-        if overlay_has_focus(focus) and now - last_dismissed >= 3:
+        if (overlay_has_focus(focus) or not watchface_clock_visible(picture)) and now - last_dismissed >= 3:
             adb('shell', 'input', 'keyevent', 'KEYCODE_BACK')
             last_dismissed = now
-        picture = Image.open(io.BytesIO(adb('exec-out', 'screencap', '-p')))
         picture.save(output / f'{style}-{label}.png')
         return picture
     def wait_mood(label, tired):

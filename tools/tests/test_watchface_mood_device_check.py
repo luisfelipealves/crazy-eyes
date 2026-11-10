@@ -44,3 +44,14 @@ class OverlayFocusTest(unittest.TestCase):
         history = 'Window{123 u0 com.google.android.wearable.sysui/com.google.android.clockwork.sysui.experiences.charging.ChargingActivity}\n'
         self.assertFalse(probe.overlay_has_focus(history + 'mCurrentFocus=Window{456 u0 com.google.android.wearable.sysui/.mainui.activity.SysUiActivity}'))
         self.assertFalse(probe.overlay_has_focus('mCurrentFocus=null'))
+
+    def test_watchface_clock_stays_visible_through_blinks_but_system_cards_cover_it(self):
+        from tools import watchface_mood_device_check as probe
+        from PIL import Image, ImageDraw
+        self.assertTrue(hasattr(probe, 'watchface_clock_visible'), 'Blinks must not trigger navigation; system full-screen cards must be dismissed')
+        for seconds, level in [(1, 80), (.12, 80), (1, 20)]:
+            picture = render_preview(XML, values={'SECOND_MILLISECOND': seconds, 'BATTERY_PERCENT': level})
+            self.assertTrue(probe.watchface_clock_visible(picture))
+        card = Image.new('RGB', (450, 450), 'black')
+        ImageDraw.Draw(card).text((40, 110), 'Wear OS\nLow battery\nYou have 20% battery remaining', fill='white')
+        self.assertFalse(probe.watchface_clock_visible(card))
