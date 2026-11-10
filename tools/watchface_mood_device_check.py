@@ -40,6 +40,13 @@ def pupil_widths(picture):
     return widths
 
 
+def overlay_has_focus(window_dump):
+    """Ignore stale overlay windows and ordinary watch face blinks."""
+    return any('mCurrentFocus=' in line and
+               ('ChargingActivity' in line or 'AllAppsLauncherActivity' in line)
+               for line in window_dump.splitlines())
+
+
 def run(style, output):
     output.mkdir(parents=True, exist_ok=True)
     def adb(*args):
@@ -49,11 +56,16 @@ def run(style, output):
         adb('emu', 'power', 'ac', 'on' if charging else 'off')
         adb('emu', 'power', 'status', 'charging' if charging else 'discharging')
         adb('shell', 'input', 'keyevent', 'KEYCODE_WAKEUP')
-        adb('shell', 'input', 'keyevent', 'KEYCODE_BACK')
-        if charging:
-            adb('shell', 'am', 'start', '-a', 'android.intent.action.MAIN',
-                '-c', 'android.intent.category.HOME')
+    last_dismissed = float('-inf')
     def capture(label):
+        nonlocal last_dismissed
+        focus = adb('shell', 'dumpsys', 'window', 'windows').decode()
+        (output / f'{style}-focus.txt').write_text('\n'.join(
+            line for line in focus.splitlines() if 'mCurrentFocus=' in line))
+        now = time.monotonic()
+        if overlay_has_focus(focus) and now - last_dismissed >= 3:
+            adb('shell', 'input', 'keyevent', 'KEYCODE_BACK')
+            last_dismissed = now
         picture = Image.open(io.BytesIO(adb('exec-out', 'screencap', '-p')))
         picture.save(output / f'{style}-{label}.png')
         return picture
@@ -66,10 +78,8 @@ def run(style, output):
             if stable.observe(picture, style, started): return picture
             if time.monotonic() >= deadline:
                 raise stable.error or AssertionError(f'{style}: {label} did not stabilize')
-            # A real power connection may open the system charging screen.
-            # BACK dismisses that overlay without changing battery data.
-            if stable.error is not None:
-                adb('shell', 'input', 'keyevent', 'KEYCODE_BACK')
+            # Blinks and mood transitions are not navigation failures. Only
+            # capture() dismisses a confirmed focused system overlay.
             time.sleep(.4)
     traces = []
     try:
