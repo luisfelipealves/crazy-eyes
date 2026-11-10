@@ -97,6 +97,10 @@ def run(package, style, output):
                 adb('shell', 'am', 'broadcast', '--async', '-a',
                     'com.google.android.wearable.app.DEBUG_SURFACE', '--es', 'operation',
                     'set-watchface', '--es', 'watchFaceId', package)
+                # Selecting a face does not dismiss the app drawer left open
+                # when the previously selected package was uninstalled.
+                adb('shell', 'am', 'start', '-a', 'android.intent.action.MAIN',
+                    '-c', 'android.intent.category.HOME')
                 next_activation = now + 10
             capture_started = time.monotonic()
             picture = Image.open(io.BytesIO(adb('exec-out', 'screencap', '-p')))
