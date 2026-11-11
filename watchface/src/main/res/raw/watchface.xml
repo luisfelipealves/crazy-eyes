@@ -221,12 +221,13 @@
                 <Compare expression="motion">
                   <Group name="left_tilt" x="0" y="0" width="153" height="207">
                     <Gyro x="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 13 : -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 20 : -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40" />
-                    <Group name="left_spin" x="41" y="68" width="72" height="72" pivotX="0.5" pivotY="0.8611111" angle="0">
+                    <Group name="left_spin" x="41" y="68" width="72" height="98" pivotX="0.5" pivotY="0.6326530612" angle="0">
                       <Transform target="angle" value="[CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
                         <Animation duration="3" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
                       </Transform>
-                      <Transform target="pivotY" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 0.6805556 : 0.8611111" />
+                      <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 55 : 68" />
                       <Group name="left_spin_energy" x="0" y="0" width="72" height="72">
+                        <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 13 : 0" />
                         <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
                         <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
                         <ListConfiguration id="eye_style">
@@ -680,12 +681,13 @@
                 <Compare expression="motion">
                   <Group name="right_tilt" x="0" y="0" width="153" height="207">
                     <Gyro x="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 13 : -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 20 : -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40" />
-                    <Group name="right_spin" x="41" y="68" width="72" height="72" pivotX="0.5" pivotY="0.8611111" angle="0">
+                    <Group name="right_spin" x="41" y="68" width="72" height="98" pivotX="0.5" pivotY="0.6326530612" angle="0">
                       <Transform target="angle" value="[CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
                         <Animation duration="3" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
                       </Transform>
-                      <Transform target="pivotY" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 0.6805556 : 0.8611111" />
+                      <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 55 : 68" />
                       <Group name="right_spin_energy" x="0" y="0" width="72" height="72">
+                        <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 13 : 0" />
                         <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
                         <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
                         <ListConfiguration id="eye_style">

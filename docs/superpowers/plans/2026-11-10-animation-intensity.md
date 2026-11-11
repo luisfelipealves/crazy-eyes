@@ -3,7 +3,7 @@
 > **For agentic workers:** Execute inline with superpowers:executing-plans.
 
 **Goal:** Native Calm/Crazy intensity and independent shake switch.
-**Architecture:** Existing WFF transforms read editor configurations; pivotY changes only orbit radius. Preview understands configuration expressions/booleans. Native probes measure13/26px radii.
+**Architecture:** Existing WFF transforms read editor configurations; static pivot plus compensating translations changes only orbit radius. Preview understands configuration expressions/booleans. Native probes measure13/26px radii.
 **Tech Stack:** WFF1, Python/Pillow, Gradle/GitHub Actions, Wear OS4.
 **Spec:** docs/superpowers/specs/2026-11-10-animation-intensity-design.md
 

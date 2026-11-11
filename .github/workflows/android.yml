@@ -137,26 +137,34 @@ jobs:
           done
           adb uninstall com.luisfelipe.crazyeyes.watchface.shake
           adb install device-apk/baseline.apk
+          python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output watchface-device-results/baseline/style
       - name: Characterize original face with calibrated injection
         run: python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --expect-no-spin --output watchface-device-results/baseline
       - name: Verify after-shake reaction in system renderer
         run: |
           adb uninstall com.luisfelipe.crazyeyes.watchface.shake
           adb install -r device-apk/experiment.apk
+          python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output watchface-device-results/experiment/style
           python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --output watchface-device-results/experiment
       - name: Verify calm orbit and independent shake switch in native renderer
         if: ${{ !cancelled() && steps.boot_wear.outcome == 'success' }}
         run: |
-          for fixture in calm shake-off; do
+          motion_status=0
+          for fixture in shake-off calm; do
             adb uninstall com.luisfelipe.crazyeyes.watchface.shake
             adb install "device-apk/motion-$fixture.apk"
             python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output "watchface-device-results/motion-$fixture/style"
             if [ "$fixture" = calm ]; then
-              python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --orbit-radius 13 --output watchface-device-results/motion-calm
+              if ! python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --orbit-radius 13 --output watchface-device-results/motion-calm; then
+                motion_status=1
+              fi
             else
-              python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --expect-no-spin --output watchface-device-results/motion-shake-off
+              if ! python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --expect-no-spin --output watchface-device-results/motion-shake-off; then
+                motion_status=1
+              fi
             fi
           done
+          exit "$motion_status"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

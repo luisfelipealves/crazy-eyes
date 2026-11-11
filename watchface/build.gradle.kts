@@ -7,8 +7,8 @@ android {
         applicationId = "com.luisfelipe.crazyeyes.watchface.shake"
         minSdk = 33
         targetSdk = 36
-        versionCode = 9
-        versionName = "0.1.8-experimental"
+        versionCode = 10
+        versionName = "0.1.9-experimental"
     }
     buildTypes {
         getByName("debug") {

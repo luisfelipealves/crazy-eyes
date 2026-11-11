@@ -1,3 +1,9 @@
+## Versão 0.1.9-experimental — correção da órbita
+
+- Mantém os controles Tranquilo/Maluco e Efeito de sacudida. Tranquilo deve girar em uma órbita de13px; Maluco mantém26px, ambos por cerca de3segundos e em sentidos opostos.
+- Corrige a interpretação diferente do pivô dinâmico no Wear OS4 usando pivô fixo e deslocamentos compensados. Olhos parados, tamanho das pupilas, inclinação e expressões de bateria permanecem como antes.
+- Confirmar no relógio a seleção e a persistência das opções após salvar e reiniciar.
+
 ## Versão 0.1.8-experimental — intensidade das animações
 
 - Desinstalar a versão anterior se houver conflito de assinatura e instalar o novo APK. Selecionar Crazy Eyes Shake e abrir Personalizar/Editar.

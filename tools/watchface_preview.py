@@ -135,7 +135,14 @@ def render_preview(xml_path: Path, ambient=False, values=None, poke=None):
             for variant in node.findall('Variant'):
                 attrs[variant.get('target')] = variant.get('value')
         for transform in node.findall('Transform'):
-            attrs[transform.get('target')] = evaluate(transform.get('value'), env)
+            target = transform.get('target')
+            value = evaluate(transform.get('value'), env)
+            # Wear OS4 applies transformed pivots in scene units, whereas
+            # static pivot attributes are normalized. Keep the latter form
+            # internally so the rotation math below handles both correctly.
+            if target == 'pivotX': value /= width
+            if target == 'pivotY': value /= height
+            attrs[target] = value
         gyro = node.find('Gyro')
         if gyro is not None:
             for key, value in gyro.attrib.items(): attrs[key] = float(attrs.get(key, 0)) + evaluate(value, env)
