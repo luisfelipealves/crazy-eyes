@@ -13,7 +13,7 @@ def values(mode, enabled='TRUE', **extra):
 class LabelsAndSpeedTest(unittest.TestCase):
     def test_options_have_captioned_tint_safe_icons_and_portuguese_fallback(self):
         config=ET.parse(XML).find('UserConfigurations/ListConfiguration[@id="animation_intensity"]')
-        for folder, expected in [('values',{'calm':'Calm','crazy':'Crazy'}),('values-pt',{'calm':'Tranquilo','crazy':'Maluco'})]:
+        for folder, expected in [('values',{'calm':'Calm','crazy':'Normal','wild':'Crazy'}),('values-pt',{'calm':'Tranquilo','crazy':'Normal','wild':'Maluco'})]:
             path=XML.parent.parent/folder/'strings.xml'
             self.assertTrue(path.is_file(),f'Missing editor locale {folder}')
             strings={n.get('name'):n.text for n in ET.parse(path).getroot()}

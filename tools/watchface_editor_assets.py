@@ -25,8 +25,8 @@ def option_icon(mode, caption):
 
 
 def generate(res):
-    for folder,captions in [('drawable-nodpi',{'calm':'Calm','crazy':'Crazy'}),
-                            ('drawable-pt-nodpi',{'calm':'Tranquilo','crazy':'Maluco'})]:
+    for folder,captions in [('drawable-nodpi',{'calm':'Calm','normal':'Normal','crazy':'Crazy'}),
+                            ('drawable-pt-nodpi',{'calm':'Tranquilo','normal':'Normal','crazy':'Maluco'})]:
         target=res/folder;target.mkdir(parents=True,exist_ok=True)
         for mode,caption in captions.items():option_icon(mode,caption).save(target/f'intensity_{mode}_icon.png')
 

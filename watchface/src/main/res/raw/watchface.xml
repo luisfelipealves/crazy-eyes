@@ -17,7 +17,8 @@
     </ColorConfiguration>
     <ListConfiguration id="animation_intensity" displayName="animation_intensity_label" screenReaderText="animation_intensity_label" defaultValue="crazy">
       <ListOption id="calm" displayName="intensity_calm" screenReaderText="intensity_calm" icon="intensity_calm_icon" />
-      <ListOption id="crazy" displayName="intensity_crazy" screenReaderText="intensity_crazy" icon="intensity_crazy_icon" />
+      <ListOption id="crazy" displayName="intensity_normal" screenReaderText="intensity_normal" icon="intensity_normal_icon" />
+      <ListOption id="wild" displayName="intensity_crazy" screenReaderText="intensity_crazy" icon="intensity_crazy_icon" />
     </ListConfiguration>
     <BooleanConfiguration id="shake_enabled" displayName="shake_enabled_label" screenReaderText="shake_enabled_label" defaultValue="TRUE" />
   </UserConfigurations>
@@ -230,7 +231,9 @@
                         <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; &amp;&amp; [CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
                           <Animation duration="3" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
                         </Transform>
-                        <Group name="left_spin_energy" x="40" y="14" width="72" height="72">
+                        <Group name="left_wild_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5">
+                          <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; ? [SECOND_MILLISECOND] * 360 : 0" />
+                          <Group name="left_spin_energy" x="40" y="14" width="72" height="72">
                           <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 27 : 14" />
                           <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
                           <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
@@ -304,6 +307,7 @@
                             </ListOption>
                           </ListConfiguration>
                         </Group>
+                        </Group>
                       </Group>
                     </Group>
                   </Group>
@@ -316,7 +320,9 @@
                     <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 20 : 68 + (fract(sin(floor([SECONDS_IN_DAY]) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
                       <Animation duration="0.25" interpolation="EASE_OUT" />
                     </Transform>
-                    <Group x="0" y="0" width="72" height="72" name="left_wander_pupil">
+                    <Group name="left_wild_wander_spin" x="-40" y="-14" width="152" height="152" pivotX="0.5" pivotY="0.5">
+                      <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; ? [SECOND_MILLISECOND] * 360 : 0" />
+                      <Group x="40" y="14" width="72" height="72" name="left_wander_pupil">
                       <Group name="left_wander_pupil_energy" x="0" y="0" width="72" height="72">
                         <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
                         <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
@@ -390,6 +396,7 @@
                           </ListOption>
                         </ListConfiguration>
                       </Group>
+                    </Group>
                     </Group>
                   </Group>
                 </Default>
@@ -695,7 +702,9 @@
                         <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; &amp;&amp; [CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
                           <Animation duration="3" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
                         </Transform>
-                        <Group name="right_spin_energy" x="40" y="14" width="72" height="72">
+                        <Group name="right_wild_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5">
+                          <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; ? -[SECOND_MILLISECOND] * 360 : 0" />
+                          <Group name="right_spin_energy" x="40" y="14" width="72" height="72">
                           <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 27 : 14" />
                           <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
                           <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
@@ -769,6 +778,7 @@
                             </ListOption>
                           </ListConfiguration>
                         </Group>
+                        </Group>
                       </Group>
                     </Group>
                   </Group>
@@ -781,7 +791,9 @@
                     <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 20 : 68 + (fract(sin(floor([SECONDS_IN_DAY]) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
                       <Animation duration="0.25" interpolation="EASE_OUT" />
                     </Transform>
-                    <Group x="0" y="0" width="72" height="72" name="right_wander_pupil">
+                    <Group name="right_wild_wander_spin" x="-40" y="-14" width="152" height="152" pivotX="0.5" pivotY="0.5">
+                      <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; ? -[SECOND_MILLISECOND] * 360 : 0" />
+                      <Group x="40" y="14" width="72" height="72" name="right_wander_pupil">
                       <Group name="right_wander_pupil_energy" x="0" y="0" width="72" height="72">
                         <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
                         <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
@@ -855,6 +867,7 @@
                           </ListOption>
                         </ListConfiguration>
                       </Group>
+                    </Group>
                     </Group>
                   </Group>
                 </Default>

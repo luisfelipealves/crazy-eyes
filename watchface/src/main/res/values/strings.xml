@@ -15,6 +15,7 @@
     <string name="color_amber">Amber</string>
     <string name="animation_intensity_label">Animation intensity</string>
     <string name="intensity_calm">Calm</string>
+    <string name="intensity_normal">Normal</string>
     <string name="intensity_crazy">Crazy</string>
     <string name="shake_enabled_label">Shake effect</string>
 </resources>
