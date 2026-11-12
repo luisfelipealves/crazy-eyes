@@ -16,8 +16,8 @@
       <ColorOption id="amber" displayName="color_amber" screenReaderText="color_amber" colors="#F6B52C" />
     </ColorConfiguration>
     <ListConfiguration id="animation_intensity" displayName="animation_intensity_label" screenReaderText="animation_intensity_label" defaultValue="crazy">
-      <ListOption id="calm" displayName="intensity_calm" screenReaderText="intensity_calm" />
-      <ListOption id="crazy" displayName="intensity_crazy" screenReaderText="intensity_crazy" />
+      <ListOption id="calm" displayName="intensity_calm" screenReaderText="intensity_calm" icon="intensity_calm_icon" />
+      <ListOption id="crazy" displayName="intensity_crazy" screenReaderText="intensity_crazy" icon="intensity_crazy_icon" />
     </ListConfiguration>
     <BooleanConfiguration id="shake_enabled" displayName="shake_enabled_label" screenReaderText="shake_enabled_label" defaultValue="TRUE" />
   </UserConfigurations>
@@ -220,95 +220,100 @@
                 </Expressions>
                 <Compare expression="motion">
                   <Group name="left_tilt" x="0" y="0" width="153" height="207">
-                    <Gyro x="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 13 : -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 20 : -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40" />
-                    <Group name="left_spin" x="41" y="68" width="72" height="98" pivotX="0.5" pivotY="0.6326530612" angle="0">
-                      <Transform target="angle" value="[CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
-                        <Animation duration="3" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
+                    <Gyro x="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 13 : -clamp([ACCELEROMETER_ANGLE_X] / 30, -1, 1) * 26" y="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 20 : -clamp([ACCELEROMETER_ANGLE_Y] / 30, -1, 1) * 40" />
+                    <Group name="left_spin" x="1" y="54" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
+                      <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;crazy&quot; &amp;&amp; [CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
+                        <Animation duration="2" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
                       </Transform>
-                      <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 55 : 68" />
-                      <Group name="left_spin_energy" x="0" y="0" width="72" height="72">
-                        <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 13 : 0" />
-                        <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
-                        <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
-                        <ListConfiguration id="eye_style">
-                          <ListOption id="cartoon">
-                            <PartDraw x="0" y="0" width="72" height="72">
-                              <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                                <Fill color="[CONFIGURATION.eye_color.0]" />
-                              </Ellipse>
-                              <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
-                                <Fill color="#06080D" />
-                              </Ellipse>
-                              <Ellipse x="20" y="17.667" width="12" height="12">
-                                <Fill color="#FFFFFF" />
-                              </Ellipse>
-                              <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
-                                <Fill color="#A0FFFFFF" />
-                              </Ellipse>
-                            </PartDraw>
-                          </ListOption>
-                          <ListOption id="cat">
-                            <PartDraw x="0" y="0" width="72" height="72">
-                              <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                                <Fill color="[CONFIGURATION.eye_color.0]" />
-                              </Ellipse>
-                              <Ellipse x="27" y="7" width="18" height="58">
-                                <Fill color="#06080D" />
-                              </Ellipse>
-                              <Ellipse x="16" y="18" width="10" height="10">
-                                <Fill color="#FFFFFF" />
-                              </Ellipse>
-                              <Ellipse x="46" y="44" width="5" height="5">
-                                <Fill color="#A0FFFFFF" />
-                              </Ellipse>
-                            </PartDraw>
-                          </ListOption>
-                          <ListOption id="robot">
-                            <PartDraw x="0" y="0" width="72" height="72">
-                              <RoundRectangle x="1" y="1" width="70" height="70" cornerRadiusX="8" cornerRadiusY="8">
-                                <Fill color="[CONFIGURATION.eye_color.0]" />
-                              </RoundRectangle>
-                              <RoundRectangle x="16" y="16" width="40" height="40" cornerRadiusX="5" cornerRadiusY="5">
-                                <Fill color="#06080D" />
-                              </RoundRectangle>
-                              <Rectangle x="23" y="22" width="9" height="9">
-                                <Fill color="#FFFFFF" />
-                              </Rectangle>
-                              <Rectangle x="44" y="44" width="4" height="4">
-                                <Fill color="#A0FFFFFF" />
-                              </Rectangle>
-                            </PartDraw>
-                          </ListOption>
-                          <ListOption id="monster">
-                            <PartDraw x="0" y="0" width="72" height="72">
-                              <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                                <Fill color="[CONFIGURATION.eye_color.0]" />
-                              </Ellipse>
-                              <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
-                                <Fill color="#06080D" />
-                              </RoundRectangle>
-                              <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
-                                <Fill color="#06080D" />
-                              </RoundRectangle>
-                              <Ellipse x="30" y="15" width="8" height="8">
-                                <Fill color="#FFFFFF" />
-                              </Ellipse>
-                              <Ellipse x="48" y="32" width="5" height="5">
-                                <Fill color="#A0FFFFFF" />
-                              </Ellipse>
-                            </PartDraw>
-                          </ListOption>
-                        </ListConfiguration>
+                      <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 : 54" />
+                      <Group name="left_calm_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
+                        <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; &amp;&amp; [CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
+                          <Animation duration="3" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
+                        </Transform>
+                        <Group name="left_spin_energy" x="40" y="14" width="72" height="72">
+                          <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 27 : 14" />
+                          <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
+                          <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
+                          <ListConfiguration id="eye_style">
+                            <ListOption id="cartoon">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </Ellipse>
+                                <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
+                                  <Fill color="#06080D" />
+                                </Ellipse>
+                                <Ellipse x="20" y="17.667" width="12" height="12">
+                                  <Fill color="#FFFFFF" />
+                                </Ellipse>
+                                <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
+                                  <Fill color="#A0FFFFFF" />
+                                </Ellipse>
+                              </PartDraw>
+                            </ListOption>
+                            <ListOption id="cat">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </Ellipse>
+                                <Ellipse x="27" y="7" width="18" height="58">
+                                  <Fill color="#06080D" />
+                                </Ellipse>
+                                <Ellipse x="16" y="18" width="10" height="10">
+                                  <Fill color="#FFFFFF" />
+                                </Ellipse>
+                                <Ellipse x="46" y="44" width="5" height="5">
+                                  <Fill color="#A0FFFFFF" />
+                                </Ellipse>
+                              </PartDraw>
+                            </ListOption>
+                            <ListOption id="robot">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <RoundRectangle x="1" y="1" width="70" height="70" cornerRadiusX="8" cornerRadiusY="8">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </RoundRectangle>
+                                <RoundRectangle x="16" y="16" width="40" height="40" cornerRadiusX="5" cornerRadiusY="5">
+                                  <Fill color="#06080D" />
+                                </RoundRectangle>
+                                <Rectangle x="23" y="22" width="9" height="9">
+                                  <Fill color="#FFFFFF" />
+                                </Rectangle>
+                                <Rectangle x="44" y="44" width="4" height="4">
+                                  <Fill color="#A0FFFFFF" />
+                                </Rectangle>
+                              </PartDraw>
+                            </ListOption>
+                            <ListOption id="monster">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </Ellipse>
+                                <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
+                                  <Fill color="#06080D" />
+                                </RoundRectangle>
+                                <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
+                                  <Fill color="#06080D" />
+                                </RoundRectangle>
+                                <Ellipse x="30" y="15" width="8" height="8">
+                                  <Fill color="#FFFFFF" />
+                                </Ellipse>
+                                <Ellipse x="48" y="32" width="5" height="5">
+                                  <Fill color="#A0FFFFFF" />
+                                </Ellipse>
+                              </PartDraw>
+                            </ListOption>
+                          </ListConfiguration>
+                        </Group>
                       </Group>
                     </Group>
                   </Group>
                 </Compare>
                 <Default>
                   <Group name="left_wander" x="41" y="68" width="72" height="72">
-                    <Transform target="x" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 13 : 41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 26">
+                    <Transform target="x" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 13 : 41 + (fract(sin(floor([SECONDS_IN_DAY]) * 12.9898) * 43758.5453) * 2 - 1) * 26">
                       <Animation duration="0.25" interpolation="EASE_OUT" />
                     </Transform>
-                    <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 20 : 68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
+                    <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 20 : 68 + (fract(sin(floor([SECONDS_IN_DAY]) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
                       <Animation duration="0.25" interpolation="EASE_OUT" />
                     </Transform>
                     <Group x="0" y="0" width="72" height="72" name="left_wander_pupil">
@@ -680,95 +685,100 @@
                 </Expressions>
                 <Compare expression="motion">
                   <Group name="right_tilt" x="0" y="0" width="153" height="207">
-                    <Gyro x="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 13 : -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 26" y="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 20 : -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 40" />
-                    <Group name="right_spin" x="41" y="68" width="72" height="98" pivotX="0.5" pivotY="0.6326530612" angle="0">
-                      <Transform target="angle" value="[CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
-                        <Animation duration="3" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
+                    <Gyro x="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 13 : -clamp([ACCELEROMETER_ANGLE_X] / 30, -1, 1) * 26" y="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 20 : -clamp([ACCELEROMETER_ANGLE_Y] / 30, -1, 1) * 40" />
+                    <Group name="right_spin" x="1" y="54" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
+                      <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;crazy&quot; &amp;&amp; [CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
+                        <Animation duration="2" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
                       </Transform>
-                      <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 55 : 68" />
-                      <Group name="right_spin_energy" x="0" y="0" width="72" height="72">
-                        <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 13 : 0" />
-                        <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
-                        <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
-                        <ListConfiguration id="eye_style">
-                          <ListOption id="cartoon">
-                            <PartDraw x="0" y="0" width="72" height="72">
-                              <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                                <Fill color="[CONFIGURATION.eye_color.0]" />
-                              </Ellipse>
-                              <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
-                                <Fill color="#06080D" />
-                              </Ellipse>
-                              <Ellipse x="20" y="17.667" width="12" height="12">
-                                <Fill color="#FFFFFF" />
-                              </Ellipse>
-                              <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
-                                <Fill color="#A0FFFFFF" />
-                              </Ellipse>
-                            </PartDraw>
-                          </ListOption>
-                          <ListOption id="cat">
-                            <PartDraw x="0" y="0" width="72" height="72">
-                              <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                                <Fill color="[CONFIGURATION.eye_color.0]" />
-                              </Ellipse>
-                              <Ellipse x="27" y="7" width="18" height="58">
-                                <Fill color="#06080D" />
-                              </Ellipse>
-                              <Ellipse x="16" y="18" width="10" height="10">
-                                <Fill color="#FFFFFF" />
-                              </Ellipse>
-                              <Ellipse x="46" y="44" width="5" height="5">
-                                <Fill color="#A0FFFFFF" />
-                              </Ellipse>
-                            </PartDraw>
-                          </ListOption>
-                          <ListOption id="robot">
-                            <PartDraw x="0" y="0" width="72" height="72">
-                              <RoundRectangle x="1" y="1" width="70" height="70" cornerRadiusX="8" cornerRadiusY="8">
-                                <Fill color="[CONFIGURATION.eye_color.0]" />
-                              </RoundRectangle>
-                              <RoundRectangle x="16" y="16" width="40" height="40" cornerRadiusX="5" cornerRadiusY="5">
-                                <Fill color="#06080D" />
-                              </RoundRectangle>
-                              <Rectangle x="23" y="22" width="9" height="9">
-                                <Fill color="#FFFFFF" />
-                              </Rectangle>
-                              <Rectangle x="44" y="44" width="4" height="4">
-                                <Fill color="#A0FFFFFF" />
-                              </Rectangle>
-                            </PartDraw>
-                          </ListOption>
-                          <ListOption id="monster">
-                            <PartDraw x="0" y="0" width="72" height="72">
-                              <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                                <Fill color="[CONFIGURATION.eye_color.0]" />
-                              </Ellipse>
-                              <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
-                                <Fill color="#06080D" />
-                              </RoundRectangle>
-                              <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
-                                <Fill color="#06080D" />
-                              </RoundRectangle>
-                              <Ellipse x="30" y="15" width="8" height="8">
-                                <Fill color="#FFFFFF" />
-                              </Ellipse>
-                              <Ellipse x="48" y="32" width="5" height="5">
-                                <Fill color="#A0FFFFFF" />
-                              </Ellipse>
-                            </PartDraw>
-                          </ListOption>
-                        </ListConfiguration>
+                      <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 : 54" />
+                      <Group name="right_calm_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
+                        <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; &amp;&amp; [CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
+                          <Animation duration="3" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
+                        </Transform>
+                        <Group name="right_spin_energy" x="40" y="14" width="72" height="72">
+                          <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 27 : 14" />
+                          <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
+                          <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
+                          <ListConfiguration id="eye_style">
+                            <ListOption id="cartoon">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </Ellipse>
+                                <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
+                                  <Fill color="#06080D" />
+                                </Ellipse>
+                                <Ellipse x="20" y="17.667" width="12" height="12">
+                                  <Fill color="#FFFFFF" />
+                                </Ellipse>
+                                <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
+                                  <Fill color="#A0FFFFFF" />
+                                </Ellipse>
+                              </PartDraw>
+                            </ListOption>
+                            <ListOption id="cat">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </Ellipse>
+                                <Ellipse x="27" y="7" width="18" height="58">
+                                  <Fill color="#06080D" />
+                                </Ellipse>
+                                <Ellipse x="16" y="18" width="10" height="10">
+                                  <Fill color="#FFFFFF" />
+                                </Ellipse>
+                                <Ellipse x="46" y="44" width="5" height="5">
+                                  <Fill color="#A0FFFFFF" />
+                                </Ellipse>
+                              </PartDraw>
+                            </ListOption>
+                            <ListOption id="robot">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <RoundRectangle x="1" y="1" width="70" height="70" cornerRadiusX="8" cornerRadiusY="8">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </RoundRectangle>
+                                <RoundRectangle x="16" y="16" width="40" height="40" cornerRadiusX="5" cornerRadiusY="5">
+                                  <Fill color="#06080D" />
+                                </RoundRectangle>
+                                <Rectangle x="23" y="22" width="9" height="9">
+                                  <Fill color="#FFFFFF" />
+                                </Rectangle>
+                                <Rectangle x="44" y="44" width="4" height="4">
+                                  <Fill color="#A0FFFFFF" />
+                                </Rectangle>
+                              </PartDraw>
+                            </ListOption>
+                            <ListOption id="monster">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </Ellipse>
+                                <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
+                                  <Fill color="#06080D" />
+                                </RoundRectangle>
+                                <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
+                                  <Fill color="#06080D" />
+                                </RoundRectangle>
+                                <Ellipse x="30" y="15" width="8" height="8">
+                                  <Fill color="#FFFFFF" />
+                                </Ellipse>
+                                <Ellipse x="48" y="32" width="5" height="5">
+                                  <Fill color="#A0FFFFFF" />
+                                </Ellipse>
+                              </PartDraw>
+                            </ListOption>
+                          </ListConfiguration>
+                        </Group>
                       </Group>
                     </Group>
                   </Group>
                 </Compare>
                 <Default>
                   <Group name="right_wander" x="41" y="68" width="72" height="72">
-                    <Transform target="x" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 13 : 41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 26">
+                    <Transform target="x" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 13 : 41 + (fract(sin(floor([SECONDS_IN_DAY]) * 12.9898) * 43758.5453) * 2 - 1) * 26">
                       <Animation duration="0.25" interpolation="EASE_OUT" />
                     </Transform>
-                    <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 20 : 68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
+                    <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 20 : 68 + (fract(sin(floor([SECONDS_IN_DAY]) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
                       <Animation duration="0.25" interpolation="EASE_OUT" />
                     </Transform>
                     <Group x="0" y="0" width="72" height="72" name="right_wander_pupil">

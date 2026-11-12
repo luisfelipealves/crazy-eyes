@@ -139,13 +139,13 @@ jobs:
           adb install device-apk/baseline.apk
           python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output watchface-device-results/baseline/style
       - name: Characterize original face with calibrated injection
-        run: python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --expect-no-spin --output watchface-device-results/baseline
+        run: python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --expect-no-spin --expected-half-tilt 13 --output watchface-device-results/baseline
       - name: Verify after-shake reaction in system renderer
         run: |
           adb uninstall com.luisfelipe.crazyeyes.watchface.shake
           adb install -r device-apk/experiment.apk
           python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output watchface-device-results/experiment/style
-          python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --output watchface-device-results/experiment
+          python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --duration 2 --expected-half-tilt 19.5 --output watchface-device-results/experiment
       - name: Verify calm orbit and independent shake switch in native renderer
         if: ${{ !cancelled() && steps.boot_wear.outcome == 'success' }}
         run: |
@@ -155,16 +155,23 @@ jobs:
             adb install "device-apk/motion-$fixture.apk"
             python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output "watchface-device-results/motion-$fixture/style"
             if [ "$fixture" = calm ]; then
-              if ! python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --orbit-radius 13 --output watchface-device-results/motion-calm; then
+              if ! python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --orbit-radius 13 --duration 3 --expected-half-tilt 6.5 --output watchface-device-results/motion-calm; then
                 motion_status=1
               fi
             else
-              if ! python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --expect-no-spin --output watchface-device-results/motion-shake-off; then
+              if ! python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --expect-no-spin --duration 2 --expected-half-tilt 19.5 --output watchface-device-results/motion-shake-off; then
                 motion_status=1
               fi
             fi
           done
           exit "$motion_status"
+      - name: Inspect visible intensity choices in native editor
+        if: ${{ !cancelled() && steps.boot_wear.outcome == 'success' }}
+        run: |
+          adb uninstall com.luisfelipe.crazyeyes.watchface.shake
+          adb install device-apk/experiment.apk
+          python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output watchface-device-results/editor/style
+          python -m tools.watchface_editor_device_check --output watchface-device-results/editor
       - uses: actions/upload-artifact@v4
         if: always()
         with:

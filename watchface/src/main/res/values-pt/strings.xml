@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string name="watch_face_name">Crazy Eyes Shake</string>
+    <string name="eye_style_label">Estilo dos olhos</string>
+    <string name="eye_color_label">Cor da íris</string>
+    <string name="style_cartoon">Cartoon</string>
+    <string name="style_cat">Gato</string>
+    <string name="style_robot">Robô</string>
+    <string name="style_monster">Monstrinho</string>
+    <string name="color_gray">Cinza</string>
+    <string name="color_blue">Azul</string>
+    <string name="color_green">Verde</string>
+    <string name="color_brown">Castanho</string>
+    <string name="color_purple">Roxo</string>
+    <string name="color_amber">Âmbar</string>
+    <string name="animation_intensity_label">Intensidade das animações</string>
+    <string name="intensity_calm">Tranquilo</string>
+    <string name="intensity_crazy">Maluco</string>
+    <string name="shake_enabled_label">Efeito de sacudida</string>
+</resources>

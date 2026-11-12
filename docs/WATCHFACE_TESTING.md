@@ -1,3 +1,10 @@
+## Versão 0.1.10-experimental — nomes e velocidade
+
+- Em Personalizar/Editar → Intensidade das animações, verificar as opções com ícones e nomes Tranquilo/Maluco (Calm/Crazy em inglês). Os nomes também estão escritos nas imagens para editores que omitem a legenda textual. Português genérico cobre pt-BR e pt-PT.
+- Maluco: inclinação mais sensível (atinge26/40px aos30°), olhar automático a cada1s, giro completo em cerca de2s. Tranquilo mantém13/20px aos45°, olhar a cada2s e giro de3s.
+- Conferir ambos os modos e Efeito de sacudida desligado; os olhos devem continuar acompanhando a inclinação. Salvar e reiniciar para confirmar persistência.
+- CI mede ganho com inclinação de22,5°, órbita/duração e captura o editor nativo. Confirmar a apresentação específica do editor Samsung no relógio/telefone.
+
 ## Versão 0.1.9-experimental — correção da órbita
 
 - Mantém os controles Tranquilo/Maluco e Efeito de sacudida. Tranquilo deve girar em uma órbita de13px; Maluco mantém26px, ambos por cerca de3segundos e em sentidos opostos.

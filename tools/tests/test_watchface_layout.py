@@ -24,13 +24,14 @@ class WatchfaceLayoutTest(unittest.TestCase):
         self.assertIsNone(ImageChops.difference(normal.crop((240, 120, 400, 335)),
                                                poked.crop((240, 120, 400, 335))).getbbox())
 
-    def test_missing_sensor_changes_gaze_every_two_seconds(self):
-        values = {'ACCELEROMETER_IS_SUPPORTED': False}
-        a = render_preview(XML, values=values | {'SECONDS_IN_DAY': 10})
-        b = render_preview(XML, values=values | {'SECONDS_IN_DAY': 11})
-        c = render_preview(XML, values=values | {'SECONDS_IN_DAY': 12})
-        self.assertIsNone(ImageChops.difference(a, b).getbbox())
-        self.assertIsNotNone(ImageChops.difference(a, c).getbbox())
+    def test_missing_sensor_uses_the_selected_gaze_cadence(self):
+        for mode,interval in [('calm',2),('crazy',1)]:
+            values = {'ACCELEROMETER_IS_SUPPORTED':False,'CONFIGURATION.animation_intensity':mode}
+            a=render_preview(XML,values=values | {'SECONDS_IN_DAY':10})
+            b=render_preview(XML,values=values | {'SECONDS_IN_DAY':10+interval/2})
+            c=render_preview(XML,values=values | {'SECONDS_IN_DAY':10+interval})
+            self.assertIsNone(ImageChops.difference(a,b).getbbox())
+            self.assertIsNotNone(ImageChops.difference(a,c).getbbox())
 
     def test_device_twelve_hour_setting_changes_only_the_time(self):
         data = {'HOUR_0_23_Z': '23', 'HOUR_1_12': 11}
