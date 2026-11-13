@@ -232,7 +232,9 @@
                           <Animation duration="3" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
                         </Transform>
                         <Group name="left_wild_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5">
-                          <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; ? [SECOND_MILLISECOND] * 360 : 0" />
+                          <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; &amp;&amp; [CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
+                            <Animation duration="1" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
+                          </Transform>
                           <Group name="left_spin_energy" x="40" y="14" width="72" height="72">
                           <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 27 : 14" />
                           <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
@@ -321,7 +323,7 @@
                       <Animation duration="0.25" interpolation="EASE_OUT" />
                     </Transform>
                     <Group name="left_wild_wander_spin" x="-40" y="-14" width="152" height="152" pivotX="0.5" pivotY="0.5">
-                      <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; ? [SECOND_MILLISECOND] * 360 : 0" />
+                      <Transform target="angle" value="0" />
                       <Group x="40" y="14" width="72" height="72" name="left_wander_pupil">
                       <Group name="left_wander_pupil_energy" x="0" y="0" width="72" height="72">
                         <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
@@ -703,7 +705,9 @@
                           <Animation duration="3" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
                         </Transform>
                         <Group name="right_wild_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5">
-                          <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; ? -[SECOND_MILLISECOND] * 360 : 0" />
+                          <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; &amp;&amp; [CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
+                            <Animation duration="1" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
+                          </Transform>
                           <Group name="right_spin_energy" x="40" y="14" width="72" height="72">
                           <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 27 : 14" />
                           <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
@@ -792,7 +796,7 @@
                       <Animation duration="0.25" interpolation="EASE_OUT" />
                     </Transform>
                     <Group name="right_wild_wander_spin" x="-40" y="-14" width="152" height="152" pivotX="0.5" pivotY="0.5">
-                      <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; ? -[SECOND_MILLISECOND] * 360 : 0" />
+                      <Transform target="angle" value="0" />
                       <Group x="40" y="14" width="72" height="72" name="right_wander_pupil">
                       <Group name="right_wander_pupil_energy" x="0" y="0" width="72" height="72">
                         <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />

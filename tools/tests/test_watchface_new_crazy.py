@@ -12,19 +12,20 @@ class NewCrazyModeTest(unittest.TestCase):
         self.assertEqual([strings[n.get('displayName')] for n in config], ['Tranquilo', 'Normal', 'Maluco'])
         self.assertEqual(config.get('defaultValue'), 'crazy')
 
-    def test_wild_eyes_spin_immediately_in_opposite_directions(self):
+    def test_wild_spin_requires_shake_and_respects_switch(self):
         tree = ET.parse(XML)
         for side, sign in [('left', 1), ('right', -1)]:
-            group = tree.find(f'.//Group[@name="{side}_wild_spin"]')
-            self.assertIsNotNone(group)
-            expr = group.find('Transform[@target="angle"]').get('value')
-            for mode in ('calm', 'crazy'):
-                self.assertEqual(evaluate(expr, DEFAULTS | {'CONFIGURATION.animation_intensity':mode, 'SECOND_MILLISECOND':1.25}),0)
-            a = evaluate(expr, DEFAULTS | {'CONFIGURATION.animation_intensity':'wild','SECOND_MILLISECOND':1.0})
-            b = evaluate(expr, DEFAULTS | {'CONFIGURATION.animation_intensity':'wild','SECOND_MILLISECOND':1.25})
-            self.assertAlmostEqual((b-a)*sign, 90)
+            transform = tree.find(f'.//Group[@name="{side}_wild_spin"]/Transform[@target="angle"]')
+            expr = transform.get('value')
+            for enabled, accel, want in [('TRUE', 0, 0), ('FALSE', 40, 0), ('TRUE', 40, sign*15)]:
+                values = DEFAULTS | {'CONFIGURATION.animation_intensity':'wild', 'CONFIGURATION.shake_enabled':enabled, 'ACCELEROMETER_X':accel}
+                self.assertEqual(evaluate(expr, values),want)
+            self.assertEqual(float(transform.find('Animation').get('duration')), 1)
 
-    def test_wild_keeps_spinning_without_accelerometer(self):
+    def test_no_shake_spin_without_accelerometer(self):
         tree = ET.parse(XML)
-        for side in ('left', 'right'):
-            self.assertIsNotNone(tree.find(f'.//Group[@name="{side}_wild_wander_spin"]'))
+        for side in ('left','right'):
+            group = tree.find(f'.//Group[@name="{side}_wild_wander_spin"]')
+            expr = group.find('Transform[@target="angle"]').get('value')
+            for seconds in (1, 1.25):
+                self.assertEqual(evaluate(expr, DEFAULTS | {'CONFIGURATION.animation_intensity':'wild', 'SECOND_MILLISECOND':seconds}), 0)
