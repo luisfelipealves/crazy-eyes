@@ -21,6 +21,24 @@
       <ListOption id="wild" displayName="intensity_crazy" screenReaderText="intensity_crazy" icon="intensity_crazy_icon" />
     </ListConfiguration>
     <BooleanConfiguration id="shake_enabled" displayName="shake_enabled_label" screenReaderText="shake_enabled_label" defaultValue="TRUE" />
+    <ListConfiguration id="time_size" displayName="time_size_label" screenReaderText="time_size_label" defaultValue="medium">
+      <ListOption id="small" displayName="time_small" screenReaderText="time_small" />
+      <ListOption id="medium" displayName="time_medium" screenReaderText="time_medium" />
+      <ListOption id="large" displayName="time_large" screenReaderText="time_large" />
+    </ListConfiguration>
+    <ListConfiguration id="time_font" displayName="time_font_label" screenReaderText="time_font_label" defaultValue="system">
+      <ListOption id="system" displayName="font_system" screenReaderText="font_system" />
+      <ListOption id="serif" displayName="font_serif" screenReaderText="font_serif" />
+      <ListOption id="mono" displayName="font_mono" screenReaderText="font_mono" />
+    </ListConfiguration>
+    <ColorConfiguration id="time_color" displayName="time_color_label" screenReaderText="time_color_label" defaultValue="gray">
+      <ColorOption id="gray" displayName="color_gray" colors="#C6C6C6" />
+      <ColorOption id="white" displayName="color_white" colors="#FFFFFF" />
+      <ColorOption id="blue" displayName="color_blue" colors="#279EFF" />
+      <ColorOption id="green" displayName="color_green" colors="#51B86C" />
+      <ColorOption id="purple" displayName="color_purple" colors="#A978E6" />
+      <ColorOption id="amber" displayName="color_amber" colors="#F6B52C" />
+    </ColorConfiguration>
   </UserConfigurations>
   <Scene backgroundColor="#000000">
     <Group name="interactive" x="0" y="0" width="450" height="450">
@@ -1174,30 +1192,187 @@
     </Group>
     <Condition>
       <Expressions>
-        <Expression name="is24">[IS_24_HOUR_MODE]</Expression>
+        <Expression name="time_small_system">[CONFIGURATION.time_size] == &quot;small&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;system&quot;</Expression>
+        <Expression name="time_small_serif">[CONFIGURATION.time_size] == &quot;small&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;serif&quot;</Expression>
+        <Expression name="time_small_mono">[CONFIGURATION.time_size] == &quot;small&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;mono&quot;</Expression>
+        <Expression name="time_medium_system">[CONFIGURATION.time_size] == &quot;medium&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;system&quot;</Expression>
+        <Expression name="time_medium_serif">[CONFIGURATION.time_size] == &quot;medium&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;serif&quot;</Expression>
+        <Expression name="time_medium_mono">[CONFIGURATION.time_size] == &quot;medium&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;mono&quot;</Expression>
+        <Expression name="time_large_system">[CONFIGURATION.time_size] == &quot;large&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;system&quot;</Expression>
+        <Expression name="time_large_serif">[CONFIGURATION.time_size] == &quot;large&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;serif&quot;</Expression>
+        <Expression name="time_large_mono">[CONFIGURATION.time_size] == &quot;large&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;mono&quot;</Expression>
       </Expressions>
-      <Compare expression="is24">
-        <PartText name="time_24" x="0" y="0" width="450" height="450">
-          <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
-            <Font family="SYNC_TO_DEVICE" size="40" weight="MEDIUM" color="#C6C6C6">
-              <Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" />
-                <Parameter expression="[MINUTE_Z]" />
-              </Template>
-            </Font>
-          </TextCircular>
-        </PartText>
+      <Compare expression="time_small_system">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_small_system" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="SYNC_TO_DEVICE" size="32" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_small_system" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="SYNC_TO_DEVICE" size="32" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
       </Compare>
-      <Default>
-        <PartText name="time_12" x="0" y="0" width="450" height="450">
-          <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
-            <Font family="SYNC_TO_DEVICE" size="40" weight="MEDIUM" color="#C6C6C6">
-              <Template>%s:%s<Parameter expression="[HOUR_1_12]" />
-                <Parameter expression="[MINUTE_Z]" />
-              </Template>
-            </Font>
-          </TextCircular>
-        </PartText>
-      </Default>
+      <Compare expression="time_small_serif">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_small_serif" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_serif" size="32" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_small_serif" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_serif" size="32" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_small_mono">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_small_mono" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_mono" size="32" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_small_mono" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_mono" size="32" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_medium_system">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_medium_system" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="SYNC_TO_DEVICE" size="40" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_medium_system" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="SYNC_TO_DEVICE" size="40" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_medium_serif">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_medium_serif" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_serif" size="40" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_medium_serif" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_serif" size="40" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_medium_mono">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_medium_mono" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_mono" size="40" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_medium_mono" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_mono" size="40" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_large_system">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_large_system" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="SYNC_TO_DEVICE" size="48" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_large_system" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="SYNC_TO_DEVICE" size="48" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_large_serif">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_large_serif" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_serif" size="48" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_large_serif" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_serif" size="48" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_large_mono">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_large_mono" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_mono" size="48" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_large_mono" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_mono" size="48" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
     </Condition>
   </Scene>
 </WatchFace>

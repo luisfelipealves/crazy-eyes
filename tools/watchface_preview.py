@@ -82,7 +82,9 @@ def render_preview(xml_path: Path, ambient=False, values=None, poke=None):
         circle = node.find('TextCircular')
         font_node = circle.find('Font')
         size = int(font_node.get('size'))
-        font = ImageFont.truetype('DejaVuSans.ttf', size)
+        family = font_node.get('family')
+        font_path = resources.parent / 'font' / (family + '.ttf')
+        font = ImageFont.truetype(str(font_path) if font_path.exists() else 'DejaVuSans.ttf', size)
         template = font_node.find('Template')
         text = (template.text or '') % tuple(evaluate(p.get('expression'), env) for p in template)
         radius = float(circle.get('width')) / 2 - size / 2
@@ -93,7 +95,7 @@ def render_preview(xml_path: Path, ambient=False, values=None, poke=None):
             angle = (position + advance / 2) / radius
             tile = Image.new('RGBA', (size * 3, size * 3))
             ImageDraw.Draw(tile).text((size * 1.5, size * 1.5), char, font=font,
-                                     fill=font_node.get('color'), anchor='mm')
+                                     fill=(env[font_node.get('color')[1:-1]] if font_node.get('color', '').startswith('[') else font_node.get('color')), anchor='mm')
             tile = tile.rotate(-math.degrees(angle), resample=Image.Resampling.BICUBIC)
             out.alpha_composite(tile, (round(cx + radius * math.sin(angle) - tile.width / 2),
                                        round(cy - radius * math.cos(angle) - tile.height / 2)))

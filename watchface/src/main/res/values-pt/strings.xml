@@ -18,4 +18,14 @@
     <string name="intensity_normal">Normal</string>
     <string name="intensity_crazy">Maluco</string>
     <string name="shake_enabled_label">Efeito de sacudida</string>
+    <string name="time_size_label">Tamanho das horas</string>
+    <string name="time_font_label">Fonte das horas</string>
+    <string name="time_color_label">Cor das horas</string>
+    <string name="time_small">Pequeno</string>
+    <string name="time_medium">Médio</string>
+    <string name="time_large">Grande</string>
+    <string name="font_system">Padrão</string>
+    <string name="font_serif">Clássica</string>
+    <string name="font_mono">Monoespaçada</string>
+    <string name="color_white">Branco</string>
 </resources>
