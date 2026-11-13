@@ -52,13 +52,12 @@ jobs:
             ./gradlew --no-daemon :watchface:assembleDebug
             cp watchface/build/outputs/apk/debug/watchface-debug.apk "device-apks/style-$style.apk"
           done
-          for fixture in calm shake-off; do
+          for fixture in calm; do
             python - "$fixture" "$RUNNER_TEMP/experiment.xml" <<'PYFIX'
           import sys
           import xml.etree.ElementTree as ET
           tree = ET.parse(sys.argv[2])
           tree.find('UserConfigurations/ListConfiguration[@id="animation_intensity"]').set('defaultValue', 'calm' if sys.argv[1] == 'calm' else 'crazy')
-          tree.find('UserConfigurations/BooleanConfiguration[@id="shake_enabled"]').set('defaultValue', 'FALSE' if sys.argv[1] == 'shake-off' else 'TRUE')
           tree.write('watchface/src/main/res/raw/watchface.xml', encoding='UTF-8', xml_declaration=True)
           PYFIX
             ./gradlew --no-daemon :watchface:assembleDebug
@@ -146,25 +145,13 @@ jobs:
           adb install -r device-apk/experiment.apk
           python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output watchface-device-results/experiment/style
           python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --duration 2 --expected-half-tilt 19.5 --output watchface-device-results/experiment
-      - name: Verify calm orbit and independent shake switch in native renderer
+      - name: Verify calm orbit in native renderer
         if: ${{ !cancelled() && steps.boot_wear.outcome == 'success' }}
         run: |
-          motion_status=0
-          for fixture in shake-off calm; do
-            adb uninstall com.luisfelipe.crazyeyes.watchface.shake
-            adb install "device-apk/motion-$fixture.apk"
-            python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output "watchface-device-results/motion-$fixture/style"
-            if [ "$fixture" = calm ]; then
-              if ! python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --orbit-radius 13 --duration 3 --expected-half-tilt 6.5 --output watchface-device-results/motion-calm; then
-                motion_status=1
-              fi
-            else
-              if ! python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --expect-no-spin --duration 2 --expected-half-tilt 19.5 --output watchface-device-results/motion-shake-off; then
-                motion_status=1
-              fi
-            fi
-          done
-          exit "$motion_status"
+          adb uninstall com.luisfelipe.crazyeyes.watchface.shake
+          adb install device-apk/motion-calm.apk
+          python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output watchface-device-results/motion-calm/style
+          python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --orbit-radius 13 --duration 3 --expected-half-tilt 6.5 --output watchface-device-results/motion-calm
       - name: Inspect visible intensity choices in native editor
         if: ${{ !cancelled() && steps.boot_wear.outcome == 'success' }}
         run: |

@@ -23,13 +23,12 @@ class AnimationIntensityTest(unittest.TestCase):
                 values = DEFAULTS | settings(mode) | {'ACCELEROMETER_ANGLE_X': 90, 'ACCELEROMETER_ANGLE_Y': -90}
                 self.assertEqual(tuple(evaluate(gyro.get(k), values) for k in ('x', 'y')), expected)
 
-    def test_shake_off_suppresses_trigger_in_both_modes_but_on_keeps_opposite_directions(self):
+    def test_shake_triggers_opposite_directions_in_both_modes(self):
         tree = ET.parse(XML)
         for mode in ('calm', 'crazy'):
-            for enabled, expected in [('FALSE', (0, 0)), ('TRUE', (15, -15))]:
-                values = DEFAULTS | settings(mode, enabled) | {'ACCELEROMETER_X': 40}
-                actual = tuple(sum(evaluate(n.get('value'),values) for n in tree.find(f'.//Group[@name="{side}_spin"]').findall('.//Transform[@target="angle"]'))
-                               for side in ('left','right'))
+            for accel, expected in [(0, (0, 0)), (40, (15, -15))]:
+                values = DEFAULTS | settings(mode) | {'ACCELEROMETER_X': accel}
+                actual = tuple(sum(evaluate(n.get('value'),values) for n in tree.find(f'.//Group[@name="{side}_spin"]').findall('.//Transform[@target="angle"]')) for side in ('left','right'))
                 self.assertEqual(actual, expected)
 
     def test_calm_halves_fallback_travel_even_when_shake_is_off(self):

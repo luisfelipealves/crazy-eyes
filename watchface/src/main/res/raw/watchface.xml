@@ -1,6 +1,24 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <WatchFace width="450" height="450">
   <UserConfigurations>
+    <ListConfiguration id="time_size" displayName="time_size_label" screenReaderText="time_size_label" defaultValue="medium">
+      <ListOption id="small" displayName="time_small" screenReaderText="time_small" />
+      <ListOption id="medium" displayName="time_medium" screenReaderText="time_medium" />
+      <ListOption id="large" displayName="time_large" screenReaderText="time_large" />
+    </ListConfiguration>
+    <ColorConfiguration id="time_color" displayName="time_color_label" screenReaderText="time_color_label" defaultValue="gray">
+      <ColorOption id="gray" displayName="color_gray" colors="#C6C6C6" />
+      <ColorOption id="white" displayName="color_white" colors="#FFFFFF" />
+      <ColorOption id="blue" displayName="color_blue" colors="#279EFF" />
+      <ColorOption id="green" displayName="color_green" colors="#51B86C" />
+      <ColorOption id="purple" displayName="color_purple" colors="#A978E6" />
+      <ColorOption id="amber" displayName="color_amber" colors="#F6B52C" />
+    </ColorConfiguration>
+    <ListConfiguration id="time_font" displayName="time_font_label" screenReaderText="time_font_label" defaultValue="system">
+      <ListOption id="system" displayName="font_system" screenReaderText="font_system" />
+      <ListOption id="serif" displayName="font_serif" screenReaderText="font_serif" />
+      <ListOption id="mono" displayName="font_mono" screenReaderText="font_mono" />
+    </ListConfiguration>
     <ListConfiguration id="eye_style" displayName="eye_style_label" screenReaderText="eye_style_label" defaultValue="cartoon">
       <ListOption id="cartoon" displayName="style_cartoon" screenReaderText="style_cartoon" />
       <ListOption id="cat" displayName="style_cat" screenReaderText="style_cat" />
@@ -20,25 +38,6 @@
       <ListOption id="crazy" displayName="intensity_normal" screenReaderText="intensity_normal" icon="intensity_normal_icon" />
       <ListOption id="wild" displayName="intensity_crazy" screenReaderText="intensity_crazy" icon="intensity_crazy_icon" />
     </ListConfiguration>
-    <BooleanConfiguration id="shake_enabled" displayName="shake_enabled_label" screenReaderText="shake_enabled_label" defaultValue="TRUE" />
-    <ListConfiguration id="time_size" displayName="time_size_label" screenReaderText="time_size_label" defaultValue="medium">
-      <ListOption id="small" displayName="time_small" screenReaderText="time_small" />
-      <ListOption id="medium" displayName="time_medium" screenReaderText="time_medium" />
-      <ListOption id="large" displayName="time_large" screenReaderText="time_large" />
-    </ListConfiguration>
-    <ListConfiguration id="time_font" displayName="time_font_label" screenReaderText="time_font_label" defaultValue="system">
-      <ListOption id="system" displayName="font_system" screenReaderText="font_system" />
-      <ListOption id="serif" displayName="font_serif" screenReaderText="font_serif" />
-      <ListOption id="mono" displayName="font_mono" screenReaderText="font_mono" />
-    </ListConfiguration>
-    <ColorConfiguration id="time_color" displayName="time_color_label" screenReaderText="time_color_label" defaultValue="gray">
-      <ColorOption id="gray" displayName="color_gray" colors="#C6C6C6" />
-      <ColorOption id="white" displayName="color_white" colors="#FFFFFF" />
-      <ColorOption id="blue" displayName="color_blue" colors="#279EFF" />
-      <ColorOption id="green" displayName="color_green" colors="#51B86C" />
-      <ColorOption id="purple" displayName="color_purple" colors="#A978E6" />
-      <ColorOption id="amber" displayName="color_amber" colors="#F6B52C" />
-    </ColorConfiguration>
   </UserConfigurations>
   <Scene backgroundColor="#000000">
     <Group name="interactive" x="0" y="0" width="450" height="450">
@@ -241,16 +240,16 @@
                   <Group name="left_tilt" x="0" y="0" width="153" height="207">
                     <Gyro x="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 13 : -clamp([ACCELEROMETER_ANGLE_X] / 30, -1, 1) * 26" y="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 20 : -clamp([ACCELEROMETER_ANGLE_Y] / 30, -1, 1) * 40" />
                     <Group name="left_spin" x="1" y="54" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
-                      <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;crazy&quot; &amp;&amp; [CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
+                      <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;crazy&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
                         <Animation duration="2" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
                       </Transform>
                       <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 : 54" />
                       <Group name="left_calm_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
-                        <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; &amp;&amp; [CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
+                        <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
                           <Animation duration="3" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
                         </Transform>
                         <Group name="left_wild_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5">
-                          <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; &amp;&amp; [CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
+                          <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
                             <Animation duration="1" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
                           </Transform>
                           <Group name="left_spin_energy" x="40" y="14" width="72" height="72">
@@ -714,16 +713,16 @@
                   <Group name="right_tilt" x="0" y="0" width="153" height="207">
                     <Gyro x="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 13 : -clamp([ACCELEROMETER_ANGLE_X] / 30, -1, 1) * 26" y="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 20 : -clamp([ACCELEROMETER_ANGLE_Y] / 30, -1, 1) * 40" />
                     <Group name="right_spin" x="1" y="54" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
-                      <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;crazy&quot; &amp;&amp; [CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
+                      <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;crazy&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
                         <Animation duration="2" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
                       </Transform>
                       <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 : 54" />
                       <Group name="right_calm_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
-                        <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; &amp;&amp; [CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
+                        <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
                           <Animation duration="3" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
                         </Transform>
                         <Group name="right_wild_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5">
-                          <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; &amp;&amp; [CONFIGURATION.shake_enabled] == &quot;TRUE&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
+                          <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
                             <Animation duration="1" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
                           </Transform>
                           <Group name="right_spin_energy" x="40" y="14" width="72" height="72">

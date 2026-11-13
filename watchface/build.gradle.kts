@@ -7,8 +7,8 @@ android {
         applicationId = "com.luisfelipe.crazyeyes.watchface.shake"
         minSdk = 33
         targetSdk = 36
-        versionCode = 14
-        versionName = "0.1.13-experimental"
+        versionCode = 15
+        versionName = "0.1.14-experimental"
     }
     buildTypes {
         getByName("debug") {
@@ -16,17 +16,6 @@ android {
             isMinifyEnabled = true
             isShrinkResources = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
-        }
-    }
-    signingConfigs {
-        getByName("debug") {
-            val localKey = rootProject.file("ci/debug.keystore")
-            if (localKey.isFile) {
-                storeFile = localKey
-                storePassword = "android"
-                keyAlias = "androiddebugkey"
-                keyPassword = "android"
-            }
         }
     }
 }

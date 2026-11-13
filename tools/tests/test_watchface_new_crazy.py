@@ -12,12 +12,12 @@ class NewCrazyModeTest(unittest.TestCase):
         self.assertEqual([strings[n.get('displayName')] for n in config], ['Tranquilo', 'Normal', 'Maluco'])
         self.assertEqual(config.get('defaultValue'), 'crazy')
 
-    def test_wild_spin_requires_shake_and_respects_switch(self):
+    def test_wild_spin_requires_shake(self):
         tree = ET.parse(XML)
         for side, sign in [('left', 1), ('right', -1)]:
             transform = tree.find(f'.//Group[@name="{side}_wild_spin"]/Transform[@target="angle"]')
             expr = transform.get('value')
-            for enabled, accel, want in [('TRUE', 0, 0), ('FALSE', 40, 0), ('TRUE', 40, sign*15)]:
+            for enabled, accel, want in [('TRUE', 0, 0), ('TRUE', 40, sign*15)]:
                 values = DEFAULTS | {'CONFIGURATION.animation_intensity':'wild', 'CONFIGURATION.shake_enabled':enabled, 'ACCELEROMETER_X':accel}
                 self.assertEqual(evaluate(expr, values),want)
             self.assertEqual(float(transform.find('Animation').get('duration')), 1)

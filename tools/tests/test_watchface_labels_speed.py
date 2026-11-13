@@ -50,14 +50,12 @@ class LabelsAndSpeedTest(unittest.TestCase):
     def test_only_selected_rotation_controller_arms_and_has_its_own_speed(self):
         root=ET.parse(XML)
         for mode,duration in [('calm',3),('crazy',2)]:
-            for enabled in ('FALSE','TRUE'):
-                for side,sign in [('left',1),('right',-1)]:
-                    transforms=root.find(f'.//Group[@name="{side}_spin"]').findall('.//Transform[@target="angle"]')
-                    armed=[n for n in transforms if evaluate(n.get('value'),values(mode,enabled,ACCELEROMETER_X=40))]
-                    self.assertEqual(len(armed),1 if enabled=='TRUE' else 0)
-                    if armed:
-                        self.assertEqual(evaluate(armed[0].get('value'),values(mode,enabled,ACCELEROMETER_X=40)),sign*15)
-                        self.assertEqual(float(armed[0].find('Animation').get('duration')),duration)
+            for side,sign in [('left',1),('right',-1)]:
+                transforms=root.find(f'.//Group[@name="{side}_spin"]').findall('.//Transform[@target="angle"]')
+                armed=[n for n in transforms if evaluate(n.get('value'),values(mode,ACCELEROMETER_X=40))]
+                self.assertEqual(len(armed),1)
+                self.assertEqual(evaluate(armed[0].get('value'),values(mode,ACCELEROMETER_X=40)),sign*15)
+                self.assertEqual(float(armed[0].find('Animation').get('duration')),duration)
 
     def test_native_validator_distinguishes_fast_and_slow_orbits(self):
         base=[(131,226),(320,226)]
