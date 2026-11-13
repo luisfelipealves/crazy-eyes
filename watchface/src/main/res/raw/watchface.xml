@@ -1373,5 +1373,27 @@
         </Condition>
       </Compare>
     </Condition>
+    <ComplicationSlot slotId="1" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" x="85" y="338" width="120" height="50">
+      <BoundingOval x="0" y="0" width="120" height="50" />
+      <Complication type="SHORT_TEXT">
+        <PartText x="0" y="0" width="120" height="50">
+          <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="25" color="#FFFFFF"><Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text>
+        </PartText>
+      </Complication>
+      <Complication type="MONOCHROMATIC_IMAGE">
+        <PartImage x="40" y="5" width="40" height="40"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+      </Complication>
+    </ComplicationSlot>
+    <ComplicationSlot slotId="2" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" x="245" y="338" width="120" height="50">
+      <BoundingOval x="0" y="0" width="120" height="50" />
+      <Complication type="SHORT_TEXT">
+        <PartText x="0" y="0" width="120" height="50">
+          <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="25" color="#FFFFFF"><Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text>
+        </PartText>
+      </Complication>
+      <Complication type="MONOCHROMATIC_IMAGE">
+        <PartImage x="40" y="5" width="40" height="40"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+      </Complication>
+    </ComplicationSlot>
   </Scene>
 </WatchFace>

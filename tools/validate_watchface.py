@@ -18,7 +18,7 @@ def validate(root: Path, apk: Path | None = None):
     schema.validate(definition)
     tree = ET.parse(definition)
     resources = definition.parent.parent / 'drawable-nodpi'
-    referenced = {n.get('resource') for n in tree.iter() if n.get('resource')}
+    referenced = {n.get('resource') for n in tree.iter() if n.get('resource') and not n.get('resource').startswith('[')}
     decoded_bytes = 0
     for resource in referenced:
         paths = list(resources.glob(resource + '.*'))
