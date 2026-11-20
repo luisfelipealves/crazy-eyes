@@ -27,7 +27,7 @@ def assert_style(picture, style):
 
         corner = rgb(3, 4)
         require(max(corner) < 30, 'rectangular overlay or missing silhouette clipping', corner)
-        inside = rgb(76, 60)
+        inside = rgb(76, 65 if style == 'monster' else 60)
         require(min(inside) > 150, 'opening is closed, missing, or wrong face selected', inside)
         top = rgb(76, 10)
         if style == 'cartoon':
@@ -45,9 +45,9 @@ def assert_style(picture, style):
             require(cream[0] > cream[2] + 20 and cream[1] > cream[2] + 10,
                     'cat opening is missing', cream)
         elif style == 'monster':
-            skin = rgb(10, 43)
+            skin = rgb(76, 60)
             require(skin[1] > 80 and skin[1] > skin[0] + 10 and skin[2] < skin[1] - 30,
-                    'irregular green socket is missing or covered', skin)
+                    'alien green frame is missing or covered', skin)
 
 
 class StyleStability:

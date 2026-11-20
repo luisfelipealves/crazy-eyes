@@ -18,9 +18,10 @@ class BatteryExpressionTest(unittest.TestCase):
         for style in STYLES:
             with self.subTest(style=style):
                 awake, tired = view(style, 21), view(style, 20)
+                upper = 187 if style == 'monster' else 182
                 for x in (130, 319):
-                    self.assertGreater(min(awake.getpixel((x, 182))), 150)
-                    self.assertEqual(tired.getpixel((x, 182)), (0, 0, 0))
+                    self.assertGreater(min(awake.getpixel((x, upper))), 150)
+                    self.assertEqual(tired.getpixel((x, upper)), (0, 0, 0))
                     self.assertGreater(min(tired.getpixel((x, 272))), 150)
                 self.assertIsNone(ImageChops.difference(awake, tired).crop((0, 0, 450, 85)).getbbox())
 
@@ -28,8 +29,9 @@ class BatteryExpressionTest(unittest.TestCase):
         for style in STYLES:
             with self.subTest(style=style):
                 a, b = view(style, 5, True, 1), view(style, 5, True, 2)
+                upper = 187 if style == 'monster' else 182
                 for x in (130, 319):
-                    self.assertGreater(min(a.getpixel((x, 182))), 150)
+                    self.assertGreater(min(a.getpixel((x, upper))), 150)
                     self.assertIsNotNone(ImageChops.difference(a, b).crop((x-45, 180, x+45, 275)).getbbox())
                 self.assertIsNone(ImageChops.difference(a, b).crop((0, 0, 450, 85)).getbbox())
 
@@ -39,7 +41,7 @@ class BatteryExpressionTest(unittest.TestCase):
     def test_moods_work_without_sensor_and_do_not_affect_ambient(self):
         for style in STYLES:
             tired = view(style, 15, ACCELEROMETER_IS_SUPPORTED=False)
-            self.assertEqual(tired.getpixel((130, 182)), (0, 0, 0))
+            self.assertEqual(tired.getpixel((130, 187 if style == 'monster' else 182)), (0, 0, 0))
             charging_a = view(style, 15, True, 1, ACCELEROMETER_IS_SUPPORTED=False)
             charging_b = view(style, 15, True, 2, ACCELEROMETER_IS_SUPPORTED=False)
             self.assertIsNotNone(ImageChops.difference(charging_a, charging_b).getbbox())
