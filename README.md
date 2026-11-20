@@ -6,7 +6,11 @@
 
 ![Watch face preview generated from the Watch Face Format assets](assets/watchface-preview.png)
 
-*This is a watch-face preview asset, not a device screenshot. Physical-device captures are pending.*
+*The image above is a generated preview. The capture below comes from a Wear OS 4 emulator in CI (an earlier watch-face revision); the current layout can differ.*
+
+![Crazy Eyes running in the Wear OS emulator](assets/emulator-watchface-2026-11-20.png)
+
+*Emulator capture from CI. A photo of the physical Galaxy Watch is still pending.*
 
 ## Experience
 
