@@ -15,7 +15,7 @@ def assert_mood(picture, style, tired):
         return
     picture = picture.convert('RGB').resize((450, 450))
     for origin in (54, 243):
-        if max(picture.getpixel((origin + 76, 182))) > 30:
+        if max(picture.getpixel((origin + 76, 187 if style == 'monster' else 182))) > 30:
             raise AssertionError(f'{style}: upper eyelid did not close at20% battery')
         if min(picture.getpixel((origin + 76, 272))) < 150:
             raise AssertionError(f'{style}: tired eye is missing or fully blinking')
@@ -35,7 +35,7 @@ def pupil_widths(picture):
         # Reflections can split a row into separate runs. Measure the outer
         # extent so ordinary vertical blinking cannot move a highlight into
         # the row and falsely look like a horizontal pulse.
-        marked = [x for x in range(20, 134) if iris(x)]
+        marked = [x for x in range(36, 117) if iris(x)]
         widths.append(marked[-1] - marked[0] + 1)
     return widths
 

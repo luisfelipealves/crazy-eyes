@@ -44,7 +44,7 @@ class WatchfaceCustomizationTest(unittest.TestCase):
             self.assertIsNone(ImageChops.difference(ambient, configured(style, color, ambient=True)).getbbox())
             poked = render_preview(XML, values={'CONFIGURATION.eye_style': style,
                                                'CONFIGURATION.eye_color': color}, poke=('left_poke', 0))
-            self.assertEqual(poked.getpixel((130, 182)), (0, 0, 0))
+            self.assertEqual(poked.getpixel((130, 187 if style == 'monster' else 182)), (0, 0, 0))
             self.assertIsNone(ImageChops.difference(normal, poked).crop((240, 120, 400, 335)).getbbox())
         self.assertEqual(len(fallback_views), 24)
 
@@ -57,9 +57,9 @@ class WatchfaceCustomizationTest(unittest.TestCase):
                                                           'CONFIGURATION.eye_color': 'blue'},
                                                poke=('left_poke', 0)).getpixel((60, 155)))
 
-    def test_cat_and_monster_have_their_own_outer_shapes(self):
+    def test_cat_and_alien_have_their_own_outer_shapes(self):
         self.assertEqual(configured('cat').getpixel((130, 132)), (0, 0, 0))
-        skin = configured('monster').getpixel((64, 165))
+        skin = configured('monster').getpixel((130, 182))
         self.assertGreater(skin[1], 80)
         self.assertGreater(skin[1], skin[0] + 10)
 

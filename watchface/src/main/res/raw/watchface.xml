@@ -147,51 +147,12 @@
           </ListOption>
           <ListOption id="monster">
             <Group name="left_frame_monster" x="0" y="0" width="153" height="207">
-              <Group name="left_frame_monster_outer" x="0" y="0" width="153" height="207">
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="8" y="12" width="137" height="183">
-                    <Fill color="#809653" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="0" y="27" width="45" height="66">
-                    <Fill color="#809653" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="117" y="74" width="36" height="82">
-                    <Fill color="#809653" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="34" y="162" width="77" height="42">
-                    <Fill color="#809653" />
-                  </Ellipse>
-                </PartDraw>
-              </Group>
-              <Group name="left_frame_monster_hole" x="0" y="0" width="153" height="207">
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="16" y="20" width="121" height="167">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="8" y="35" width="29" height="50">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="125" y="82" width="20" height="66">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="42" y="170" width="61" height="26">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-              </Group>
-            </Group>
+            <Group name="alien_layer_1" x="0" y="0" width="153" height="207" angle="-19">
+            <Group name="alien_layer_2" x="0" y="0" width="153" height="207"><PartDraw x="0" y="0" width="153" height="207"><Ellipse x="6" y="-27" width="141" height="190"><Fill color="#4AA661" /></Ellipse></PartDraw>
+            <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK"><Ellipse x="6" y="55" width="141" height="190"><Fill color="#FFFFFF" /></Ellipse></PartDraw></Group>
+            <Group name="alien_layer_3" x="0" y="0" width="153" height="207"><PartDraw x="0" y="0" width="153" height="207"><Ellipse x="14" y="-19" width="125" height="174"><Fill color="#000000" /></Ellipse></PartDraw>
+            <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK"><Ellipse x="14" y="63" width="125" height="174"><Fill color="#FFFFFF" /></Ellipse></PartDraw></Group>
+            </Group></Group>
           </ListOption>
         </ListConfiguration>
         <Group name="left_lid" x="0" y="0" width="153" height="207">
@@ -226,7 +187,7 @@
                   <Group name="left_background_monster" x="0" y="0" width="153" height="207">
                     <PartDraw x="0" y="0" width="153" height="207">
                       <Rectangle x="0" y="0" width="153" height="207">
-                        <Fill color="#EAE7BB" />
+                        <Fill color="#DDF3DD" />
                       </Rectangle>
                     </PartDraw>
                   </Group>
@@ -307,22 +268,11 @@
                             </ListOption>
                             <ListOption id="monster">
                               <PartDraw x="0" y="0" width="72" height="72">
-                                <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                                  <Fill color="[CONFIGURATION.eye_color.0]" />
-                                </Ellipse>
-                                <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
-                                  <Fill color="#06080D" />
-                                </RoundRectangle>
-                                <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
-                                  <Fill color="#06080D" />
-                                </RoundRectangle>
-                                <Ellipse x="30" y="15" width="8" height="8">
-                                  <Fill color="#FFFFFF" />
-                                </Ellipse>
-                                <Ellipse x="48" y="32" width="5" height="5">
-                                  <Fill color="#A0FFFFFF" />
-                                </Ellipse>
-                              </PartDraw>
+<Ellipse x="0.333" y="0.333" width="71.333" height="71.333"><Fill color="[CONFIGURATION.eye_color.0]" /></Ellipse>
+<Ellipse x="6" y="6" width="60" height="60"><Fill color="#06080D" /></Ellipse>
+<Ellipse x="18" y="14" width="13" height="13"><Fill color="#FFFFFF" /></Ellipse>
+<Ellipse x="45" y="43" width="7" height="7"><Fill color="#B0FFFFFF" /></Ellipse>
+</PartDraw>
                             </ListOption>
                           </ListConfiguration>
                         </Group>
@@ -396,22 +346,11 @@
                           </ListOption>
                           <ListOption id="monster">
                             <PartDraw x="0" y="0" width="72" height="72">
-                              <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                                <Fill color="[CONFIGURATION.eye_color.0]" />
-                              </Ellipse>
-                              <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
-                                <Fill color="#06080D" />
-                              </RoundRectangle>
-                              <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
-                                <Fill color="#06080D" />
-                              </RoundRectangle>
-                              <Ellipse x="30" y="15" width="8" height="8">
-                                <Fill color="#FFFFFF" />
-                              </Ellipse>
-                              <Ellipse x="48" y="32" width="5" height="5">
-                                <Fill color="#A0FFFFFF" />
-                              </Ellipse>
-                            </PartDraw>
+<Ellipse x="0.333" y="0.333" width="71.333" height="71.333"><Fill color="[CONFIGURATION.eye_color.0]" /></Ellipse>
+<Ellipse x="6" y="6" width="60" height="60"><Fill color="#06080D" /></Ellipse>
+<Ellipse x="18" y="14" width="13" height="13"><Fill color="#FFFFFF" /></Ellipse>
+<Ellipse x="45" y="43" width="7" height="7"><Fill color="#B0FFFFFF" /></Ellipse>
+</PartDraw>
                           </ListOption>
                         </ListConfiguration>
                       </Group>
@@ -470,27 +409,8 @@
             </ListOption>
             <ListOption id="monster">
               <Group name="left_opening_monster" x="0" y="0" width="153" height="207" renderMode="MASK">
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="16" y="20" width="121" height="167">
-                    <Fill color="#FFFFFF" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="8" y="35" width="29" height="50">
-                    <Fill color="#FFFFFF" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="125" y="82" width="20" height="66">
-                    <Fill color="#FFFFFF" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="42" y="170" width="61" height="26">
-                    <Fill color="#FFFFFF" />
-                  </Ellipse>
-                </PartDraw>
-              </Group>
+              <Group name="alien_layer_4" x="0" y="0" width="153" height="207" angle="-19"><Group name="alien_layer_5" x="0" y="0" width="153" height="207"><PartDraw x="0" y="0" width="153" height="207"><Ellipse x="14" y="-19" width="125" height="174"><Fill color="#FFFFFF" /></Ellipse></PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK"><Ellipse x="14" y="63" width="125" height="174"><Fill color="#FFFFFF" /></Ellipse></PartDraw></Group></Group></Group>
             </ListOption>
           </ListConfiguration>
         </Group>
@@ -505,13 +425,7 @@
             <Group name="left_detail_robot" x="0" y="0" width="153" height="207" />
           </ListOption>
           <ListOption id="monster">
-            <Group name="left_detail_monster" x="0" y="0" width="153" height="207">
-              <PartDraw x="0" y="0" width="153" height="207" angle="-8">
-                <RoundRectangle x="25" y="30" width="104" height="14" cornerRadiusX="6" cornerRadiusY="6">
-                  <Fill color="#5A7039" />
-                </RoundRectangle>
-              </PartDraw>
-            </Group>
+            <Group name="left_detail_monster" x="0" y="0" width="153" height="207" />
           </ListOption>
         </ListConfiguration>
       </Group>
@@ -620,51 +534,12 @@
           </ListOption>
           <ListOption id="monster">
             <Group name="right_frame_monster" x="0" y="0" width="153" height="207">
-              <Group name="right_frame_monster_outer" x="0" y="0" width="153" height="207">
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="8" y="12" width="137" height="183">
-                    <Fill color="#809653" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="0" y="27" width="45" height="66">
-                    <Fill color="#809653" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="117" y="74" width="36" height="82">
-                    <Fill color="#809653" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="34" y="162" width="77" height="42">
-                    <Fill color="#809653" />
-                  </Ellipse>
-                </PartDraw>
-              </Group>
-              <Group name="right_frame_monster_hole" x="0" y="0" width="153" height="207">
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="16" y="20" width="121" height="167">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="8" y="35" width="29" height="50">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="125" y="82" width="20" height="66">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="42" y="170" width="61" height="26">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-              </Group>
-            </Group>
+            <Group name="alien_layer_6" x="0" y="0" width="153" height="207" angle="19">
+            <Group name="alien_layer_7" x="0" y="0" width="153" height="207"><PartDraw x="0" y="0" width="153" height="207"><Ellipse x="6" y="-27" width="141" height="190"><Fill color="#4AA661" /></Ellipse></PartDraw>
+            <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK"><Ellipse x="6" y="55" width="141" height="190"><Fill color="#FFFFFF" /></Ellipse></PartDraw></Group>
+            <Group name="alien_layer_8" x="0" y="0" width="153" height="207"><PartDraw x="0" y="0" width="153" height="207"><Ellipse x="14" y="-19" width="125" height="174"><Fill color="#000000" /></Ellipse></PartDraw>
+            <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK"><Ellipse x="14" y="63" width="125" height="174"><Fill color="#FFFFFF" /></Ellipse></PartDraw></Group>
+            </Group></Group>
           </ListOption>
         </ListConfiguration>
         <Group name="right_lid" x="0" y="0" width="153" height="207">
@@ -699,7 +574,7 @@
                   <Group name="right_background_monster" x="0" y="0" width="153" height="207">
                     <PartDraw x="0" y="0" width="153" height="207">
                       <Rectangle x="0" y="0" width="153" height="207">
-                        <Fill color="#EAE7BB" />
+                        <Fill color="#DDF3DD" />
                       </Rectangle>
                     </PartDraw>
                   </Group>
@@ -780,22 +655,11 @@
                             </ListOption>
                             <ListOption id="monster">
                               <PartDraw x="0" y="0" width="72" height="72">
-                                <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                                  <Fill color="[CONFIGURATION.eye_color.0]" />
-                                </Ellipse>
-                                <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
-                                  <Fill color="#06080D" />
-                                </RoundRectangle>
-                                <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
-                                  <Fill color="#06080D" />
-                                </RoundRectangle>
-                                <Ellipse x="30" y="15" width="8" height="8">
-                                  <Fill color="#FFFFFF" />
-                                </Ellipse>
-                                <Ellipse x="48" y="32" width="5" height="5">
-                                  <Fill color="#A0FFFFFF" />
-                                </Ellipse>
-                              </PartDraw>
+<Ellipse x="0.333" y="0.333" width="71.333" height="71.333"><Fill color="[CONFIGURATION.eye_color.0]" /></Ellipse>
+<Ellipse x="6" y="6" width="60" height="60"><Fill color="#06080D" /></Ellipse>
+<Ellipse x="18" y="14" width="13" height="13"><Fill color="#FFFFFF" /></Ellipse>
+<Ellipse x="45" y="43" width="7" height="7"><Fill color="#B0FFFFFF" /></Ellipse>
+</PartDraw>
                             </ListOption>
                           </ListConfiguration>
                         </Group>
@@ -869,22 +733,11 @@
                           </ListOption>
                           <ListOption id="monster">
                             <PartDraw x="0" y="0" width="72" height="72">
-                              <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
-                                <Fill color="[CONFIGURATION.eye_color.0]" />
-                              </Ellipse>
-                              <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
-                                <Fill color="#06080D" />
-                              </RoundRectangle>
-                              <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
-                                <Fill color="#06080D" />
-                              </RoundRectangle>
-                              <Ellipse x="30" y="15" width="8" height="8">
-                                <Fill color="#FFFFFF" />
-                              </Ellipse>
-                              <Ellipse x="48" y="32" width="5" height="5">
-                                <Fill color="#A0FFFFFF" />
-                              </Ellipse>
-                            </PartDraw>
+<Ellipse x="0.333" y="0.333" width="71.333" height="71.333"><Fill color="[CONFIGURATION.eye_color.0]" /></Ellipse>
+<Ellipse x="6" y="6" width="60" height="60"><Fill color="#06080D" /></Ellipse>
+<Ellipse x="18" y="14" width="13" height="13"><Fill color="#FFFFFF" /></Ellipse>
+<Ellipse x="45" y="43" width="7" height="7"><Fill color="#B0FFFFFF" /></Ellipse>
+</PartDraw>
                           </ListOption>
                         </ListConfiguration>
                       </Group>
@@ -943,27 +796,8 @@
             </ListOption>
             <ListOption id="monster">
               <Group name="right_opening_monster" x="0" y="0" width="153" height="207" renderMode="MASK">
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="16" y="20" width="121" height="167">
-                    <Fill color="#FFFFFF" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="8" y="35" width="29" height="50">
-                    <Fill color="#FFFFFF" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="125" y="82" width="20" height="66">
-                    <Fill color="#FFFFFF" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="42" y="170" width="61" height="26">
-                    <Fill color="#FFFFFF" />
-                  </Ellipse>
-                </PartDraw>
-              </Group>
+              <Group name="alien_layer_9" x="0" y="0" width="153" height="207" angle="19"><Group name="alien_layer_10" x="0" y="0" width="153" height="207"><PartDraw x="0" y="0" width="153" height="207"><Ellipse x="14" y="-19" width="125" height="174"><Fill color="#FFFFFF" /></Ellipse></PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK"><Ellipse x="14" y="63" width="125" height="174"><Fill color="#FFFFFF" /></Ellipse></PartDraw></Group></Group></Group>
             </ListOption>
           </ListConfiguration>
         </Group>
@@ -978,13 +812,7 @@
             <Group name="right_detail_robot" x="0" y="0" width="153" height="207" />
           </ListOption>
           <ListOption id="monster">
-            <Group name="right_detail_monster" x="0" y="0" width="153" height="207">
-              <PartDraw x="0" y="0" width="153" height="207" angle="-8">
-                <RoundRectangle x="25" y="30" width="104" height="14" cornerRadiusX="6" cornerRadiusY="6">
-                  <Fill color="#5A7039" />
-                </RoundRectangle>
-              </PartDraw>
-            </Group>
+            <Group name="right_detail_monster" x="0" y="0" width="153" height="207" />
           </ListOption>
         </ListConfiguration>
       </Group>
@@ -1094,97 +922,19 @@
         <ListOption id="monster">
           <Group name="ambient_shape_monster" x="0" y="0" width="450" height="450">
             <Group name="ambient_shape_monster_left" x="54" y="122" width="153" height="207">
-              <Group name="ambient_shape_monster_left_outer" x="0" y="0" width="153" height="207">
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="8" y="12" width="137" height="183">
-                    <Fill color="#707780" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="0" y="27" width="45" height="66">
-                    <Fill color="#707780" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="117" y="74" width="36" height="82">
-                    <Fill color="#707780" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="34" y="162" width="77" height="42">
-                    <Fill color="#707780" />
-                  </Ellipse>
-                </PartDraw>
-              </Group>
-              <Group name="ambient_shape_monster_left_hole" x="0" y="0" width="153" height="207">
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="10" y="14" width="133" height="179">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="2" y="29" width="41" height="62">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="119" y="76" width="32" height="78">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="36" y="164" width="73" height="38">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-              </Group>
-            </Group>
+            <Group name="alien_layer_11" x="0" y="0" width="153" height="207" angle="-19">
+            <Group name="alien_layer_12" x="0" y="0" width="153" height="207"><PartDraw x="0" y="0" width="153" height="207"><Ellipse x="6" y="-27" width="141" height="190"><Fill color="#707780" /></Ellipse></PartDraw>
+            <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK"><Ellipse x="6" y="55" width="141" height="190"><Fill color="#FFFFFF" /></Ellipse></PartDraw></Group>
+            <Group name="alien_layer_13" x="0" y="0" width="153" height="207"><PartDraw x="0" y="0" width="153" height="207"><Ellipse x="14" y="-19" width="125" height="174"><Fill color="#000000" /></Ellipse></PartDraw>
+            <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK"><Ellipse x="14" y="63" width="125" height="174"><Fill color="#FFFFFF" /></Ellipse></PartDraw></Group>
+            </Group></Group>
             <Group name="ambient_shape_monster_right" x="243" y="122" width="153" height="207">
-              <Group name="ambient_shape_monster_right_outer" x="0" y="0" width="153" height="207">
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="8" y="12" width="137" height="183">
-                    <Fill color="#707780" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="0" y="27" width="45" height="66">
-                    <Fill color="#707780" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="117" y="74" width="36" height="82">
-                    <Fill color="#707780" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="34" y="162" width="77" height="42">
-                    <Fill color="#707780" />
-                  </Ellipse>
-                </PartDraw>
-              </Group>
-              <Group name="ambient_shape_monster_right_hole" x="0" y="0" width="153" height="207">
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="10" y="14" width="133" height="179">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="2" y="29" width="41" height="62">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="119" y="76" width="32" height="78">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-                <PartDraw x="0" y="0" width="153" height="207">
-                  <Ellipse x="36" y="164" width="73" height="38">
-                    <Fill color="#000000" />
-                  </Ellipse>
-                </PartDraw>
-              </Group>
-            </Group>
+            <Group name="alien_layer_14" x="0" y="0" width="153" height="207" angle="19">
+            <Group name="alien_layer_15" x="0" y="0" width="153" height="207"><PartDraw x="0" y="0" width="153" height="207"><Ellipse x="6" y="-27" width="141" height="190"><Fill color="#707780" /></Ellipse></PartDraw>
+            <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK"><Ellipse x="6" y="55" width="141" height="190"><Fill color="#FFFFFF" /></Ellipse></PartDraw></Group>
+            <Group name="alien_layer_16" x="0" y="0" width="153" height="207"><PartDraw x="0" y="0" width="153" height="207"><Ellipse x="14" y="-19" width="125" height="174"><Fill color="#000000" /></Ellipse></PartDraw>
+            <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK"><Ellipse x="14" y="63" width="125" height="174"><Fill color="#FFFFFF" /></Ellipse></PartDraw></Group>
+            </Group></Group>
           </Group>
         </ListOption>
       </ListConfiguration>
