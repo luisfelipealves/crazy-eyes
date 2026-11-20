@@ -187,7 +187,7 @@ if __name__ == '__main__':
     parser.add_argument('--output', type=Path, default=Path('watchface-device-results'))
     parser.add_argument('--expect-no-spin', action='store_true')
     parser.add_argument('--orbit-radius', type=int, choices=(13, 26), default=26)
-    parser.add_argument('--duration',type=float,choices=(2,3),default=3)
+    parser.add_argument('--duration',type=float,choices=(2,3,4,6),default=3)
     parser.add_argument('--expected-half-tilt',type=float)
     args = parser.parse_args()
     try:

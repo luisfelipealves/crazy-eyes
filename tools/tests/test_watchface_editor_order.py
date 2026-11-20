@@ -10,7 +10,7 @@ class EditorOrderTest(unittest.TestCase):
         root=ET.parse(XML)
         config=root.find('UserConfigurations')
         ids=[e.get('id') for e in config]
-        self.assertEqual(ids[:3],['time_size','time_color','time_font'])
+        self.assertEqual(ids[:4],['eye_style','time_size','time_color','time_font'])
         self.assertNotIn('shake_enabled',ids)
         self.assertNotIn('CONFIGURATION.shake_enabled',XML.read_text())
 

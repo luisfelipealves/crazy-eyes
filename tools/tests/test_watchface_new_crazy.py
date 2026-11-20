@@ -21,6 +21,7 @@ class NewCrazyModeTest(unittest.TestCase):
                 values = DEFAULTS | {'CONFIGURATION.animation_intensity':'wild', 'CONFIGURATION.shake_enabled':enabled, 'ACCELEROMETER_X':accel}
                 self.assertEqual(evaluate(expr, values),want)
             self.assertEqual(float(transform.find('Animation').get('duration')), 1)
+            self.assertEqual(transform.find('Animation').get('repeat'), '1')
 
     def test_no_shake_spin_without_accelerometer(self):
         tree = ET.parse(XML)

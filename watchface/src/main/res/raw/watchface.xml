@@ -1,6 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <WatchFace width="450" height="450">
   <UserConfigurations>
+    <ListConfiguration id="eye_style" displayName="eye_style_label" screenReaderText="eye_style_label" defaultValue="cartoon">
+      <ListOption id="cartoon" displayName="style_cartoon" screenReaderText="style_cartoon" />
+      <ListOption id="cat" displayName="style_cat" screenReaderText="style_cat" />
+      <ListOption id="robot" displayName="style_robot" screenReaderText="style_robot" />
+      <ListOption id="monster" displayName="style_monster" screenReaderText="style_monster" />
+    </ListConfiguration>
     <ListConfiguration id="time_size" displayName="time_size_label" screenReaderText="time_size_label" defaultValue="medium">
       <ListOption id="small" displayName="time_small" screenReaderText="time_small" />
       <ListOption id="medium" displayName="time_medium" screenReaderText="time_medium" />
@@ -18,12 +24,6 @@
       <ListOption id="system" displayName="font_system" screenReaderText="font_system" />
       <ListOption id="serif" displayName="font_serif" screenReaderText="font_serif" />
       <ListOption id="mono" displayName="font_mono" screenReaderText="font_mono" />
-    </ListConfiguration>
-    <ListConfiguration id="eye_style" displayName="eye_style_label" screenReaderText="eye_style_label" defaultValue="cartoon">
-      <ListOption id="cartoon" displayName="style_cartoon" screenReaderText="style_cartoon" />
-      <ListOption id="cat" displayName="style_cat" screenReaderText="style_cat" />
-      <ListOption id="robot" displayName="style_robot" screenReaderText="style_robot" />
-      <ListOption id="monster" displayName="style_monster" screenReaderText="style_monster" />
     </ListConfiguration>
     <ColorConfiguration id="eye_color" displayName="eye_color_label" screenReaderText="eye_color_label" defaultValue="gray">
       <ColorOption id="gray" displayName="color_gray" screenReaderText="color_gray" colors="#2C333F" />
@@ -241,16 +241,16 @@
                     <Gyro x="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 13 : -clamp([ACCELEROMETER_ANGLE_X] / 30, -1, 1) * 26" y="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 20 : -clamp([ACCELEROMETER_ANGLE_Y] / 30, -1, 1) * 40" />
                     <Group name="left_spin" x="1" y="54" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
                       <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;crazy&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
-                        <Animation duration="2" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
+                        <Animation duration="2" interpolation="EASE_OUT" angleDirection="CLOCKWISE" repeat="1" fps="30" />
                       </Transform>
                       <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 : 54" />
                       <Group name="left_calm_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
                         <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
-                          <Animation duration="3" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
+                          <Animation duration="3" interpolation="EASE_OUT" angleDirection="CLOCKWISE" repeat="1" fps="30" />
                         </Transform>
                         <Group name="left_wild_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5">
                           <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
-                            <Animation duration="1" interpolation="EASE_OUT" angleDirection="CLOCKWISE" fps="30" />
+                            <Animation duration="1" interpolation="EASE_OUT" angleDirection="CLOCKWISE" repeat="1" fps="30" />
                           </Transform>
                           <Group name="left_spin_energy" x="40" y="14" width="72" height="72">
                           <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 27 : 14" />
@@ -714,16 +714,16 @@
                     <Gyro x="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 13 : -clamp([ACCELEROMETER_ANGLE_X] / 30, -1, 1) * 26" y="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 20 : -clamp([ACCELEROMETER_ANGLE_Y] / 30, -1, 1) * 40" />
                     <Group name="right_spin" x="1" y="54" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
                       <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;crazy&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
-                        <Animation duration="2" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
+                        <Animation duration="2" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" repeat="1" fps="30" />
                       </Transform>
                       <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 : 54" />
                       <Group name="right_calm_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
                         <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
-                          <Animation duration="3" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
+                          <Animation duration="3" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" repeat="1" fps="30" />
                         </Transform>
                         <Group name="right_wild_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5">
                           <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
-                            <Animation duration="1" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" fps="30" />
+                            <Animation duration="1" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" repeat="1" fps="30" />
                           </Transform>
                           <Group name="right_spin_energy" x="40" y="14" width="72" height="72">
                           <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 27 : 14" />
@@ -1377,22 +1377,22 @@
       <BoundingOval x="0" y="0" width="120" height="50" />
       <Complication type="SHORT_TEXT">
         <PartText x="0" y="0" width="120" height="50">
-          <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="25" color="#FFFFFF"><Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text>
+          <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="25" color="[CONFIGURATION.time_color.0]"><Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text>
         </PartText>
       </Complication>
       <Complication type="MONOCHROMATIC_IMAGE">
-        <PartImage x="40" y="5" width="40" height="40"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+        <PartImage x="40" y="5" width="40" height="40" tintColor="[CONFIGURATION.time_color.0]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
       </Complication>
     </ComplicationSlot>
     <ComplicationSlot slotId="2" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" x="245" y="338" width="120" height="50">
       <BoundingOval x="0" y="0" width="120" height="50" />
       <Complication type="SHORT_TEXT">
         <PartText x="0" y="0" width="120" height="50">
-          <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="25" color="#FFFFFF"><Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text>
+          <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="25" color="[CONFIGURATION.time_color.0]"><Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text>
         </PartText>
       </Complication>
       <Complication type="MONOCHROMATIC_IMAGE">
-        <PartImage x="40" y="5" width="40" height="40"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+        <PartImage x="40" y="5" width="40" height="40" tintColor="[CONFIGURATION.time_color.0]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
       </Complication>
     </ComplicationSlot>
   </Scene>

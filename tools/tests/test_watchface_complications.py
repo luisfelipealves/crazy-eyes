@@ -15,3 +15,10 @@ class ComplicationsTest(unittest.TestCase):
             self.assertTrue({'SHORT_TEXT','MONOCHROMATIC_IMAGE','EMPTY'}.issubset(set(slot.get('supportedTypes').split())))
             self.assertIsNotNone(slot.find("Complication[@type='SHORT_TEXT']//Parameter[@expression='[COMPLICATION.TEXT]']"))
             self.assertIsNotNone(slot.find("Complication[@type='MONOCHROMATIC_IMAGE']//Image[@resource='[COMPLICATION.MONOCHROMATIC_IMAGE]']"))
+
+    def test_complication_text_and_icon_follow_clock_color(self):
+        for slot in ET.parse(XML).findall('./Scene/ComplicationSlot'):
+            font=slot.find("Complication[@type='SHORT_TEXT']//Font")
+            icon=slot.find("Complication[@type='MONOCHROMATIC_IMAGE']/PartImage")
+            self.assertEqual(font.get('color'),'[CONFIGURATION.time_color.0]')
+            self.assertEqual(icon.get('tintColor'),'[CONFIGURATION.time_color.0]')

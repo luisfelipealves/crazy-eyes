@@ -144,14 +144,14 @@ jobs:
           adb uninstall com.luisfelipe.crazyeyes.watchface.shake
           adb install -r device-apk/experiment.apk
           python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output watchface-device-results/experiment/style
-          python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --duration 2 --expected-half-tilt 19.5 --output watchface-device-results/experiment
+          python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --duration 4 --expected-half-tilt 19.5 --output watchface-device-results/experiment
       - name: Verify calm orbit in native renderer
         if: ${{ !cancelled() && steps.boot_wear.outcome == 'success' }}
         run: |
           adb uninstall com.luisfelipe.crazyeyes.watchface.shake
           adb install device-apk/motion-calm.apk
           python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output watchface-device-results/motion-calm/style
-          python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --orbit-radius 13 --duration 3 --expected-half-tilt 6.5 --output watchface-device-results/motion-calm
+          python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --orbit-radius 13 --duration 6 --expected-half-tilt 6.5 --output watchface-device-results/motion-calm
       - name: Inspect visible intensity choices in native editor
         if: ${{ !cancelled() && steps.boot_wear.outcome == 'success' }}
         run: |

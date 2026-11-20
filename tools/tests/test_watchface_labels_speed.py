@@ -56,6 +56,7 @@ class LabelsAndSpeedTest(unittest.TestCase):
                 self.assertEqual(len(armed),1)
                 self.assertEqual(evaluate(armed[0].get('value'),values(mode,ACCELEROMETER_X=40)),sign*15)
                 self.assertEqual(float(armed[0].find('Animation').get('duration')),duration)
+                self.assertEqual(armed[0].find('Animation').get('repeat'),'1')
 
     def test_native_validator_distinguishes_fast_and_slow_orbits(self):
         base=[(131,226),(320,226)]
