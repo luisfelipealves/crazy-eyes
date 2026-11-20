@@ -1,0 +1,1399 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<WatchFace width="450" height="450">
+  <UserConfigurations>
+    <ListConfiguration id="eye_style" displayName="eye_style_label" screenReaderText="eye_style_label" defaultValue="cartoon">
+      <ListOption id="cartoon" displayName="style_cartoon" screenReaderText="style_cartoon" />
+      <ListOption id="cat" displayName="style_cat" screenReaderText="style_cat" />
+      <ListOption id="robot" displayName="style_robot" screenReaderText="style_robot" />
+      <ListOption id="monster" displayName="style_monster" screenReaderText="style_monster" />
+    </ListConfiguration>
+    <ListConfiguration id="time_size" displayName="time_size_label" screenReaderText="time_size_label" defaultValue="medium">
+      <ListOption id="small" displayName="time_small" screenReaderText="time_small" />
+      <ListOption id="medium" displayName="time_medium" screenReaderText="time_medium" />
+      <ListOption id="large" displayName="time_large" screenReaderText="time_large" />
+    </ListConfiguration>
+    <ColorConfiguration id="time_color" displayName="time_color_label" screenReaderText="time_color_label" defaultValue="gray">
+      <ColorOption id="gray" displayName="color_gray" colors="#C6C6C6" />
+      <ColorOption id="white" displayName="color_white" colors="#FFFFFF" />
+      <ColorOption id="blue" displayName="color_blue" colors="#279EFF" />
+      <ColorOption id="green" displayName="color_green" colors="#51B86C" />
+      <ColorOption id="purple" displayName="color_purple" colors="#A978E6" />
+      <ColorOption id="amber" displayName="color_amber" colors="#F6B52C" />
+    </ColorConfiguration>
+    <ListConfiguration id="time_font" displayName="time_font_label" screenReaderText="time_font_label" defaultValue="system">
+      <ListOption id="system" displayName="font_system" screenReaderText="font_system" />
+      <ListOption id="serif" displayName="font_serif" screenReaderText="font_serif" />
+      <ListOption id="mono" displayName="font_mono" screenReaderText="font_mono" />
+    </ListConfiguration>
+    <ColorConfiguration id="eye_color" displayName="eye_color_label" screenReaderText="eye_color_label" defaultValue="gray">
+      <ColorOption id="gray" displayName="color_gray" screenReaderText="color_gray" colors="#2C333F" />
+      <ColorOption id="blue" displayName="color_blue" screenReaderText="color_blue" colors="#279EFF" />
+      <ColorOption id="green" displayName="color_green" screenReaderText="color_green" colors="#51B86C" />
+      <ColorOption id="brown" displayName="color_brown" screenReaderText="color_brown" colors="#AC754C" />
+      <ColorOption id="purple" displayName="color_purple" screenReaderText="color_purple" colors="#A978E6" />
+      <ColorOption id="amber" displayName="color_amber" screenReaderText="color_amber" colors="#F6B52C" />
+    </ColorConfiguration>
+    <ListConfiguration id="animation_intensity" displayName="animation_intensity_label" screenReaderText="animation_intensity_label" defaultValue="crazy">
+      <ListOption id="calm" displayName="intensity_calm" screenReaderText="intensity_calm" icon="intensity_calm_icon" />
+      <ListOption id="crazy" displayName="intensity_normal" screenReaderText="intensity_normal" icon="intensity_normal_icon" />
+      <ListOption id="wild" displayName="intensity_crazy" screenReaderText="intensity_crazy" icon="intensity_crazy_icon" />
+    </ListConfiguration>
+  </UserConfigurations>
+  <Scene backgroundColor="#000000">
+    <Group name="interactive" x="0" y="0" width="450" height="450">
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+      <Group name="left_eye" x="54" y="122" width="153" height="207" pivotX="0.5" pivotY="0.5">
+        <ListConfiguration id="eye_style">
+          <ListOption id="cartoon">
+            <Group name="left_frame_cartoon" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="cat">
+            <Group name="left_frame_cat" x="0" y="0" width="153" height="207">
+              <Group name="left_frame_cat_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-10" y="-101.5" width="173" height="280">
+                    <Fill color="#654733" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-10" y="28.5" width="173" height="280">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="left_frame_cat_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-6" y="-97.5" width="165" height="272">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-6" y="32.5" width="165" height="272">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+          </ListOption>
+          <ListOption id="robot">
+            <Group name="left_frame_robot" x="0" y="0" width="153" height="207">
+              <Group name="left_frame_robot_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="0" y="27" width="153" height="153" cornerRadiusX="15" cornerRadiusY="15">
+                    <Fill color="#3A4855" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <Group name="left_frame_robot_bevel" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="3" y="30" width="147" height="147" cornerRadiusX="12" cornerRadiusY="12">
+                    <Fill color="#97A7B3" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <Group name="left_frame_robot_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="10" y="37" width="133" height="133" cornerRadiusX="5" cornerRadiusY="5">
+                    <Fill color="#000000" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="6" y="33" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="7" y="34" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="141" y="33" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="142" y="34" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="6" y="168" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="7" y="169" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="141" y="168" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="142" y="169" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <RoundRectangle x="43" y="30" width="67" height="3" cornerRadiusX="1" cornerRadiusY="1">
+                  <Fill color="#C2CED6" />
+                </RoundRectangle>
+              </PartDraw>
+            </Group>
+          </ListOption>
+          <ListOption id="monster">
+            <Group name="left_frame_monster" x="0" y="0" width="153" height="207">
+              <Group name="left_frame_monster_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="12" width="137" height="183">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="0" y="27" width="45" height="66">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="117" y="74" width="36" height="82">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="34" y="162" width="77" height="42">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="left_frame_monster_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="16" y="20" width="121" height="167">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="35" width="29" height="50">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="125" y="82" width="20" height="66">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="42" y="170" width="61" height="26">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+          </ListOption>
+        </ListConfiguration>
+        <Group name="left_lid" x="0" y="0" width="153" height="207">
+          <Transform target="scaleY" value="1 - 0.94 * (1 - clamp(abs(([SECOND_MILLISECOND] % 6) - 0.12) / 0.12, 0, 1))" />
+          <Group name="left_mood_clip" x="0" y="0" width="153" height="207">
+            <Group name="left_silhouette_clip" x="0" y="0" width="153" height="207">
+              <ListConfiguration id="eye_style">
+                <ListOption id="cartoon">
+                  <PartImage x="0" y="0" width="153" height="207">
+                    <Image resource="sclera" />
+                  </PartImage>
+                </ListOption>
+                <ListOption id="cat">
+                  <Group name="left_background_cat" x="0" y="0" width="153" height="207">
+                    <PartDraw x="0" y="0" width="153" height="207">
+                      <Rectangle x="0" y="0" width="153" height="207">
+                        <Fill color="#F5EBC9" />
+                      </Rectangle>
+                    </PartDraw>
+                  </Group>
+                </ListOption>
+                <ListOption id="robot">
+                  <Group name="left_background_robot" x="0" y="0" width="153" height="207">
+                    <PartDraw x="0" y="0" width="153" height="207">
+                      <Rectangle x="0" y="0" width="153" height="207">
+                        <Fill color="#D7F1EC" />
+                      </Rectangle>
+                    </PartDraw>
+                  </Group>
+                </ListOption>
+                <ListOption id="monster">
+                  <Group name="left_background_monster" x="0" y="0" width="153" height="207">
+                    <PartDraw x="0" y="0" width="153" height="207">
+                      <Rectangle x="0" y="0" width="153" height="207">
+                        <Fill color="#EAE7BB" />
+                      </Rectangle>
+                    </PartDraw>
+                  </Group>
+                </ListOption>
+              </ListConfiguration>
+              <Condition>
+                <Expressions>
+                  <Expression name="motion">[ACCELEROMETER_IS_SUPPORTED]</Expression>
+                </Expressions>
+                <Compare expression="motion">
+                  <Group name="left_tilt" x="0" y="0" width="153" height="207">
+                    <Gyro x="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 13 : -clamp([ACCELEROMETER_ANGLE_X] / 30, -1, 1) * 26" y="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 20 : -clamp([ACCELEROMETER_ANGLE_Y] / 30, -1, 1) * 40" />
+                    <Group name="left_spin" x="1" y="54" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
+                      <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;crazy&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
+                        <Animation duration="2" interpolation="EASE_OUT" angleDirection="CLOCKWISE" repeat="1" fps="30" />
+                      </Transform>
+                      <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 : 54" />
+                      <Group name="left_calm_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
+                        <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
+                          <Animation duration="3" interpolation="EASE_OUT" angleDirection="CLOCKWISE" repeat="1" fps="30" />
+                        </Transform>
+                        <Group name="left_wild_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5">
+                          <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? 15 : 0">
+                            <Animation duration="1" interpolation="EASE_OUT" angleDirection="CLOCKWISE" repeat="1" fps="30" />
+                          </Transform>
+                          <Group name="left_spin_energy" x="40" y="14" width="72" height="72">
+                          <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 27 : 14" />
+                          <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
+                          <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
+                          <ListConfiguration id="eye_style">
+                            <ListOption id="cartoon">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </Ellipse>
+                                <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
+                                  <Fill color="#06080D" />
+                                </Ellipse>
+                                <Ellipse x="20" y="17.667" width="12" height="12">
+                                  <Fill color="#FFFFFF" />
+                                </Ellipse>
+                                <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
+                                  <Fill color="#A0FFFFFF" />
+                                </Ellipse>
+                              </PartDraw>
+                            </ListOption>
+                            <ListOption id="cat">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </Ellipse>
+                                <Ellipse x="27" y="7" width="18" height="58">
+                                  <Fill color="#06080D" />
+                                </Ellipse>
+                                <Ellipse x="16" y="18" width="10" height="10">
+                                  <Fill color="#FFFFFF" />
+                                </Ellipse>
+                                <Ellipse x="46" y="44" width="5" height="5">
+                                  <Fill color="#A0FFFFFF" />
+                                </Ellipse>
+                              </PartDraw>
+                            </ListOption>
+                            <ListOption id="robot">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <RoundRectangle x="1" y="1" width="70" height="70" cornerRadiusX="8" cornerRadiusY="8">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </RoundRectangle>
+                                <RoundRectangle x="16" y="16" width="40" height="40" cornerRadiusX="5" cornerRadiusY="5">
+                                  <Fill color="#06080D" />
+                                </RoundRectangle>
+                                <Rectangle x="23" y="22" width="9" height="9">
+                                  <Fill color="#FFFFFF" />
+                                </Rectangle>
+                                <Rectangle x="44" y="44" width="4" height="4">
+                                  <Fill color="#A0FFFFFF" />
+                                </Rectangle>
+                              </PartDraw>
+                            </ListOption>
+                            <ListOption id="monster">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </Ellipse>
+                                <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
+                                  <Fill color="#06080D" />
+                                </RoundRectangle>
+                                <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
+                                  <Fill color="#06080D" />
+                                </RoundRectangle>
+                                <Ellipse x="30" y="15" width="8" height="8">
+                                  <Fill color="#FFFFFF" />
+                                </Ellipse>
+                                <Ellipse x="48" y="32" width="5" height="5">
+                                  <Fill color="#A0FFFFFF" />
+                                </Ellipse>
+                              </PartDraw>
+                            </ListOption>
+                          </ListConfiguration>
+                        </Group>
+                        </Group>
+                      </Group>
+                    </Group>
+                  </Group>
+                </Compare>
+                <Default>
+                  <Group name="left_wander" x="41" y="68" width="72" height="72">
+                    <Transform target="x" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 13 : 41 + (fract(sin(floor([SECONDS_IN_DAY]) * 12.9898) * 43758.5453) * 2 - 1) * 26">
+                      <Animation duration="0.25" interpolation="EASE_OUT" />
+                    </Transform>
+                    <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 20 : 68 + (fract(sin(floor([SECONDS_IN_DAY]) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
+                      <Animation duration="0.25" interpolation="EASE_OUT" />
+                    </Transform>
+                    <Group name="left_wild_wander_spin" x="-40" y="-14" width="152" height="152" pivotX="0.5" pivotY="0.5">
+                      <Transform target="angle" value="0" />
+                      <Group x="40" y="14" width="72" height="72" name="left_wander_pupil">
+                      <Group name="left_wander_pupil_energy" x="0" y="0" width="72" height="72">
+                        <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
+                        <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
+                        <ListConfiguration id="eye_style">
+                          <ListOption id="cartoon">
+                            <PartDraw x="0" y="0" width="72" height="72">
+                              <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                <Fill color="[CONFIGURATION.eye_color.0]" />
+                              </Ellipse>
+                              <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
+                                <Fill color="#06080D" />
+                              </Ellipse>
+                              <Ellipse x="20" y="17.667" width="12" height="12">
+                                <Fill color="#FFFFFF" />
+                              </Ellipse>
+                              <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
+                                <Fill color="#A0FFFFFF" />
+                              </Ellipse>
+                            </PartDraw>
+                          </ListOption>
+                          <ListOption id="cat">
+                            <PartDraw x="0" y="0" width="72" height="72">
+                              <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                <Fill color="[CONFIGURATION.eye_color.0]" />
+                              </Ellipse>
+                              <Ellipse x="27" y="7" width="18" height="58">
+                                <Fill color="#06080D" />
+                              </Ellipse>
+                              <Ellipse x="16" y="18" width="10" height="10">
+                                <Fill color="#FFFFFF" />
+                              </Ellipse>
+                              <Ellipse x="46" y="44" width="5" height="5">
+                                <Fill color="#A0FFFFFF" />
+                              </Ellipse>
+                            </PartDraw>
+                          </ListOption>
+                          <ListOption id="robot">
+                            <PartDraw x="0" y="0" width="72" height="72">
+                              <RoundRectangle x="1" y="1" width="70" height="70" cornerRadiusX="8" cornerRadiusY="8">
+                                <Fill color="[CONFIGURATION.eye_color.0]" />
+                              </RoundRectangle>
+                              <RoundRectangle x="16" y="16" width="40" height="40" cornerRadiusX="5" cornerRadiusY="5">
+                                <Fill color="#06080D" />
+                              </RoundRectangle>
+                              <Rectangle x="23" y="22" width="9" height="9">
+                                <Fill color="#FFFFFF" />
+                              </Rectangle>
+                              <Rectangle x="44" y="44" width="4" height="4">
+                                <Fill color="#A0FFFFFF" />
+                              </Rectangle>
+                            </PartDraw>
+                          </ListOption>
+                          <ListOption id="monster">
+                            <PartDraw x="0" y="0" width="72" height="72">
+                              <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                <Fill color="[CONFIGURATION.eye_color.0]" />
+                              </Ellipse>
+                              <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
+                                <Fill color="#06080D" />
+                              </RoundRectangle>
+                              <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
+                                <Fill color="#06080D" />
+                              </RoundRectangle>
+                              <Ellipse x="30" y="15" width="8" height="8">
+                                <Fill color="#FFFFFF" />
+                              </Ellipse>
+                              <Ellipse x="48" y="32" width="5" height="5">
+                                <Fill color="#A0FFFFFF" />
+                              </Ellipse>
+                            </PartDraw>
+                          </ListOption>
+                        </ListConfiguration>
+                      </Group>
+                    </Group>
+                    </Group>
+                  </Group>
+                </Default>
+              </Condition>
+              <PartAnimatedImage name="left_poke" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <AnimationController play="TAP" loopCount="1" beforePlaying="THUMBNAIL" afterPlaying="THUMBNAIL" />
+                <AnimatedImage resource="poke_band" format="WEBP" />
+                <Thumbnail resource="open_band" />
+              </PartAnimatedImage>
+            </Group>
+            <PartDraw name="left_mood_mask" x="0" y="0" width="153" height="207" renderMode="MASK">
+              <Transform target="y" value="[BATTERY_PERCENT] &lt;= 20 &amp;&amp; ![BATTERY_CHARGING_STATUS] ? 80 : 0">
+                <Animation duration="0.35" interpolation="EASE_OUT" />
+              </Transform>
+              <Rectangle x="0" y="0" width="153" height="207">
+                <Fill color="#FFFFFF" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <ListConfiguration id="eye_style">
+            <ListOption id="cartoon">
+              <Group name="left_opening_cartoon" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="0" y="0" width="153" height="207">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </ListOption>
+            <ListOption id="cat">
+              <Group name="left_opening_cat" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-6" y="-97.5" width="165" height="272">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-6" y="32.5" width="165" height="272">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </ListOption>
+            <ListOption id="robot">
+              <Group name="left_opening_robot" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="10" y="37" width="133" height="133" cornerRadiusX="5" cornerRadiusY="5">
+                    <Fill color="#FFFFFF" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+            </ListOption>
+            <ListOption id="monster">
+              <Group name="left_opening_monster" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="16" y="20" width="121" height="167">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="35" width="29" height="50">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="125" y="82" width="20" height="66">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="42" y="170" width="61" height="26">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </ListOption>
+          </ListConfiguration>
+        </Group>
+        <ListConfiguration id="eye_style">
+          <ListOption id="cartoon">
+            <Group name="left_detail_cartoon" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="cat">
+            <Group name="left_detail_cat" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="robot">
+            <Group name="left_detail_robot" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="monster">
+            <Group name="left_detail_monster" x="0" y="0" width="153" height="207">
+              <PartDraw x="0" y="0" width="153" height="207" angle="-8">
+                <RoundRectangle x="25" y="30" width="104" height="14" cornerRadiusX="6" cornerRadiusY="6">
+                  <Fill color="#5A7039" />
+                </RoundRectangle>
+              </PartDraw>
+            </Group>
+          </ListOption>
+        </ListConfiguration>
+      </Group>
+      <Group name="right_eye" x="243" y="122" width="153" height="207" pivotX="0.5" pivotY="0.5">
+        <ListConfiguration id="eye_style">
+          <ListOption id="cartoon">
+            <Group name="right_frame_cartoon" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="cat">
+            <Group name="right_frame_cat" x="0" y="0" width="153" height="207">
+              <Group name="right_frame_cat_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-10" y="-101.5" width="173" height="280">
+                    <Fill color="#654733" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-10" y="28.5" width="173" height="280">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="right_frame_cat_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-6" y="-97.5" width="165" height="272">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-6" y="32.5" width="165" height="272">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+          </ListOption>
+          <ListOption id="robot">
+            <Group name="right_frame_robot" x="0" y="0" width="153" height="207">
+              <Group name="right_frame_robot_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="0" y="27" width="153" height="153" cornerRadiusX="15" cornerRadiusY="15">
+                    <Fill color="#3A4855" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <Group name="right_frame_robot_bevel" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="3" y="30" width="147" height="147" cornerRadiusX="12" cornerRadiusY="12">
+                    <Fill color="#97A7B3" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <Group name="right_frame_robot_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="10" y="37" width="133" height="133" cornerRadiusX="5" cornerRadiusY="5">
+                    <Fill color="#000000" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="6" y="33" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="7" y="34" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="141" y="33" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="142" y="34" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="6" y="168" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="7" y="169" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="141" y="168" width="6" height="6">
+                  <Fill color="#26333D" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <Ellipse x="142" y="169" width="2" height="2">
+                  <Fill color="#DCE5EB" />
+                </Ellipse>
+              </PartDraw>
+              <PartDraw x="0" y="0" width="153" height="207">
+                <RoundRectangle x="43" y="30" width="67" height="3" cornerRadiusX="1" cornerRadiusY="1">
+                  <Fill color="#C2CED6" />
+                </RoundRectangle>
+              </PartDraw>
+            </Group>
+          </ListOption>
+          <ListOption id="monster">
+            <Group name="right_frame_monster" x="0" y="0" width="153" height="207">
+              <Group name="right_frame_monster_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="12" width="137" height="183">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="0" y="27" width="45" height="66">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="117" y="74" width="36" height="82">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="34" y="162" width="77" height="42">
+                    <Fill color="#809653" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="right_frame_monster_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="16" y="20" width="121" height="167">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="35" width="29" height="50">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="125" y="82" width="20" height="66">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="42" y="170" width="61" height="26">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+          </ListOption>
+        </ListConfiguration>
+        <Group name="right_lid" x="0" y="0" width="153" height="207">
+          <Transform target="scaleY" value="1 - 0.94 * (1 - clamp(abs(([SECOND_MILLISECOND] % 6) - 0.12) / 0.12, 0, 1))" />
+          <Group name="right_mood_clip" x="0" y="0" width="153" height="207">
+            <Group name="right_silhouette_clip" x="0" y="0" width="153" height="207">
+              <ListConfiguration id="eye_style">
+                <ListOption id="cartoon">
+                  <PartImage x="0" y="0" width="153" height="207">
+                    <Image resource="sclera" />
+                  </PartImage>
+                </ListOption>
+                <ListOption id="cat">
+                  <Group name="right_background_cat" x="0" y="0" width="153" height="207">
+                    <PartDraw x="0" y="0" width="153" height="207">
+                      <Rectangle x="0" y="0" width="153" height="207">
+                        <Fill color="#F5EBC9" />
+                      </Rectangle>
+                    </PartDraw>
+                  </Group>
+                </ListOption>
+                <ListOption id="robot">
+                  <Group name="right_background_robot" x="0" y="0" width="153" height="207">
+                    <PartDraw x="0" y="0" width="153" height="207">
+                      <Rectangle x="0" y="0" width="153" height="207">
+                        <Fill color="#D7F1EC" />
+                      </Rectangle>
+                    </PartDraw>
+                  </Group>
+                </ListOption>
+                <ListOption id="monster">
+                  <Group name="right_background_monster" x="0" y="0" width="153" height="207">
+                    <PartDraw x="0" y="0" width="153" height="207">
+                      <Rectangle x="0" y="0" width="153" height="207">
+                        <Fill color="#EAE7BB" />
+                      </Rectangle>
+                    </PartDraw>
+                  </Group>
+                </ListOption>
+              </ListConfiguration>
+              <Condition>
+                <Expressions>
+                  <Expression name="motion">[ACCELEROMETER_IS_SUPPORTED]</Expression>
+                </Expressions>
+                <Compare expression="motion">
+                  <Group name="right_tilt" x="0" y="0" width="153" height="207">
+                    <Gyro x="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_X] / 45, -1, 1) * 13 : -clamp([ACCELEROMETER_ANGLE_X] / 30, -1, 1) * 26" y="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? -clamp([ACCELEROMETER_ANGLE_Y] / 45, -1, 1) * 20 : -clamp([ACCELEROMETER_ANGLE_Y] / 30, -1, 1) * 40" />
+                    <Group name="right_spin" x="1" y="54" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
+                      <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;crazy&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
+                        <Animation duration="2" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" repeat="1" fps="30" />
+                      </Transform>
+                      <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 : 54" />
+                      <Group name="right_calm_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5" angle="0">
+                        <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
+                          <Animation duration="3" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" repeat="1" fps="30" />
+                        </Transform>
+                        <Group name="right_wild_spin" x="0" y="0" width="152" height="152" pivotX="0.5" pivotY="0.5">
+                          <Transform target="angle" value="[CONFIGURATION.animation_intensity] == &quot;wild&quot; &amp;&amp; ([ACCELEROMETER_X] * [ACCELEROMETER_X] + [ACCELEROMETER_Y] * [ACCELEROMETER_Y] + [ACCELEROMETER_Z] * [ACCELEROMETER_Z]) &gt; 625 ? -15 : 0">
+                            <Animation duration="1" interpolation="EASE_OUT" angleDirection="COUNTER_CLOCKWISE" repeat="1" fps="30" />
+                          </Transform>
+                          <Group name="right_spin_energy" x="40" y="14" width="72" height="72">
+                          <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 27 : 14" />
+                          <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
+                          <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
+                          <ListConfiguration id="eye_style">
+                            <ListOption id="cartoon">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </Ellipse>
+                                <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
+                                  <Fill color="#06080D" />
+                                </Ellipse>
+                                <Ellipse x="20" y="17.667" width="12" height="12">
+                                  <Fill color="#FFFFFF" />
+                                </Ellipse>
+                                <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
+                                  <Fill color="#A0FFFFFF" />
+                                </Ellipse>
+                              </PartDraw>
+                            </ListOption>
+                            <ListOption id="cat">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </Ellipse>
+                                <Ellipse x="27" y="7" width="18" height="58">
+                                  <Fill color="#06080D" />
+                                </Ellipse>
+                                <Ellipse x="16" y="18" width="10" height="10">
+                                  <Fill color="#FFFFFF" />
+                                </Ellipse>
+                                <Ellipse x="46" y="44" width="5" height="5">
+                                  <Fill color="#A0FFFFFF" />
+                                </Ellipse>
+                              </PartDraw>
+                            </ListOption>
+                            <ListOption id="robot">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <RoundRectangle x="1" y="1" width="70" height="70" cornerRadiusX="8" cornerRadiusY="8">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </RoundRectangle>
+                                <RoundRectangle x="16" y="16" width="40" height="40" cornerRadiusX="5" cornerRadiusY="5">
+                                  <Fill color="#06080D" />
+                                </RoundRectangle>
+                                <Rectangle x="23" y="22" width="9" height="9">
+                                  <Fill color="#FFFFFF" />
+                                </Rectangle>
+                                <Rectangle x="44" y="44" width="4" height="4">
+                                  <Fill color="#A0FFFFFF" />
+                                </Rectangle>
+                              </PartDraw>
+                            </ListOption>
+                            <ListOption id="monster">
+                              <PartDraw x="0" y="0" width="72" height="72">
+                                <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                  <Fill color="[CONFIGURATION.eye_color.0]" />
+                                </Ellipse>
+                                <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
+                                  <Fill color="#06080D" />
+                                </RoundRectangle>
+                                <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
+                                  <Fill color="#06080D" />
+                                </RoundRectangle>
+                                <Ellipse x="30" y="15" width="8" height="8">
+                                  <Fill color="#FFFFFF" />
+                                </Ellipse>
+                                <Ellipse x="48" y="32" width="5" height="5">
+                                  <Fill color="#A0FFFFFF" />
+                                </Ellipse>
+                              </PartDraw>
+                            </ListOption>
+                          </ListConfiguration>
+                        </Group>
+                        </Group>
+                      </Group>
+                    </Group>
+                  </Group>
+                </Compare>
+                <Default>
+                  <Group name="right_wander" x="41" y="68" width="72" height="72">
+                    <Transform target="x" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 41 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 12.9898) * 43758.5453) * 2 - 1) * 13 : 41 + (fract(sin(floor([SECONDS_IN_DAY]) * 12.9898) * 43758.5453) * 2 - 1) * 26">
+                      <Animation duration="0.25" interpolation="EASE_OUT" />
+                    </Transform>
+                    <Transform target="y" value="[CONFIGURATION.animation_intensity] == &quot;calm&quot; ? 68 + (fract(sin(floor([SECONDS_IN_DAY] / 2) * 78.233 + 1) * 23891.239) * 2 - 1) * 20 : 68 + (fract(sin(floor([SECONDS_IN_DAY]) * 78.233 + 1) * 23891.239) * 2 - 1) * 40">
+                      <Animation duration="0.25" interpolation="EASE_OUT" />
+                    </Transform>
+                    <Group name="right_wild_wander_spin" x="-40" y="-14" width="152" height="152" pivotX="0.5" pivotY="0.5">
+                      <Transform target="angle" value="0" />
+                      <Group x="40" y="14" width="72" height="72" name="right_wander_pupil">
+                      <Group name="right_wander_pupil_energy" x="0" y="0" width="72" height="72">
+                        <Transform target="scaleX" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
+                        <Transform target="scaleY" value="[BATTERY_CHARGING_STATUS] ? 0.94 + 0.06 * sin([SECOND_MILLISECOND] * 1.6981582) : 1" />
+                        <ListConfiguration id="eye_style">
+                          <ListOption id="cartoon">
+                            <PartDraw x="0" y="0" width="72" height="72">
+                              <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                <Fill color="[CONFIGURATION.eye_color.0]" />
+                              </Ellipse>
+                              <Ellipse x="8.333" y="8.333" width="55.333" height="55.333">
+                                <Fill color="#06080D" />
+                              </Ellipse>
+                              <Ellipse x="20" y="17.667" width="12" height="12">
+                                <Fill color="#FFFFFF" />
+                              </Ellipse>
+                              <Ellipse x="44.333" y="44.667" width="5.333" height="5.333">
+                                <Fill color="#A0FFFFFF" />
+                              </Ellipse>
+                            </PartDraw>
+                          </ListOption>
+                          <ListOption id="cat">
+                            <PartDraw x="0" y="0" width="72" height="72">
+                              <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                <Fill color="[CONFIGURATION.eye_color.0]" />
+                              </Ellipse>
+                              <Ellipse x="27" y="7" width="18" height="58">
+                                <Fill color="#06080D" />
+                              </Ellipse>
+                              <Ellipse x="16" y="18" width="10" height="10">
+                                <Fill color="#FFFFFF" />
+                              </Ellipse>
+                              <Ellipse x="46" y="44" width="5" height="5">
+                                <Fill color="#A0FFFFFF" />
+                              </Ellipse>
+                            </PartDraw>
+                          </ListOption>
+                          <ListOption id="robot">
+                            <PartDraw x="0" y="0" width="72" height="72">
+                              <RoundRectangle x="1" y="1" width="70" height="70" cornerRadiusX="8" cornerRadiusY="8">
+                                <Fill color="[CONFIGURATION.eye_color.0]" />
+                              </RoundRectangle>
+                              <RoundRectangle x="16" y="16" width="40" height="40" cornerRadiusX="5" cornerRadiusY="5">
+                                <Fill color="#06080D" />
+                              </RoundRectangle>
+                              <Rectangle x="23" y="22" width="9" height="9">
+                                <Fill color="#FFFFFF" />
+                              </Rectangle>
+                              <Rectangle x="44" y="44" width="4" height="4">
+                                <Fill color="#A0FFFFFF" />
+                              </Rectangle>
+                            </PartDraw>
+                          </ListOption>
+                          <ListOption id="monster">
+                            <PartDraw x="0" y="0" width="72" height="72">
+                              <Ellipse x="0.333" y="0.333" width="71.333" height="71.333">
+                                <Fill color="[CONFIGURATION.eye_color.0]" />
+                              </Ellipse>
+                              <RoundRectangle x="27" y="8" width="18" height="56" cornerRadiusX="6" cornerRadiusY="6">
+                                <Fill color="#06080D" />
+                              </RoundRectangle>
+                              <RoundRectangle x="8" y="27" width="56" height="18" cornerRadiusX="6" cornerRadiusY="6">
+                                <Fill color="#06080D" />
+                              </RoundRectangle>
+                              <Ellipse x="30" y="15" width="8" height="8">
+                                <Fill color="#FFFFFF" />
+                              </Ellipse>
+                              <Ellipse x="48" y="32" width="5" height="5">
+                                <Fill color="#A0FFFFFF" />
+                              </Ellipse>
+                            </PartDraw>
+                          </ListOption>
+                        </ListConfiguration>
+                      </Group>
+                    </Group>
+                    </Group>
+                  </Group>
+                </Default>
+              </Condition>
+              <PartAnimatedImage name="right_poke" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <AnimationController play="TAP" loopCount="1" beforePlaying="THUMBNAIL" afterPlaying="THUMBNAIL" />
+                <AnimatedImage resource="poke_band" format="WEBP" />
+                <Thumbnail resource="open_band" />
+              </PartAnimatedImage>
+            </Group>
+            <PartDraw name="right_mood_mask" x="0" y="0" width="153" height="207" renderMode="MASK">
+              <Transform target="y" value="[BATTERY_PERCENT] &lt;= 20 &amp;&amp; ![BATTERY_CHARGING_STATUS] ? 80 : 0">
+                <Animation duration="0.35" interpolation="EASE_OUT" />
+              </Transform>
+              <Rectangle x="0" y="0" width="153" height="207">
+                <Fill color="#FFFFFF" />
+              </Rectangle>
+            </PartDraw>
+          </Group>
+          <ListConfiguration id="eye_style">
+            <ListOption id="cartoon">
+              <Group name="right_opening_cartoon" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="0" y="0" width="153" height="207">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </ListOption>
+            <ListOption id="cat">
+              <Group name="right_opening_cat" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-6" y="-97.5" width="165" height="272">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-6" y="32.5" width="165" height="272">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </ListOption>
+            <ListOption id="robot">
+              <Group name="right_opening_robot" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="10" y="37" width="133" height="133" cornerRadiusX="5" cornerRadiusY="5">
+                    <Fill color="#FFFFFF" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+            </ListOption>
+            <ListOption id="monster">
+              <Group name="right_opening_monster" x="0" y="0" width="153" height="207" renderMode="MASK">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="16" y="20" width="121" height="167">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="35" width="29" height="50">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="125" y="82" width="20" height="66">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="42" y="170" width="61" height="26">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </ListOption>
+          </ListConfiguration>
+        </Group>
+        <ListConfiguration id="eye_style">
+          <ListOption id="cartoon">
+            <Group name="right_detail_cartoon" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="cat">
+            <Group name="right_detail_cat" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="robot">
+            <Group name="right_detail_robot" x="0" y="0" width="153" height="207" />
+          </ListOption>
+          <ListOption id="monster">
+            <Group name="right_detail_monster" x="0" y="0" width="153" height="207">
+              <PartDraw x="0" y="0" width="153" height="207" angle="-8">
+                <RoundRectangle x="25" y="30" width="104" height="14" cornerRadiusX="6" cornerRadiusY="6">
+                  <Fill color="#5A7039" />
+                </RoundRectangle>
+              </PartDraw>
+            </Group>
+          </ListOption>
+        </ListConfiguration>
+      </Group>
+    </Group>
+    <Group name="ambient" x="0" y="0" width="450" height="450" alpha="0">
+      <Variant mode="AMBIENT" target="alpha" value="255" />
+      <ListConfiguration id="eye_style">
+        <ListOption id="cartoon">
+          <Group name="ambient_shape_cartoon" x="0" y="0" width="450" height="450">
+            <PartImage x="0" y="0" width="450" height="450">
+              <Image resource="eyes_ambient" />
+            </PartImage>
+          </Group>
+        </ListOption>
+        <ListOption id="cat">
+          <Group name="ambient_shape_cat" x="0" y="0" width="450" height="450">
+            <Group name="ambient_shape_cat_left" x="54" y="122" width="153" height="207">
+              <Group name="ambient_shape_cat_left_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-10" y="-101.5" width="173" height="280">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-10" y="28.5" width="173" height="280">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="ambient_shape_cat_left_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-8" y="-99.5" width="169" height="276">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-8" y="30.5" width="169" height="276">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+            <Group name="ambient_shape_cat_right" x="243" y="122" width="153" height="207">
+              <Group name="ambient_shape_cat_right_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-10" y="-101.5" width="173" height="280">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-10" y="28.5" width="173" height="280">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="ambient_shape_cat_right_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="-8" y="-99.5" width="169" height="276">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207" renderMode="MASK">
+                  <Ellipse x="-8" y="30.5" width="169" height="276">
+                    <Fill color="#FFFFFF" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+          </Group>
+        </ListOption>
+        <ListOption id="robot">
+          <Group name="ambient_shape_robot" x="0" y="0" width="450" height="450">
+            <Group name="ambient_shape_robot_left" x="54" y="122" width="153" height="207">
+              <Group name="ambient_shape_robot_left_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="0" y="27" width="153" height="153" cornerRadiusX="15" cornerRadiusY="15">
+                    <Fill color="#707780" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <Group name="ambient_shape_robot_left_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="2" y="29" width="149" height="149" cornerRadiusX="13" cornerRadiusY="13">
+                    <Fill color="#000000" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+            </Group>
+            <Group name="ambient_shape_robot_right" x="243" y="122" width="153" height="207">
+              <Group name="ambient_shape_robot_right_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="0" y="27" width="153" height="153" cornerRadiusX="15" cornerRadiusY="15">
+                    <Fill color="#707780" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+              <Group name="ambient_shape_robot_right_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <RoundRectangle x="2" y="29" width="149" height="149" cornerRadiusX="13" cornerRadiusY="13">
+                    <Fill color="#000000" />
+                  </RoundRectangle>
+                </PartDraw>
+              </Group>
+            </Group>
+          </Group>
+        </ListOption>
+        <ListOption id="monster">
+          <Group name="ambient_shape_monster" x="0" y="0" width="450" height="450">
+            <Group name="ambient_shape_monster_left" x="54" y="122" width="153" height="207">
+              <Group name="ambient_shape_monster_left_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="12" width="137" height="183">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="0" y="27" width="45" height="66">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="117" y="74" width="36" height="82">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="34" y="162" width="77" height="42">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="ambient_shape_monster_left_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="10" y="14" width="133" height="179">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="2" y="29" width="41" height="62">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="119" y="76" width="32" height="78">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="36" y="164" width="73" height="38">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+            <Group name="ambient_shape_monster_right" x="243" y="122" width="153" height="207">
+              <Group name="ambient_shape_monster_right_outer" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="8" y="12" width="137" height="183">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="0" y="27" width="45" height="66">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="117" y="74" width="36" height="82">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="34" y="162" width="77" height="42">
+                    <Fill color="#707780" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+              <Group name="ambient_shape_monster_right_hole" x="0" y="0" width="153" height="207">
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="10" y="14" width="133" height="179">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="2" y="29" width="41" height="62">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="119" y="76" width="32" height="78">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="153" height="207">
+                  <Ellipse x="36" y="164" width="73" height="38">
+                    <Fill color="#000000" />
+                  </Ellipse>
+                </PartDraw>
+              </Group>
+            </Group>
+          </Group>
+        </ListOption>
+      </ListConfiguration>
+    </Group>
+    <Condition>
+      <Expressions>
+        <Expression name="time_small_system">[CONFIGURATION.time_size] == &quot;small&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;system&quot;</Expression>
+        <Expression name="time_small_serif">[CONFIGURATION.time_size] == &quot;small&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;serif&quot;</Expression>
+        <Expression name="time_small_mono">[CONFIGURATION.time_size] == &quot;small&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;mono&quot;</Expression>
+        <Expression name="time_medium_system">[CONFIGURATION.time_size] == &quot;medium&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;system&quot;</Expression>
+        <Expression name="time_medium_serif">[CONFIGURATION.time_size] == &quot;medium&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;serif&quot;</Expression>
+        <Expression name="time_medium_mono">[CONFIGURATION.time_size] == &quot;medium&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;mono&quot;</Expression>
+        <Expression name="time_large_system">[CONFIGURATION.time_size] == &quot;large&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;system&quot;</Expression>
+        <Expression name="time_large_serif">[CONFIGURATION.time_size] == &quot;large&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;serif&quot;</Expression>
+        <Expression name="time_large_mono">[CONFIGURATION.time_size] == &quot;large&quot; &amp;&amp; [CONFIGURATION.time_font] == &quot;mono&quot;</Expression>
+      </Expressions>
+      <Compare expression="time_small_system">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_small_system" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="SYNC_TO_DEVICE" size="32" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_small_system" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="SYNC_TO_DEVICE" size="32" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_small_serif">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_small_serif" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_serif" size="32" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_small_serif" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_serif" size="32" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_small_mono">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_small_mono" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_mono" size="32" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_small_mono" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_mono" size="32" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_medium_system">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_medium_system" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="SYNC_TO_DEVICE" size="40" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_medium_system" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="SYNC_TO_DEVICE" size="40" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_medium_serif">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_medium_serif" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_serif" size="40" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_medium_serif" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_serif" size="40" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_medium_mono">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_medium_mono" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_mono" size="40" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_medium_mono" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_mono" size="40" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_large_system">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_large_system" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="SYNC_TO_DEVICE" size="48" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_large_system" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="SYNC_TO_DEVICE" size="48" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_large_serif">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_large_serif" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_serif" size="48" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_large_serif" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_serif" size="48" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+      <Compare expression="time_large_mono">
+        <Condition>
+          <Expressions><Expression name="is24">[IS_24_HOUR_MODE]</Expression></Expressions>
+            <Compare expression="is24">
+              <PartText name="time_24_large_mono" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_mono" size="48" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_0_23_Z]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Compare>
+            <Default>
+              <PartText name="time_12_large_mono" x="0" y="0" width="450" height="450">
+                <TextCircular centerX="225" centerY="225" width="414" height="414" startAngle="330" endAngle="30" align="CENTER" direction="CLOCKWISE">
+                  <Font family="time_mono" size="48" weight="MEDIUM" color="[CONFIGURATION.time_color.0]"><Template>%s:%s<Parameter expression="[HOUR_1_12]" /><Parameter expression="[MINUTE_Z]" /></Template></Font>
+                </TextCircular>
+              </PartText>
+            </Default>
+        </Condition>
+      </Compare>
+    </Condition>
+    <ComplicationSlot slotId="1" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" x="85" y="338" width="120" height="50">
+      <BoundingOval x="0" y="0" width="120" height="50" />
+      <Complication type="SHORT_TEXT">
+        <PartText x="0" y="0" width="120" height="50">
+          <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="25" color="[CONFIGURATION.time_color.0]"><Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text>
+        </PartText>
+      </Complication>
+      <Complication type="MONOCHROMATIC_IMAGE">
+        <PartImage x="40" y="5" width="40" height="40" tintColor="[CONFIGURATION.time_color.0]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+      </Complication>
+    </ComplicationSlot>
+    <ComplicationSlot slotId="2" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY" x="245" y="338" width="120" height="50">
+      <BoundingOval x="0" y="0" width="120" height="50" />
+      <Complication type="SHORT_TEXT">
+        <PartText x="0" y="0" width="120" height="50">
+          <Text align="CENTER"><Font family="SYNC_TO_DEVICE" size="25" color="[CONFIGURATION.time_color.0]"><Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text>
+        </PartText>
+      </Complication>
+      <Complication type="MONOCHROMATIC_IMAGE">
+        <PartImage x="40" y="5" width="40" height="40" tintColor="[CONFIGURATION.time_color.0]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+      </Complication>
+    </ComplicationSlot>
+  </Scene>
+</WatchFace>

@@ -1,0 +1,21 @@
+plugins { id("com.android.application") }
+
+android {
+    namespace = "com.luisfelipe.crazyeyes.watchface"
+    compileSdk = 36
+    defaultConfig {
+        applicationId = "com.luisfelipe.crazyeyes.watchface.shake"
+        minSdk = 33
+        targetSdk = 36
+        versionCode = 17
+        versionName = "0.1.16-experimental"
+    }
+    buildTypes {
+        getByName("debug") {
+            // AGP generates R classes even without sources. R8 removes them so the WFF APK has no DEX.
+            isMinifyEnabled = true
+            isShrinkResources = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
+        }
+    }
+}

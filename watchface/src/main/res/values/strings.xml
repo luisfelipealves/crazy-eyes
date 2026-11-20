@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string name="watch_face_name">Crazy Eyes Shake</string>
+    <string name="eye_style_label">Eye style</string>
+    <string name="eye_color_label">Iris color</string>
+    <string name="style_cartoon">Cartoon</string>
+    <string name="style_cat">Cat</string>
+    <string name="style_robot">Robot</string>
+    <string name="style_monster">Little monster</string>
+    <string name="color_gray">Gray</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_green">Green</string>
+    <string name="color_brown">Brown</string>
+    <string name="color_purple">Purple</string>
+    <string name="color_amber">Amber</string>
+    <string name="animation_intensity_label">Animation intensity</string>
+    <string name="intensity_calm">Calm</string>
+    <string name="intensity_normal">Normal</string>
+    <string name="intensity_crazy">Crazy</string>
+    <string name="shake_enabled_label">Shake effect</string>
+    <string name="time_size_label">Time size</string>
+    <string name="time_font_label">Time font</string>
+    <string name="time_color_label">Time color</string>
+    <string name="time_small">Small</string>
+    <string name="time_medium">Medium</string>
+    <string name="time_large">Large</string>
+    <string name="font_system">System</string>
+    <string name="font_serif">Serif</string>
+    <string name="font_mono">Monospace</string>
+    <string name="color_white">White</string>
+</resources>

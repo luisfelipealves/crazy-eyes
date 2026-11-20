@@ -1,0 +1,1 @@
+Os testes do motor usam tempo explícito e aleatoriedade com seed. A integração usa eventos Android reais em Robolectric. Os PNGs gerados em `app/build/reports/eyes-preview` são imagens do renderer de produção, não uma implementação alternativa da interface.

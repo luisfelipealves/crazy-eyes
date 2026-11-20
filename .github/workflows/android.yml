@@ -1,0 +1,168 @@
+name: Android
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
+          cmdline-tools-version: '13114758'
+          log-accepted-android-sdk-licenses: false
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Install SDK
+        run: sdkmanager 'platforms;android-36' 'build-tools;35.0.0'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate watch face and visual contracts
+        run: |
+          pip install -r tools/requirements.txt
+          python -m unittest discover -s tools/tests -v
+          python -m tools.validate_watchface
+      - name: Tests, lint and debug APK
+        run: ./gradlew --no-daemon testDebugUnitTest lintDebug assembleDebug
+      - name: Verify resource-only watch face APK
+        run: python -m tools.validate_watchface --apk watchface/build/outputs/apk/debug/watchface-debug.apk
+      - name: Build baseline for renderer comparison
+        run: |
+          mkdir device-apks
+          cp watchface/build/outputs/apk/debug/watchface-debug.apk device-apks/experiment.apk
+          cp watchface/src/main/res/raw/watchface.xml "$RUNNER_TEMP/experiment.xml"
+          for style in cartoon cat robot monster; do
+            python - "$style" "$RUNNER_TEMP/experiment.xml" <<'PY'
+          import sys
+          import xml.etree.ElementTree as ET
+          tree = ET.parse(sys.argv[2])
+          tree.find('UserConfigurations/ListConfiguration[@id="eye_style"]').set('defaultValue', sys.argv[1])
+          tree.write('watchface/src/main/res/raw/watchface.xml', encoding='UTF-8', xml_declaration=True)
+          PY
+            ./gradlew --no-daemon :watchface:assembleDebug
+            cp watchface/build/outputs/apk/debug/watchface-debug.apk "device-apks/style-$style.apk"
+          done
+          for fixture in calm; do
+            python - "$fixture" "$RUNNER_TEMP/experiment.xml" <<'PYFIX'
+          import sys
+          import xml.etree.ElementTree as ET
+          tree = ET.parse(sys.argv[2])
+          tree.find('UserConfigurations/ListConfiguration[@id="animation_intensity"]').set('defaultValue', 'calm' if sys.argv[1] == 'calm' else 'crazy')
+          tree.write('watchface/src/main/res/raw/watchface.xml', encoding='UTF-8', xml_declaration=True)
+          PYFIX
+            ./gradlew --no-daemon :watchface:assembleDebug
+            cp watchface/build/outputs/apk/debug/watchface-debug.apk "device-apks/motion-$fixture.apk"
+          done
+          git fetch --no-tags --depth=1 origin e5e6d1fca63fe67c96dc687bd385da15716fadd8
+          git show FETCH_HEAD:watchface/src/main/res/raw/watchface.xml > watchface/src/main/res/raw/watchface.xml
+          ./gradlew --no-daemon :watchface:assembleDebug
+          cp watchface/build/outputs/apk/debug/watchface-debug.apk device-apks/baseline.apk
+          cp "$RUNNER_TEMP/experiment.xml" watchface/src/main/res/raw/watchface.xml
+          git diff --exit-code -- watchface/src/main/res/raw/watchface.xml
+      - uses: actions/upload-artifact@v4
+        with:
+          name: crazy-eyes-face-debug
+          path: device-apks/*.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: crazy-eyes-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reports
+          path: |
+            app/build/reports/
+            app/build/test-results/
+  watchface-device:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ANDROID_AVD_HOME: /tmp/crazy-eyes-avds
+      ANDROID_USER_HOME: /tmp/crazy-eyes-android
+      ANDROID_EMULATOR_HOME: /tmp/crazy-eyes-android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
+          cmdline-tools-version: '13114758'
+          log-accepted-android-sdk-licenses: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r tools/requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: crazy-eyes-face-debug
+          path: device-apk
+      - name: Boot Wear OS 4 emulator
+        id: boot_wear
+        run: |
+          sdkmanager 'emulator' 'system-images;android-33;android-wear;x86_64'
+          sudo chmod 666 /dev/kvm
+          mkdir -p "$ANDROID_AVD_HOME" "$ANDROID_USER_HOME"
+          echo no | avdmanager create avd -n wear -k 'system-images;android-33;android-wear;x86_64' --device 'wearos_large_round' --path "$ANDROID_AVD_HOME/wear.avd"
+          "$ANDROID_HOME/emulator/emulator" -list-avds | grep -x wear
+          "$ANDROID_HOME/emulator/emulator" -avd wear -no-window -no-audio -no-snapshot -no-boot-anim -gpu swiftshader_indirect -accel on -cores 4 -memory 3072 > emulator.log 2>&1 &
+          timeout 240 adb wait-for-device
+          timeout 240 bash -c 'until [ "$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d "\r")" = 1 ]; do sleep 2; done'
+          adb shell settings put global device_provisioned 1
+          adb shell settings put secure user_setup_complete 1
+          adb shell wm dismiss-keyguard
+          adb install -r device-apk/baseline.apk
+      - name: Verify all complete eye silhouettes in native renderer
+        run: |
+          for style in cartoon cat robot monster; do
+            adb uninstall com.luisfelipe.crazyeyes.watchface.shake
+            adb install "device-apk/style-$style.apk"
+            python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style "$style" --output watchface-device-results/styles
+            python -m tools.watchface_mood_device_check --style "$style" --output watchface-device-results/moods
+          done
+          adb uninstall com.luisfelipe.crazyeyes.watchface.shake
+          adb install device-apk/baseline.apk
+          python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output watchface-device-results/baseline/style
+      - name: Characterize original face with calibrated injection
+        run: python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --expect-no-spin --expected-half-tilt 13 --output watchface-device-results/baseline
+      - name: Verify after-shake reaction in system renderer
+        run: |
+          adb uninstall com.luisfelipe.crazyeyes.watchface.shake
+          adb install -r device-apk/experiment.apk
+          python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output watchface-device-results/experiment/style
+          python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --duration 4 --expected-half-tilt 19.5 --output watchface-device-results/experiment
+      - name: Verify calm orbit in native renderer
+        if: ${{ !cancelled() && steps.boot_wear.outcome == 'success' }}
+        run: |
+          adb uninstall com.luisfelipe.crazyeyes.watchface.shake
+          adb install device-apk/motion-calm.apk
+          python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output watchface-device-results/motion-calm/style
+          python -m tools.watchface_device_check --package com.luisfelipe.crazyeyes.watchface.shake --orbit-radius 13 --duration 6 --expected-half-tilt 6.5 --output watchface-device-results/motion-calm
+      - name: Inspect visible intensity choices in native editor
+        if: ${{ !cancelled() && steps.boot_wear.outcome == 'success' }}
+        run: |
+          adb uninstall com.luisfelipe.crazyeyes.watchface.shake
+          adb install device-apk/experiment.apk
+          python -m tools.watchface_style_device_check --package com.luisfelipe.crazyeyes.watchface.shake --style cartoon --output watchface-device-results/editor/style
+          python -m tools.watchface_editor_device_check --output watchface-device-results/editor
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: watchface-device-evidence
+          path: |
+            watchface-device-results/
+            emulator.log
